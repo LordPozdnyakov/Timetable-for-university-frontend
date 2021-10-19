@@ -1,6 +1,7 @@
 import React from 'react';
 import "./HeaderStyles.scss"
-import {UserOutlined} from "@ant-design/icons";
+import {UserOutlined,ExportOutlined} from "@ant-design/icons";
+
 
 const HeaderComponent = () => {
     return (
@@ -13,7 +14,7 @@ const HeaderComponent = () => {
                     <UserOutlined />
                 </div>
                 <div className="header__navigate-logout">
-
+                    <ExportOutlined />
                 </div>
             </div>
         </header>
