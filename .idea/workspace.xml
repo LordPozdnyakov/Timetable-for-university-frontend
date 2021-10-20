@@ -4,16 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8ad16ce9-912f-4b1d-bd4a-7521ca119240" name="Changes" comment="1.Installing libraries&#10;2.Component breakdown">
+    <list default="true" id="8ad16ce9-912f-4b1d-bd4a-7521ca119240" name="Changes" comment="Add route&#10;Create grid layout">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/timetable/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/timetable/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/timetable/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/timetable/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/timetable/src/App.scss" beforeDir="false" afterPath="$PROJECT_DIR$/timetable/src/App.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/timetable/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/timetable/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/timetable/src/Components/Header/HeaderComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/timetable/src/Components/Header/HeaderComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/timetable/src/Components/Header/HeaderStyles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/timetable/src/Components/Header/HeaderStyles.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/timetable/src/Components/Sidebar/SidebarStyles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/timetable/src/Components/Sidebar/SidebarStyles.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/timetable/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/timetable/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/timetable/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/timetable/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +61,8 @@
       <updated>1634638948467</updated>
       <workItem from="1634638949804" duration="8059000" />
       <workItem from="1634648929041" duration="4196000" />
-      <workItem from="1634653427604" duration="435000" />
+      <workItem from="1634653427604" duration="1793000" />
+      <workItem from="1634707099787" duration="643000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1634640136271</created>
@@ -98,7 +92,14 @@
       <option name="project" value="LOCAL" />
       <updated>1634649200586</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Add route&#10;Create grid layout">
+      <created>1634654047189</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1634654047189</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -119,6 +120,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="init" />
     <MESSAGE value="1.Installing libraries&#10;2.Component breakdown" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.Installing libraries&#10;2.Component breakdown" />
+    <MESSAGE value="Add route&#10;Create grid layout" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add route&#10;Create grid layout" />
   </component>
 </project>
