@@ -1,11 +1,12 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 
-import './App.scss';
-
-
 import HeaderContainerComponent from "./Components/Header/HeaderContainerComponent";
 import SidebarContainerComponent from "./Components/Sidebar/SidebarContainerComponent";
+import ProfileContainerComponent from './Components/Profile/ProfileContainerComponent';
+
+import './App.scss';
+
 
 const  App = () => {
   return (
@@ -13,7 +14,7 @@ const  App = () => {
         <HeaderContainerComponent />
         <SidebarContainerComponent />
         <div className="content">
-            <Route exact path="/profile" />
+            <Route exact path="/profile" render={() => <ProfileContainerComponent />} />
         </div>
     </div>
   );
