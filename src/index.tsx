@@ -7,6 +7,7 @@ import App from './App';
 import store from './Redux/Store';
 
 import './index.css';
+import 'antd/dist/antd.css';
 
 
 ReactDOM.render(

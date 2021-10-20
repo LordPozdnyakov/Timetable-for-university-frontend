@@ -6,6 +6,9 @@ import SidebarContainerComponent from "./Components/Sidebar/SidebarContainerComp
 import ProfileContainerComponent from './Components/Profile/ProfileContainerComponent';
 
 import './App.scss';
+import MainPage from "./Pages/MainPage/MainPage";
+import StudentsPage from "./Pages/StudentsPage/StudentsPage";
+import TeachersPage from "./Pages/TeachersPage/TeachersPage";
 
 
 const  App = () => {
@@ -15,6 +18,10 @@ const  App = () => {
         <SidebarContainerComponent />
         <div className="content">
             <Route exact path="/profile" render={() => <ProfileContainerComponent />} />
+
+          <Route path='/' component={MainPage} exact/>
+          <Route path='/students' component={StudentsPage} exact/>
+          <Route path='/teachers' component={TeachersPage} exact/>
         </div>
     </div>
   );
