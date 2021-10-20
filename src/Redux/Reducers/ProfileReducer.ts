@@ -1,24 +1,44 @@
-// @ts-ignore
 import {getUser} from "../Actions/getUser";
-// @ts-ignore
 import {getProfileAPI} from "../../API/ProfileAPI"
-const GET_USER = "GET_USER";
+import { GET_USER } from "../../Constant/Constant";
 
+type fatherType = {
+    name: string,
+    phone: number
+}
 
+type motherType = {
+    name: string,
+    phone: number
+}
 
-let initialState = {
-    user: null
+type parentsType = {
+    father: fatherType,
+    mother: motherType
+}
 
+type userType = {
+    name: string,
+    date: string,
+    phone: number,
+    email: string,
+    address: string,
+    group: string,
+    parents: parentsType
+}
+
+export type InitialStateType = {
+    user: object | null
+}
+
+let initialState: InitialStateType = {
+    user: null as userType | null
 }
 
 
-// @ts-ignore
-export const ProfileReducer = (state = initialState, action) => {
-
+export const ProfileReducer = (state: InitialStateType = initialState, action: any): InitialStateType => {
     switch (action.type) {
-        // @ts-ignore
         case GET_USER: {
-            debugger
             return {...state, user: action.user }
         }
         default:
@@ -27,10 +47,7 @@ export const ProfileReducer = (state = initialState, action) => {
 
 }
 
-// @ts-ignore
-export  const getUserProfile = () => async (dispatch) => {
-    debugger
-        // @ts-ignore
+
+export  const getUserProfile = () => async (dispatch: any) => {
     dispatch(getUser(await getProfileAPI()))
-    debugger
 }
