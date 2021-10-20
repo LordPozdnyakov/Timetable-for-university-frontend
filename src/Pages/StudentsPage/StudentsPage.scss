@@ -1,0 +1,30 @@
+.students {
+
+  &__header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  &__title {
+    margin-bottom: 0;
+  }
+
+  &__table {
+    width: 100%;
+
+    tr {
+      border: 1px solid #E5E5E5;
+    }
+
+    th, td {
+      text-align: center;
+      padding: 15px 10px;
+    }
+  }
+}
+
+.table-responsive {
+  overflow-x: auto;
+}

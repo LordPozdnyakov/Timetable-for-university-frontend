@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Card, Button } from 'antd';
+import { Card } from 'antd';
 import IInfoCardProps from '../../Types/IInfoCardProps';
 import './InfoCard.scss';
 

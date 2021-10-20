@@ -1,4 +1,4 @@
-@import 'src/shared/variables';
+@import './src/Shared/variables';
 
 .info-card {
   width: 18rem;
@@ -7,7 +7,7 @@
   margin: 0 15px 15px;
 
   &__title {
-    font-size: 18px;
+    font-size: $h5;
     margin-bottom: 10px;
   }
 

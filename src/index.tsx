@@ -8,6 +8,7 @@ import store from './Redux/Store';
 
 import './index.css';
 import 'antd/dist/antd.css';
+import './Shared/common.scss';
 
 
 ReactDOM.render(
