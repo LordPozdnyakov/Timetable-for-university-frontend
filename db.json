@@ -1,0 +1,22 @@
+{
+  "users": {
+    "user": {
+      "name": "Васільчук Світлана Вікторивна",
+      "date": "25.10.2021",
+      "phone": 3807764774747,
+      "email": "ocorochok@ukr.net",
+      "address": "Херсон ул Павла Тычины 28",
+      "group": "5ПР1",
+      "parents": {
+        "father": {
+          "name": "Shantanu Kumar",
+          "phone": 3807764774747
+        },
+        "mother": {
+          "name": "Просковья Вершанська",
+          "phone": 3807764774747
+        }
+      }
+    }
+  }
+}
