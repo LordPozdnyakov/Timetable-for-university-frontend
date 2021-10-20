@@ -1,0 +1,40 @@
+.profile {
+  &__name {
+    border: 1px solid #E5E5E5;
+    padding: 16px;
+    h4 {
+      font-size: 34px;
+      color: #3F51B5;
+      font-weight: normal;
+    }
+    span {
+      opacity: 0.5;
+    }
+  }
+  &__information {
+    display: flex;
+    div {
+      margin-right: 147px;
+      margin-top: 16px;
+      div {
+
+      }
+    }
+  }
+  &__group {
+    border: 1px solid #E5E5E5;
+    padding: 16px;
+    margin-top: 16px;
+  }
+  h5 {
+    color: #2196F3;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+  }
+  &__parents {
+    margin-top: 16px;
+    border: 1px solid #E5E5E5;
+    padding: 16px;
+  }
+}
