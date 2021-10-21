@@ -1,4 +1,16 @@
 .sidebar {
     height: 100vh;
     background-color: #7986CB;
+    &__item {
+        background-color: #7986CB;
+        color: #fff;
+        border: none;
+    }
+    &__icon {
+        font-size: 22px!important;
+    }
 }
+.ant-menu {
+    background-color: #7986CB!important;
+}
+

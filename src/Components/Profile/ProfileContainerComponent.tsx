@@ -9,13 +9,12 @@ import {getUserProfile} from "../../Redux/Reducers/ProfileReducer";
 
 // @ts-ignore
 const ProfileContainerComponent = (props) => {
-    debugger
     const {getUserProfile} = props;
     // @ts-ignore
     React.useEffect(
         () => {
             getUserProfile()
-        }, []
+        }, [getUserProfile]
     )
 
 

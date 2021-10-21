@@ -1,11 +1,12 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import HeaderContainerComponent from "./Components/Header/HeaderContainerComponent";
 import SidebarContainerComponent from "./Components/Sidebar/SidebarContainerComponent";
 import ProfileContainerComponent from './Components/Profile/ProfileContainerComponent';
 
 import './App.scss';
+
 import MainPage from "./Pages/MainPage/MainPage";
 import StudentsPage from "./Pages/StudentsPage/StudentsPage";
 import TeachersPage from "./Pages/TeachersPage/TeachersPage";
@@ -19,13 +20,12 @@ const  App = () => {
         <SidebarContainerComponent />
         <div className="content">
           <Breadcrumbs/>
-
-            <Route exact path="/profile" render={() => <ProfileContainerComponent />} />
-
-          <Route path='/' component={MainPage} exact/>
-          <Route path='/students' component={StudentsPage} exact/>
-          <Route path='/teachers' component={TeachersPage} exact/>
-
+          <Switch>
+              <Route path='/' component={MainPage} exact/>
+              <Route path="/profile" render={() => <ProfileContainerComponent />} />
+              <Route path='/students' component={StudentsPage} exact/>
+              <Route path='/teachers' component={TeachersPage} exact/>
+          </Switch>
         </div>
     </div>
   );
