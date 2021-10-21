@@ -9,6 +9,7 @@ import './App.scss';
 import MainPage from "./Pages/MainPage/MainPage";
 import StudentsPage from "./Pages/StudentsPage/StudentsPage";
 import TeachersPage from "./Pages/TeachersPage/TeachersPage";
+import Breadcrumbs from "./Components/Breadcrumbs/Breadcrumbs";
 
 
 const  App = () => {
@@ -17,11 +18,14 @@ const  App = () => {
         <HeaderContainerComponent />
         <SidebarContainerComponent />
         <div className="content">
+          <Breadcrumbs/>
+
             <Route exact path="/profile" render={() => <ProfileContainerComponent />} />
 
           <Route path='/' component={MainPage} exact/>
           <Route path='/students' component={StudentsPage} exact/>
           <Route path='/teachers' component={TeachersPage} exact/>
+
         </div>
     </div>
   );
