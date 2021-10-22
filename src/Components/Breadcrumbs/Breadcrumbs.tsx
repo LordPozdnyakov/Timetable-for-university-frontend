@@ -2,9 +2,11 @@ import React from 'react';
 import {Breadcrumb} from 'antd';
 import {HomeFilled, UserOutlined} from '@ant-design/icons';
 import {useLocation} from 'react-router-dom';
+import IPathnamesProperties from '../../Types/IPathnamesProperties';
+import {checkIfPageIsProfile, createBreadcrumpsForUserName, createPathnamesArray} from '../../Shared/helpers';
 import './Breadcrumps.scss';
 
-const pathnamesProperties = [
+const pathnamesProperties: IPathnamesProperties[] = [
   {
     path: 'students',
     title: 'Студенти',
@@ -14,12 +16,18 @@ const pathnamesProperties = [
     path: 'teachers',
     title: 'Викладачі',
     icon: <UserOutlined/>
+  },
+  {
+    path: 'add-student',
+    title: 'Додати студента',
+    icon: null
   }
 ]
 
 const Breadcrumbs = () => {
   const location = useLocation();
-  const pathnames = location.pathname.split('/').filter((p) => p);
+  const pathnames: string[] = createPathnamesArray(location.pathname);
+  const isProfile: boolean = checkIfPageIsProfile(location.pathname);
 
   return (
     <Breadcrumb className='breadcrumps'>
@@ -37,12 +45,15 @@ const Breadcrumbs = () => {
         )
       }
       {
-        pathnames.map((path, index) => {
-          const pathProperty = pathnamesProperties.find((pathProps) => path === pathProps.path);
+        pathnames.map((path: string, index: number) => {
+          let pathProperty: IPathnamesProperties | undefined = pathnamesProperties.find((pathProps: IPathnamesProperties) => path === pathProps.path);
+          if (index === pathnames.length - 1 && isProfile) {
+            pathProperty = createBreadcrumpsForUserName(pathnames, path);
+          }
           if (!pathProperty) return null;
           const {title, icon} = pathProperty;
-          const isLastElem = index === pathnames.length - 1;
-          const routeTo = `/${pathnames.slice(0, index + 1).join('/')}`;
+          const isLastElem: boolean = index === pathnames.length - 1;
+          const routeTo: string = `/${pathnames.slice(0, index + 1).join('/')}`;
 
           return isLastElem ? (
               <Breadcrumb.Item key={path}>

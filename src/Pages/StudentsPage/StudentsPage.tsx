@@ -1,12 +1,14 @@
 import React from 'react';
-import './StudentsPage.scss';
-import Student from "../../Components/Student/Student";
+import {Link} from 'react-router-dom';
+import Student from '../../Components/Student/Student';
 import IStudentProps from "../../Types/IStudentProps";
-import {Button} from "antd";
-import {PlusOutlined} from "@ant-design/icons";
+import {Button} from 'antd';
+import {PlusOutlined} from '@ant-design/icons';
+import './StudentsPage.scss';
 
-const students = [
+export const students: IStudentProps[] = [
   {
+    id: Math.ceil(Math.random() *  Date.now()),
     name: 'Васильчук Світлана',
     group: '415',
     birthDate: '25.06.2002',
@@ -15,6 +17,7 @@ const students = [
     address: 'Херсон, просп. Ушакова, 89'
   },
   {
+    id: Math.ceil(Math.random() *  Date.now()),
     name: 'Васиse тлана',
     group: '41eeee5',
     birthDate: '25.06.sss2002',
@@ -23,6 +26,7 @@ const students = [
     address: 'Херсон, 89'
   },
   {
+    id: Math.ceil(Math.random() *  Date.now()),
     name: 'Васильefsfesfesчук Світлана',
     group: '4',
     birthDate: '25..2002',
@@ -37,7 +41,9 @@ const StudentsPage = () => {
     <div className='students'>
       <div className='students__header'>
         <h5 className='page-title students__title'>Всі студенти</h5>
-        <Button className='add-btn' type='primary' shape='circle' icon={<PlusOutlined className='add-btn__inner'/>} />
+        <Link to='/students/add-student'>
+          <Button className='add-btn' type='primary' shape='circle' icon={<PlusOutlined className='add-btn__inner'/>}/>
+        </Link>
       </div>
       <div className='table-responsive'>
         <table className='students__table'>
@@ -54,7 +60,7 @@ const StudentsPage = () => {
             </tr>
             {
               students.map((student: IStudentProps) => {
-                return <Student student={student} key={student.email}/>;
+                return <Student student={student} key={student.id}/>;
               })
             }
           </tbody>

@@ -1,4 +1,5 @@
-export  default interface IStudentProps {
+export default interface IStudentProps {
+  id: number,
   name: string,
   group: string,
   phone: string,
