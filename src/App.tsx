@@ -1,34 +1,23 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
 
-import HeaderContainerComponent from "./Components/Header/HeaderContainerComponent";
-import SidebarContainerComponent from "./Components/Sidebar/SidebarContainerComponent";
-import ProfileContainerComponent from './Components/Profile/ProfileContainerComponent';
+import {Route, Switch} from 'react-router-dom';
 
-import './App.scss';
-
-import MainPage from "./Pages/MainPage/MainPage";
-import StudentsPage from "./Pages/StudentsPage/StudentsPage";
-import TeachersPage from "./Pages/TeachersPage/TeachersPage";
-import Breadcrumbs from "./Components/Breadcrumbs/Breadcrumbs";
+import LoginFormContainerComponent from './Modules/LoginForm/LoginFormContainerComponent';
+import HomePage from './Pages/HomePage/HomePage';
 
 
-const  App = () => {
-  return (
-    <div className="wrapper">
-        <HeaderContainerComponent />
-        <SidebarContainerComponent />
-        <div className="content">
-          <Breadcrumbs/>
-          <Switch>
-              <Route path='/' component={MainPage} exact/>
-              <Route path="/profile" render={() => <ProfileContainerComponent />} />
-              <Route path='/students' component={StudentsPage} exact/>
-              <Route path='/teachers' component={TeachersPage} exact/>
-          </Switch>
-        </div>
-    </div>
-  );
+
+
+const App = () => {
+    return (
+        <>
+            <Switch>
+                <Route exact path="/login" component={LoginFormContainerComponent} />
+                <Route  path="/" component={HomePage} />
+            </Switch>
+
+        </>
+    );
 }
 
 export default App;

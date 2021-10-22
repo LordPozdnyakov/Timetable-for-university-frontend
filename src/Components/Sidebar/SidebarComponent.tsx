@@ -1,9 +1,14 @@
 import React from 'react';
+
 import "./SidebarStyles.scss"
+
+import { NavLink } from 'react-router-dom'
+
 import { Menu } from 'antd';
 import {  UserOutlined , TeamOutlined,SolutionOutlined,BookFilled,ReadFilled,FieldTimeOutlined} from '@ant-design/icons';
-import { NavLink } from 'react-router-dom';
+
 const { SubMenu } = Menu;
+
 
 const SidebarComponent = () => {
     return (
