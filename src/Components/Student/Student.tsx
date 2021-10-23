@@ -52,7 +52,11 @@ const Student = ({student} : { student: IStudentProps }) => {
           </a>
         </td>
         <td>{address}</td>
-        <td className='table-icon edit-icon'><EditFilled/></td>
+        <td className='table-icon edit-icon'>
+          <Link to='/students/edit-student'>
+            <EditFilled/>
+          </Link>
+        </td>
         <td className='table-icon delete-icon' onClick={showModal}><DeleteFilled/></td>
       </tr>
       <SimpleModal title='Видалити студента?'

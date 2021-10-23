@@ -1,9 +1,11 @@
 import React from 'react';
+import StudentForm from "../../Components/StudentForm/StudentForm";
 
 const AddStudentPage = () => {
   return (
     <div>
-      Add Student
+      <h5 className='page-title'>Додати студента</h5>
+      <StudentForm editMode={false}/>
     </div>
   );
 };
