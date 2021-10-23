@@ -3,20 +3,18 @@ import LoginFormComponent from "./LoginFormComponent";
 
 
 
+
 const LoginFormContainerComponent = withFormik({
     mapPropsToValues: () => ({
         email: '',
-        password: ''
+        password: '',
+        rememberMe: false,
     }),
 
 
     handleSubmit: (values, { setSubmitting,props}) => {
-        // store.dispatch(UsserAction.fetchUserLogin(values)).then(({status}) =>{
-        //     if (status === 'success') {
-        //         props.props.history.push('/')
-        //     }
-        //     setSubmitting(false)
-        // })
+        alert(values.email)
+        setSubmitting(false)
     },
 
 
