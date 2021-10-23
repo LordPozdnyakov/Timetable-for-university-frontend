@@ -1,4 +1,5 @@
 import { withFormik } from "formik";
+import { Redirect } from "react-router-dom";
 import LoginFormComponent from "./LoginFormComponent";
 
 
@@ -13,8 +14,13 @@ const LoginFormContainerComponent = withFormik({
 
 
     handleSubmit: (values, { setSubmitting,props}) => {
+        debugger
         alert(values.email)
         setSubmitting(false)
+
+        // @ts-ignore
+        props.history.push("/")
+
     },
 
 

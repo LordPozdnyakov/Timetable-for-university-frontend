@@ -36,7 +36,6 @@ const LoginFormComponent = (props:any) => {
                 </span>
                 <p>Увійти</p>
                 <Form
-                    // @ts-ignore
                     {...layout}
                     name="LoginForm"
                     // @ts-ignore
@@ -79,9 +78,7 @@ const LoginFormComponent = (props:any) => {
                             Увійти
                         </ButtonComponent>
                     </Form.Item>
-
-
-                    <Link to={'/register'} className={'auth__link-registered'}>Забули пароль?</Link>
+                    <Link to={'/recovery'} className={'auth__link-registered'}>Забули пароль?</Link>
                 </Form>
             </FormWrapper>
         </div>
