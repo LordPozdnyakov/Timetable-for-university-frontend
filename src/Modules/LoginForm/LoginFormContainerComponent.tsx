@@ -1,22 +1,26 @@
 import { withFormik } from "formik";
+import { Redirect } from "react-router-dom";
 import LoginFormComponent from "./LoginFormComponent";
+
 
 
 
 const LoginFormContainerComponent = withFormik({
     mapPropsToValues: () => ({
         email: '',
-        password: ''
+        password: '',
+        rememberMe: false,
     }),
 
 
     handleSubmit: (values, { setSubmitting,props}) => {
-        // store.dispatch(UsserAction.fetchUserLogin(values)).then(({status}) =>{
-        //     if (status === 'success') {
-        //         props.props.history.push('/')
-        //     }
-        //     setSubmitting(false)
-        // })
+        debugger
+        alert(values.email)
+        setSubmitting(false)
+
+        // @ts-ignore
+        props.history.push("/")
+
     },
 
 
