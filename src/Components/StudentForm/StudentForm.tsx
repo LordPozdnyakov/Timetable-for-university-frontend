@@ -1,8 +1,17 @@
 import React from 'react';
-import {Button, DatePicker, Form, Input, Select} from 'antd';
+import {Button, DatePicker, Form, Input, Select, message} from 'antd';
 import './StudentForm.scss';
 
 const StudentForm = ({editMode}: {editMode: boolean}) => {
+
+  const handleAddStudent = (): void => {
+    message.success('Студента успішно додано');
+  }
+
+  const handleDeleteStudent = (): void => {
+    message.success('Студента успішно видалено');
+  }
+
   return (
     <Form layout='vertical' className='form'>
       <div className='form__row'>
@@ -81,7 +90,8 @@ const StudentForm = ({editMode}: {editMode: boolean}) => {
         </Form.Item>
       </div>
       <div className='form__row--buttons'>
-        <Button htmlType='submit' className='form__button form__button--save'>
+        <Button htmlType='submit' className='form__button form__button--save'
+                onClick={handleAddStudent}>
           Зберегти
         </Button>
         <Button htmlType='button' className='form__button form__button--cancel'>
@@ -89,7 +99,8 @@ const StudentForm = ({editMode}: {editMode: boolean}) => {
         </Button>
         {
           editMode ?
-            <Button htmlType='button' className='form__button form__button--delete'>
+            <Button htmlType='button' className='form__button form__button--delete'
+                    onClick={handleDeleteStudent}>
               Видалити
             </Button>
             : null
