@@ -1,12 +1,9 @@
 import * as axios from "axios";
+import https from "https";
+
 // @ts-ignore
 const httpsAgent = new https.Agent({
-    // @ts-ignore
-    ca: fs.readFileSync("./resource/bundle.crt"),
-    // @ts-ignore
-    cert: fs.readFileSync("./resrouce/thirdparty.crt"),
-    // @ts-ignore
-    key: fs.readFileSync("./resource/key.pem"),
+    rejectUnauthorized: false
 })
 
 
