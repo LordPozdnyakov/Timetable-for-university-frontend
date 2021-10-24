@@ -8,5 +8,5 @@ export const getProfileAPI = () => {
 
 export  const setUserLoginAPI = (values:any) => {
     // @ts-ignore
-    return instance.post("", values).then(response => alert(response.data))
+    return instance.post("login", values).then(response => alert(response.data))
 }
