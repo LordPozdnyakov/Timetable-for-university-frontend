@@ -1,10 +1,12 @@
 import {applyMiddleware, combineReducers, compose, createStore } from "redux";
 import thunkMiddleware from "redux-thunk";
 import { ProfileReducer } from "./Reducers/ProfileReducer";
+import { UserReducer } from "./Reducers/userReducer";
 
 
 let redusers = combineReducers({
-    profile: ProfileReducer
+    profile: ProfileReducer,
+    user: UserReducer
 })
 
 // @ts-ignore
