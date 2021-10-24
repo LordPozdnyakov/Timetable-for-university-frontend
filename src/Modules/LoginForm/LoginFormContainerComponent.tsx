@@ -18,6 +18,7 @@ const LoginFormContainerComponent = withFormik({
         // @ts-ignore
         store.dispatch(setUserLogin(values))
         // @ts-ignore
+        props.history.push("/")
 
     },
 

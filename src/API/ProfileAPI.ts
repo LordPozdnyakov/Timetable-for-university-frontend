@@ -7,7 +7,6 @@ export const getProfileAPI = () => {
 }
 
 export  const setUserLoginAPI = (values:any) => {
-    debugger
     // @ts-ignore
-    return instance.post("").then(response => alert(response.data))
+    return instance.post("", values).then(response => alert(response.data))
 }
