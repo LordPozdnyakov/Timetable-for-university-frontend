@@ -1,6 +1,7 @@
-export  default    () =>( {
+export  default () =>( {
     email: (errors:any, values:any,touched:any) => {
         if (!values) {
+            debugger
             errors.email = 'Эмаил указан не корректно';
         }  else if(touched) {
             errors.email = "Ви залилишили крим"
