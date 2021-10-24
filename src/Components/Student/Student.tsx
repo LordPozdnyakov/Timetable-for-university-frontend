@@ -4,6 +4,7 @@ import {DeleteFilled, EditFilled} from '@ant-design/icons';
 import IStudentProps from '../../Types/IStudentProps';
 import './Student.scss';
 import SimpleModal from "../../SimpleModal/SimpleModal";
+import {message} from 'antd';
 
 const Student = ({student} : { student: IStudentProps }) => {
 
@@ -21,6 +22,7 @@ const Student = ({student} : { student: IStudentProps }) => {
 
   const handleYes = (): void => {
     setIsModalVisible(false);
+    message.success('Студента успішно видалено');
   }
 
   const handleNo = (): void => {
