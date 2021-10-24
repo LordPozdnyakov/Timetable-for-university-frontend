@@ -8,6 +8,7 @@ import validateField from '../../Utils/helpers/validateField';
 import "./LoginFormStyles.scss"
 
 const LoginFormComponent = (props:any) => {
+    debugger
     const layout = {
         labelCol: {span: 4},
         wrapperCol: {span: 30},
