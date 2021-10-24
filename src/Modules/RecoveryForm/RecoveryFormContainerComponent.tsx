@@ -1,11 +1,20 @@
-import React from 'react';
+import { withFormik } from 'formik';
 
-const RecoveryFormContainerComponent = () => {
-    return (
-        <div>
-            
-        </div>
-    );
-};
+import RecoveryFormComponent from "./RecoveryFormComponent"
+
+
+const RecoveryFormContainerComponent = withFormik({
+    // @ts-ignore
+    mapStateToProps: () => ({
+        email: ""
+    }),
+
+    handleSubmit: (values, { setSubmitting,props}) => {
+        alert(values.email)
+    },
+
+
+    displayName: "RecoveryForm"
+})(RecoveryFormComponent)
 
 export default RecoveryFormContainerComponent;

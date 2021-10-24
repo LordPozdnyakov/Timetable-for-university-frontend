@@ -1,5 +1,6 @@
 import { withFormik } from "formik";
-import { Redirect } from "react-router-dom";
+import { setUserLogin } from "../../Redux/Reducers/userReducer";
+import store from "../../Redux/Store";
 import LoginFormComponent from "./LoginFormComponent";
 
 
@@ -14,10 +15,8 @@ const LoginFormContainerComponent = withFormik({
 
 
     handleSubmit: (values, { setSubmitting,props}) => {
-        debugger
-        alert(values.email)
-        setSubmitting(false)
-
+        // @ts-ignore
+        store.dispatch(setUserLogin(values))
         // @ts-ignore
         props.history.push("/")
 

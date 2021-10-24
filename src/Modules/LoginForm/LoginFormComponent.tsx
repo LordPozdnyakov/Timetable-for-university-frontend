@@ -4,6 +4,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import ButtonComponent from '../../Components/Button/ButtonComponent';
 import FormWrapper from '../../Components/FormWrapper/FormWrapper';
+import validateField from '../../Utils/helpers/validateField';
 import "./LoginFormStyles.scss"
 
 const LoginFormComponent = (props:any) => {
@@ -26,15 +27,13 @@ const LoginFormComponent = (props:any) => {
         history,
         isAuth
     } = props;
-    // @ts-ignore
-    // @ts-ignore
     return (
         <div className="wrapper__form">
             <FormWrapper>
                 <span className="wrapper__form-icon">
                     <LockOutlined className="wrapper__form-icon-i" />
                 </span>
-                <p>Увійти</p>
+                <h3>Увійти</h3>
                 <Form
                     {...layout}
                     name="LoginForm"
@@ -44,36 +43,31 @@ const LoginFormComponent = (props:any) => {
                     <Form.Item
                         name="email"
                         hasFeedback
-                        // @ts-ignore
-                        // validateStatus={validateField('email', touched, errors)}
+                        validateStatus={validateField('email', touched, errors)}
                     >
 
-                        <Input size={"large"} placeholder="Введите логин" onChange={handleChange} onBlur={handleBlur}
+                        <Input size={"large"} placeholder="Email *" onChange={handleChange} onBlur={handleBlur}
                                id='email' value={values.name}/>
                     </Form.Item>
-
-
                     <Form.Item
                         name="password"
-                        // @ts-ignore
-                        // validateStatus={validateField('password', touched, errors)}
+                        hasFeedback
+                        validateStatus={validateField('password', touched, errors)}
                     >
-                        <Input size={"large"} placeholder="Введите пароль" onChange={handleChange}
+                        <Input.Password size={"large"} placeholder="Пароль *" onChange={handleChange} type="password"
                                onBlur={handleBlur} id='password' value={values.password}/>
                     </Form.Item>
                     <Form.Item
                         name="rememberMe"
-                        // @ts-ignore
-                        // validateStatus={validateField('password', touched, errors)}
+                        hasFeedback
+                        validateStatus={validateField('checkbox', touched, errors)}
                     >
                         <div className="checkbox">
                             <div><Checkbox onChange={handleChange} id='rememberMe' value={values.rememberMe} /></div>
                             <div><p>Запам’ятати мене</p></div>
                         </div>
                     </Form.Item>
-
                     <Form.Item {...tailLayout}>
-
                         <ButtonComponent  type="primary" htmlType="submit" onClick={handleSubmit} disabled={isSubmitting}>
                             Увійти
                         </ButtonComponent>
