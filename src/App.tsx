@@ -1,17 +1,16 @@
 import React from 'react';
-import {Route, Switch} from 'react-router-dom';
+import {Redirect, Route, Switch} from 'react-router-dom';
 
-import { HomePage } from './Pages';
+import {AuthPage, HomePage } from './Pages';
 import { LoginFormContainerComponent, RecoveryFormContainerComponent } from './Modules';
 
 
-const App = () => {
+const App = (props:any) => {
     return (
         <>
             <Switch>
-                <Route exact path="/login" component={LoginFormContainerComponent} />
-                <Route exact path="/recovery" component={RecoveryFormContainerComponent} />
-                <Route  path="/" component={HomePage} />
+                <Route  exact path={['/login',"/recovery"]} component={AuthPage}/>
+                <Route  path="/" render={() => (props.isAuth ? <HomePage /> : <Redirect to="/login" /> )} />
             </Switch>
 
         </>

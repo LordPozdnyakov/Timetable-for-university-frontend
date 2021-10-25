@@ -14,7 +14,7 @@ import './Shared/common.scss';
 ReactDOM.render(
       <BrowserRouter>
           <Provider store={store}>
-            <App />
+            <App isAuth={true} />
           </Provider>
       </BrowserRouter>,
   document.getElementById('root')
