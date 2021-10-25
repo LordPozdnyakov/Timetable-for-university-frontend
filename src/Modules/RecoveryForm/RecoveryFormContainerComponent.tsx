@@ -1,13 +1,21 @@
 import { withFormik } from 'formik';
+import validator from '../../Utils/validator';
 
 import RecoveryFormComponent from "./RecoveryFormComponent"
 
 
 const RecoveryFormContainerComponent = withFormik({
     // @ts-ignore
-    mapStateToProps: () => ({
+    mapPropsToValues: () => ({
         email: ""
     }),
+    validate: values => {
+        let errors = {};
+
+        validator({ isAuth: true, values, errors });
+
+        return errors;
+    },
 
     handleSubmit: (values, { setSubmitting,props}) => {
         alert(values.email)

@@ -8,7 +8,6 @@ import validateField from '../../Utils/helpers/validateField';
 import "./LoginFormStyles.scss"
 
 const LoginFormComponent = (props:any) => {
-    debugger
     const layout = {
         labelCol: {span: 4},
         wrapperCol: {span: 30},
@@ -46,10 +45,10 @@ const LoginFormComponent = (props:any) => {
                         hasFeedback
                         validateStatus={validateField('email', touched, errors)}
                     >
-
                         <Input size={"large"} placeholder="Email *" onChange={handleChange} onBlur={handleBlur}
                                id='email' value={values.name}/>
                     </Form.Item>
+                    {errors.email && touched.email && <div className="wrapper__form-error" >{errors.email}</div>}
                     <Form.Item
                         name="password"
                         hasFeedback
@@ -58,10 +57,12 @@ const LoginFormComponent = (props:any) => {
                         <Input.Password size={"large"} placeholder="Пароль *" onChange={handleChange} type="password"
                                onBlur={handleBlur} id='password' value={values.password}/>
                     </Form.Item>
+                    {errors.password && touched.password && <div className="wrapper__form-error">{errors.password}</div>}
                     <Form.Item
                         name="rememberMe"
                         hasFeedback
                         validateStatus={validateField('checkbox', touched, errors)}
+                        valuePropName="checked"
                     >
                         <div className="checkbox">
                             <div><Checkbox onChange={handleChange} id='rememberMe' value={values.rememberMe} /></div>
@@ -73,7 +74,7 @@ const LoginFormComponent = (props:any) => {
                             Увійти
                         </ButtonComponent>
                     </Form.Item>
-                    <Link to={'/recovery'} className={'auth__link-registered'}>Забули пароль?</Link>
+                    <Link to={'/recovery'}>Забули пароль?</Link>
                 </Form>
             </FormWrapper>
         </div>

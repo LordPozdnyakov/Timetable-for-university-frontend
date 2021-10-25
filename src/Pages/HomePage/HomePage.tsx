@@ -1,20 +1,10 @@
 import React from 'react';
 import {Route, Switch } from 'react-router-dom';
 
+import {AddStudentPage, MainPage, StudentEditPage, StudentsPage, TeachersPage } from '..';
+import { Breadcrumbs, HeaderContainerComponent, ProfileContainerComponent, SidebarContainerComponent } from '../../Components';
+
 import '../../App.scss';
-
-import Breadcrumbs from '../../Components/Breadcrumbs/Breadcrumbs';
-import HeaderContainerComponent from '../../Components/Header/HeaderContainerComponent';
-import ProfileContainerComponent from '../../Components/Profile/ProfileContainerComponent';
-import SidebarContainerComponent from '../../Components/Sidebar/SidebarContainerComponent';
-
-
-
-import MainPage from '../MainPage/MainPage';
-import StudentsPage from '../StudentsPage/StudentsPage';
-import TeachersPage from '../TeachersPage/TeachersPage';
-import AddStudentPage from "../AddStudentPage/AddStudentPage";
-import StudentEditPage from "../StudentEditPage/StudentEditPage";
 
 
 const HomePage = () => {
