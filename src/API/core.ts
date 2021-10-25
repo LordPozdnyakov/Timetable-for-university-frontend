@@ -2,5 +2,5 @@ import * as axios from "axios";
 
 // @ts-ignore
 export const instance = axios.create({
-    baseURL: 'http://localhost:50001/',
+    baseURL: 'https://localhost:5001/'
 });
