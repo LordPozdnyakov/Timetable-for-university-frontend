@@ -4,6 +4,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import ButtonComponent from '../../Components/Button/ButtonComponent';
 import FormWrapper from '../../Components/FormWrapper/FormWrapper';
+import validateField from '../../Utils/helpers/validateField';
 
 const RecoveryFormComponent = (props:any) => {
     const layout = {
@@ -25,7 +26,6 @@ const RecoveryFormComponent = (props:any) => {
         isAuth
     } = props;
     // @ts-ignore
-    // @ts-ignore
     return (
         <div className="wrapper__form">
             <FormWrapper>
@@ -43,18 +43,18 @@ const RecoveryFormComponent = (props:any) => {
                     <Form.Item
                         name="email"
                         hasFeedback
-                        // @ts-ignore
-                        // validateStatus={validateField('email', touched, errors)}
+                        validateStatus={validateField('email', touched, errors)}
                     >
                         <Input size={"large"} placeholder="Email*" onChange={handleChange} onBlur={handleBlur}
                                id='email' value={values.name}/>
                     </Form.Item>
+                    {errors.email && touched.email && <div className="wrapper__form-error" >{errors.email}</div>}
                     <Form.Item {...tailLayout}>
                         <ButtonComponent  type="primary" htmlType="submit" onClick={handleSubmit} disabled={isSubmitting}>
                             Надіслати
                         </ButtonComponent>
                     </Form.Item>
-                    <Link to={'/login'} className={'auth__link-registered'}>Згадали пароль?</Link>
+                    <Link to={'/login'} >Згадали пароль?</Link>
                 </Form>
             </FormWrapper>
         </div>

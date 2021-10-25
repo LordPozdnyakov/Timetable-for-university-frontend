@@ -1,20 +1,10 @@
 import React from 'react';
 import {Route, Switch } from 'react-router-dom';
 
+import {AddStudentPage, MainPage, StudentEditPage, StudentsPage, TeachersPage } from '..';
+import { Breadcrumbs, HeaderContainerComponent, ProfileContainerComponent, SidebarContainerComponent } from '../../Components';
+
 import '../../App.scss';
-
-import Breadcrumbs from '../../Components/Breadcrumbs/Breadcrumbs';
-import HeaderContainerComponent from '../../Components/Header/HeaderContainerComponent';
-import ProfileContainerComponent from '../../Components/Profile/ProfileContainerComponent';
-import SidebarContainerComponent from '../../Components/Sidebar/SidebarContainerComponent';
-
-
-
-import MainPage from '../MainPage/MainPage';
-import StudentsPage from '../StudentsPage/StudentsPage';
-import TeachersPage from '../TeachersPage/TeachersPage';
-import AddStudentPage from "../AddStudentPage/AddStudentPage";
-import StudentEditPage from "../StudentEditPage/StudentEditPage";
 
 
 const HomePage = () => {
@@ -30,6 +20,7 @@ const HomePage = () => {
                     <Route exact path='/students' component={StudentsPage} />
                     <Route exact path='/students/add-student' component={AddStudentPage} />
                     <Route exact path='/students/edit-student' component={StudentEditPage} />
+                    <Route exact path='/students/:id' component={ProfileContainerComponent} />
                     <Route exact path='/teachers' component={TeachersPage} />
                 </Switch>
             </div>
