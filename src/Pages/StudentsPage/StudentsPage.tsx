@@ -1,9 +1,12 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import Student from '../../Components/Student/Student';
 import IStudentProps from "../../Types/IStudentProps";
 import {Button} from 'antd';
 import {PlusOutlined} from '@ant-design/icons';
+import {useTypedSelector} from '../../hooks/useTypedSelector';
+import {getStudents} from '../../Redux/Actions/studentsActions';
+import {useActions} from '../../hooks/useActions';
 import './StudentsPage.scss';
 
 export const students: IStudentProps[] = [
@@ -37,6 +40,26 @@ export const students: IStudentProps[] = [
 ]
 
 const StudentsPage = () => {
+  //TODO: rename allStudents
+  const {students: allStudents, loading, error} = useTypedSelector((state) => state.studentsReducer);
+  const {getStudents} = useActions();
+
+  useEffect(() => {
+    // getStudents();
+  }, []);
+
+  if (loading) {
+    return <div>Завантаження...</div>
+  }
+
+  if (error) {
+    return <h3>{error}</h3>
+  }
+
+  if (students.length < 1) {
+    return <div>Студенти відсутні</div>
+  }
+
   return (
     <div className='students'>
       <div className='students__header'>
