@@ -30,6 +30,7 @@ const HomePage = () => {
                     <Route exact path='/students' component={StudentsPage} />
                     <Route exact path='/students/add-student' component={AddStudentPage} />
                     <Route exact path='/students/edit-student' component={StudentEditPage} />
+                    <Route exact path='/students/:id' component={ProfileContainerComponent} />
                     <Route exact path='/teachers' component={TeachersPage} />
                 </Switch>
             </div>
