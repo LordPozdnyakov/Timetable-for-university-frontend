@@ -1,10 +1,11 @@
 import React from 'react';
+import { IUserType } from '../../Types';
 
 
 import './ProfileStyles.scss'
-// @ts-ignore
-const ProfileComponent = ({user}) => {
-    const {name,date,phone,email,address,group,parents} = user;
+
+
+const ProfileComponent: React.FC<IUserType> = ({name,date,phone,email,address,group,parents}) => {
     return (
         <section className="profile">
             <div className="profile__name">

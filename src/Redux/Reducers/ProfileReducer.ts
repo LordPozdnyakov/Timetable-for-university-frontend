@@ -1,38 +1,16 @@
 import {getUser} from "../Actions/getUser";
 import {getProfileAPI} from "../../API/ProfileAPI"
 import { GET_USER } from "../../Constant/Constant";
+import { IUserType } from "../../Types";
 
-type fatherType = {
-    name: string,
-    phone: number
-}
 
-type motherType = {
-    name: string,
-    phone: number
-}
-
-type parentsType = {
-    father: fatherType,
-    mother: motherType
-}
-
-type userType = {
-    name: string,
-    date: string,
-    phone: number,
-    email: string,
-    address: string,
-    group: string,
-    parents: parentsType
-}
 
 export type InitialStateType = {
     user: object | null
 }
 
 let initialState: InitialStateType = {
-    user: null as userType | null
+    user: null as IUserType | null
 }
 
 

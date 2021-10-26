@@ -1,35 +1,43 @@
 import React from 'react';
 import { connect } from 'react-redux';
+
 import ProfileComponent from './ProfileComponent';
 import {getUserProfile} from "../../Redux/Reducers/ProfileReducer";
 
+import { IUserType } from '../../Types';
+import { AppStateType } from '../../Redux/Store';
+
+type OwnPropsType = {
+
+}
+
+type mapStateType =  {
+    user?: IUserType | null
+}
+
+type mapDispatchType = {
+    getUserProfile: () => void
+}
+
+type PropsType = mapStateType & mapDispatchType;
 
 
-
-
-// @ts-ignore
-const ProfileContainerComponent = (props) => {
-    const {getUserProfile} = props;
-    // @ts-ignore
+const ProfileContainerComponent:React.FC<PropsType> = ({getUserProfile,user}) => {
     React.useEffect(
         () => {
             getUserProfile()
         }, [getUserProfile]
     )
-
-
     return (
-        // @ts-ignore
-          props.user ? <ProfileComponent user={props.user} /> :<div>пользователь не был загружен</div>
+          user ? <ProfileComponent {...user} /> :<div>пользователь не был загружен</div>
     );
 };
 
-
-// @ts-ignore
-let mapStateToProps = (state) => {
+let mapStateToProps = (state: AppStateType): mapStateType => {
     // @ts-ignore
     return {user: state.profile.user}
 }
 
-// @ts-ignore
-export default connect(mapStateToProps,{getUserProfile})(ProfileContainerComponent);
+
+
+export default connect<mapStateType,mapDispatchType,OwnPropsType,AppStateType>(mapStateToProps,{getUserProfile})(ProfileContainerComponent);
