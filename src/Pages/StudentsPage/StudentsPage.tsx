@@ -1,51 +1,21 @@
 import React, {useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import Student from '../../Components/Student/Student';
-import IStudentProps from "../../Types/IStudentProps";
 import {Button} from 'antd';
 import {PlusOutlined} from '@ant-design/icons';
 import {useTypedSelector} from '../../hooks/useTypedSelector';
 import {getStudents} from '../../Redux/Actions/studentsActions';
 import {useActions} from '../../hooks/useActions';
 import './StudentsPage.scss';
-
-export const students: IStudentProps[] = [
-  {
-    id: Math.ceil(Math.random() *  Date.now()),
-    name: 'Васильчук Світлана',
-    group: '415',
-    birthDate: '25.06.2002',
-    phone: '30951255489',
-    email: 'vasilchuck24@gmail.com',
-    address: 'Херсон, просп. Ушакова, 89'
-  },
-  {
-    id: Math.ceil(Math.random() *  Date.now()),
-    name: 'Васиse тлана',
-    group: '41eeee5',
-    birthDate: '25.06.sss2002',
-    phone: '+30951255489',
-    email: 'vasilcdddddddddhuck24@gmail.com',
-    address: 'Херсон, 89'
-  },
-  {
-    id: Math.ceil(Math.random() *  Date.now()),
-    name: 'Васильefsfesfesчук Світлана',
-    group: '4',
-    birthDate: '25..2002',
-    phone: '+309sefe51255489',
-    email: 'vasilchucom',
-    address: 'Херсоssssssssssssssssssssssssssssssssва, 89'
-  }
-]
+import IUser from "../../Types/IUser";
 
 const StudentsPage = () => {
   //TODO: rename allStudents
-  const {students: allStudents, loading, error} = useTypedSelector((state) => state.studentsReducer);
+  const {students, loading, error} = useTypedSelector((state) => state.studentsReducer);
   const {getStudents} = useActions();
 
   useEffect(() => {
-    // getStudents();
+    getStudents();
   }, []);
 
   if (loading) {
@@ -82,8 +52,8 @@ const StudentsPage = () => {
               <th></th>
             </tr>
             {
-              students.map((student: IStudentProps) => {
-                return <Student student={student} key={student.id}/>;
+              students.map((student: IUser) => {
+                return <Student student={student} key={student.UserId}/>;
               })
             }
           </tbody>

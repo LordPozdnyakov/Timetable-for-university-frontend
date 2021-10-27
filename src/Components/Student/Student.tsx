@@ -1,14 +1,15 @@
 import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 import {DeleteFilled, EditFilled} from '@ant-design/icons';
-import IStudentProps from '../../Types/IStudentProps';
 import './Student.scss';
 import SimpleModal from "../../SimpleModal/SimpleModal";
 import {message} from 'antd';
+import IUser from "../../Types/IUser";
 
-const Student = ({student} : { student: IStudentProps }) => {
+const Student = ({student} : { student: IUser }) => {
 
-  const {id, name, group, birthDate, phone, email, address} = student;
+  const {UserId, FirstName, LastName, SurName, GroupId, BirthDay, PhoneNumber, Email, Address} = student;
+  const fullName = `${LastName} ${FirstName} ${SurName}`;
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -33,27 +34,27 @@ const Student = ({student} : { student: IStudentProps }) => {
     <React.Fragment>
       <tr>
         <td>
-          <Link to={`/students/${id}`}>
-            {name}
+          <Link to={`/students/${UserId}`}>
+            {fullName}
           </Link>
         </td>
         <td>
-          <Link to={`/groups/${group}`}>
-            {group}
+          <Link to={`/groups/${GroupId}`}>
+            {GroupId}
           </Link>
         </td>
-        <td>{birthDate}</td>
+        <td>{BirthDay}</td>
         <td>
-          <a href={`tel:${phone}`}>
-            {phone}
+          <a href={`tel:${PhoneNumber}`}>
+            {PhoneNumber}
           </a>
         </td>
         <td>
-          <a href={`mailto:${email}`}>
-            {email}
+          <a href={`mailto:${Email}`}>
+            {Email}
           </a>
         </td>
-        <td>{address}</td>
+        <td>{Address}</td>
         <td className='table-icon edit-icon'>
           <Link to='/students/edit-student'>
             <EditFilled/>
@@ -62,7 +63,7 @@ const Student = ({student} : { student: IStudentProps }) => {
         <td className='table-icon delete-icon' onClick={showModal}><DeleteFilled/></td>
       </tr>
       <SimpleModal title='Видалити студента?'
-                   content={`Студент ${student.name} буде повністю видалений із системи.
+                   content={`Студент ${fullName} буде повністю видалений із системи.
                    Продовжити?`}
                    isModalVisible={isModalVisible}
                    hideModal={hideModal}

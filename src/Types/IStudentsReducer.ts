@@ -1,5 +1,3 @@
-import IStudentProps from './IStudentProps';
-
 //TODO: add type for students!
 export interface IInitialStudentsState {
   students: any[],
@@ -13,17 +11,17 @@ export enum StudentsActionTypes {
   GET_STUDENTS_ERROR = 'GET_STUDENTS_ERROR'
 }
 
-interface IGetStudentsAction {
+export interface IGetStudentsAction {
   type: StudentsActionTypes.GET_STUDENTS
 }
 
 //TODO: add type for payload! (students)
-interface IGetStudentsSuccessAction {
+export interface IGetStudentsSuccessAction {
   type: StudentsActionTypes.GET_STUDENTS_SUCCESS,
   payload: any[]
 }
 
-interface IGetStudentsErrorAction {
+export interface IGetStudentsErrorAction {
   type: StudentsActionTypes.GET_STUDENTS_ERROR,
   payload: string
 }

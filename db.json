@@ -1,3 +1,61 @@
 {
-  "users": {}
+  "users": [
+    {
+      "UserId": 1,
+      "Email": "test@gmail.com",
+      "PasswordHash": "passwordhash",
+      "RememberMe": true,
+      "Token": "token",
+      "Privilege": "student",
+      "FirstName": "FirstName",
+      "LastName": "LastName",
+      "SurName": "SurName",
+      "FatherName": "FatherName",
+      "FatherPhone": "FatherPhone",
+      "MotherName": "MotherName",
+      "MotherPhone": "MotherPhone",
+      "BirthDay": "01.02.1992",
+      "PhoneNumber": "PhoneNumber",
+      "GroupId": 121,
+      "Address":"City Street Home"
+    },
+    {
+      "UserId": 2,
+      "Email": "test2@gmail.com",
+      "PasswordHash": "passwordhash2",
+      "RememberMe": true,
+      "Token": "token2",
+      "Privilege": "student",
+      "FirstName": "FirstName2",
+      "LastName": "LastName2",
+      "SurName": "SurName2",
+      "FatherName": "FatherName2",
+      "FatherPhone": "FatherPhone2",
+      "MotherName": "MotherName2",
+      "MotherPhone": "MotherPhone2",
+      "BirthDay": "02.02.1992",
+      "PhoneNumber": "PhoneNumber2",
+      "GroupId": 122,
+      "Address": "City Street Home2"
+    },
+    {
+      "UserId": 3,
+      "Email": "test3@gmail.com",
+      "PasswordHash": "passwordhash3",
+      "RememberMe": true,
+      "Token": "token3",
+      "Privilege": "student",
+      "FirstName": "FirstName3",
+      "LastName": "LastName3",
+      "SurName": "SurName3",
+      "FatherName": "FatherName3",
+      "FatherPhone": "FatherPhone3",
+      "MotherName": "MotherName3",
+      "MotherPhone": "MotherPhone3",
+      "BirthDay": "03.02.1992",
+      "PhoneNumber": "PhoneNumber3",
+      "GroupId": 123,
+      "Address": "City Street Home3"
+    }
+  ]
 }

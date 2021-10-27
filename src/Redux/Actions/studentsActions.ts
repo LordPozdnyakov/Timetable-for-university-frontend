@@ -1,22 +1,18 @@
-import {StudentsAction, StudentsActionTypes} from '../../Types/IStudentsReducer';
+import {StudentsAction} from '../../Types/IStudentsReducer';
 import {Dispatch} from 'redux';
-import {instance} from '../../API/core';
+import {getStudentsAction, getStudentsErrorAction, getStudentsSuccessAction} from "./actions";
+import {getAllStudents} from '../../API/studentsAPI';
+import IUser from '../../Types/IUser';
 
 export const getStudents = () => {
   return async (dispatch: Dispatch<StudentsAction>) => {
     try {
-      dispatch({type: StudentsActionTypes.GET_STUDENTS});
+      dispatch(getStudentsAction());
       //TODO: any type, add correct url
-      const response: any = await instance.get('students');
-      dispatch({
-        type: StudentsActionTypes.GET_STUDENTS_SUCCESS,
-        payload: response.data
-      });
+      const response: IUser[] = await getAllStudents();
+      dispatch(getStudentsSuccessAction(response));
     } catch (e) {
-      dispatch({
-        type: StudentsActionTypes.GET_STUDENTS_ERROR,
-        payload: 'Помилка при завантаженні студентів'
-      });
+      dispatch(getStudentsErrorAction(`Помилка при завантаженні: ${(e as Error).message}`));
     }
   }
 }

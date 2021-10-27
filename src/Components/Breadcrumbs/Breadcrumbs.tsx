@@ -3,8 +3,8 @@ import {Breadcrumb} from 'antd';
 import {HomeFilled, UserOutlined} from '@ant-design/icons';
 import {useLocation} from 'react-router-dom';
 import IPathnamesProperties from '../../Types/IPathnamesProperties';
-import {checkIfPageIsProfile, createBreadcrumpsForUserName, createPathnamesArray} from '../../Shared/helpers';
-import './Breadcrumps.scss';
+import {checkIfPageIsProfile, createPathnamesArray} from '../../Shared/helpers';
+import './Breadcrumbs.scss';
 
 const pathnamesProperties: IPathnamesProperties[] = [
   {
@@ -47,8 +47,9 @@ const Breadcrumbs = () => {
       {
         pathnames.map((path: string, index: number) => {
           let pathProperty: IPathnamesProperties | undefined = pathnamesProperties.find((pathProps: IPathnamesProperties) => path === pathProps.path);
-          if (index === pathnames.length - 1 && isProfile) {
-            pathProperty = createBreadcrumpsForUserName(pathnames, path);
+          if (!pathProperty && index === pathnames.length - 1 && isProfile) {
+            // console.log('create')
+          //  pathProperty = createBreadcrumpsForUserName(pathnames, path);
           }
           if (!pathProperty) return null;
           const {title, icon} = pathProperty;
