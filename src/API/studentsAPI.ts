@@ -1,6 +1,6 @@
-import {instance} from './core';
+import axios from './core';
 
 export const getAllStudents = async () => {
-  const response = await instance.get('users');
+  const response = await axios.get('users');
   return response.data;
 }
