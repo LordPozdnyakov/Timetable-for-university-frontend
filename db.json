@@ -1,6 +1,7 @@
 {
   "users": [
     {
+      "id": 1,
       "userId": 1,
       "email": "test@gmail.com",
       "password": "password",
@@ -19,6 +20,7 @@
       "groupId": 121
     },
     {
+      "id": 2,
       "userId": 2,
       "email": "test2@gmail.com",
       "password": "password2",
@@ -37,6 +39,7 @@
       "groupId": 122
     },
     {
+      "id": 3,
       "userId": 3,
       "email": "test3@gmail.com",
       "password": "password3",

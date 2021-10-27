@@ -10,7 +10,6 @@ import './StudentsPage.scss';
 import IUser from "../../Types/IUser";
 
 const StudentsPage = () => {
-  //TODO: rename allStudents
   const {students, loading, error} = useTypedSelector((state) => state.studentsReducer);
   const {getStudents} = useActions();
 

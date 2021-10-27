@@ -1,9 +1,27 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './StudentProfilePage.scss';
+import {useTypedSelector} from "../../hooks/useTypedSelector";
+import { useParams } from 'react-router-dom';
+import { useActions } from '../../hooks/useActions';
 
 const StudentProfilePage = () => {
-  const phoneNumber = '+62652';
-  const email = 'gjhfkl';
+  const {selectedStudent, loading, error} = useTypedSelector((state) => state.studentsReducer);
+  const {id} = useParams<{id: string}>();
+  const {getStudentById} = useActions();
+
+  useEffect(() => {
+    getStudentById(+id);
+  }, []);
+
+  if (loading) {
+    return <div>Завантаження...</div>
+  }
+
+  if (error || !selectedStudent) {
+    return <h3>{error}</h3>
+  }
+
+  const {firstName, lastName, surName, birthDay, phoneNumber, email, groupId, fatherName, fatherPhone, motherName, motherPhone} = selectedStudent;
 
   return (
     <section className='profile'>
@@ -12,13 +30,13 @@ const StudentProfilePage = () => {
           <div className='profile__info-row'>
             <div className='profile__info-elem'>
               <div className='profile__info-subtitle'>Прізвище, ім’я, по-батькові</div>
-              <div className='profile__info-important'>Name</div>
+              <div className='profile__info-important'>{`${lastName} ${firstName} ${surName}`}</div>
             </div>
           </div>
           <div className='profile__info-row'>
             <div className='profile__info-elem'>
               <div className='profile__info-subtitle'>Дата народження</div>
-              <div>DATE</div>
+              <div>{birthDay}</div>
             </div>
             <div className='profile__info-elem'>
               <div className='profile__info-subtitle'>Номер телефону</div>
@@ -42,24 +60,24 @@ const StudentProfilePage = () => {
           <div className='profile__info-elem'>
             <div className='profile__info-subtitle'>Група</div>
             <div className='profile__info-important'>
-              5ПР2
+              {groupId}
             </div>
           </div>
         </div>
         <div className='profile_info-row profile__info-block'>
           <div className='profile__info-elem'>
             <div className='profile__info-subtitle'>Батько</div>
-            <div>Батько,
-              <a href={`tel:${phoneNumber}`}>
-                {phoneNumber}
+            <div>{`${fatherName}, `}
+              <a href={`tel:${fatherPhone}`}>
+                {fatherPhone}
               </a>
             </div>
           </div>
           <div className='profile__info-elem'>
             <div className='profile__info-subtitle'>Мати</div>
-            <div>Мати,
-              <a href={`tel:${phoneNumber}`}>
-                {phoneNumber}
+            <div>{`${motherName}, `}
+              <a href={`tel:${motherPhone}`}>
+                {motherPhone}
               </a>
             </div>
           </div>

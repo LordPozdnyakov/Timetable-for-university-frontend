@@ -3,28 +3,35 @@ import {IInitialStudentsState, StudentsAction, StudentsActionTypes} from "../../
 const initialStudentsState: IInitialStudentsState = {
   students: [],
   loading: false,
-  error: null
+  error: null,
+  selectedStudent: null
 }
 
 export const studentsReducer = (state = initialStudentsState, action: StudentsAction): IInitialStudentsState => {
   switch (action.type) {
-    case StudentsActionTypes.GET_STUDENTS:
+    case StudentsActionTypes.FETCH_DATA:
       return {
-        students: [],
-        loading: true,
-        error: null
+        ...state,
+        loading: true
       }
-    case StudentsActionTypes.GET_STUDENTS_SUCCESS:
+    case StudentsActionTypes.FETCH_DATA_ERROR:
       return {
-        students: action.payload,
-        loading: false,
-        error: null
-      }
-    case StudentsActionTypes.GET_STUDENTS_ERROR:
-      return {
-        students: [],
+        ...state,
         loading: false,
         error: action.payload
+      }
+    case StudentsActionTypes.FETCH_STUDENTS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        students: action.payload
+
+      }
+    case StudentsActionTypes.FETCH_STUDENTS_BY_ID_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        selectedStudent: action.payload
       }
     default:
       return state;

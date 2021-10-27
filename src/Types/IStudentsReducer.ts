@@ -1,29 +1,36 @@
-//TODO: add type for students!
+import IUser from './IUser';
+
 export interface IInitialStudentsState {
-  students: any[],
+  students: IUser[],
   loading: boolean,
-  error: string | null
+  error: string | null,
+  selectedStudent: IUser | null
 }
 
 export enum StudentsActionTypes {
-  GET_STUDENTS = 'GET_STUDENTS',
-  GET_STUDENTS_SUCCESS = 'GET_STUDENTS_SUCCESS',
-  GET_STUDENTS_ERROR = 'GET_STUDENTS_ERROR'
+  FETCH_DATA = 'FETCH_DATA',
+  FETCH_DATA_ERROR = 'FETCH_DATA_ERROR',
+  FETCH_STUDENTS_SUCCESS = 'FETCH_STUDENTS_SUCCESS',
+  FETCH_STUDENTS_BY_ID_SUCCESS = 'FETCH_STUDENTS_BY_ID_SUCCESS'
 }
 
-export interface IGetStudentsAction {
-  type: StudentsActionTypes.GET_STUDENTS
+export interface IFetchDataAction {
+  type: StudentsActionTypes.FETCH_DATA,
 }
 
-//TODO: add type for payload! (students)
-export interface IGetStudentsSuccessAction {
-  type: StudentsActionTypes.GET_STUDENTS_SUCCESS,
-  payload: any[]
-}
-
-export interface IGetStudentsErrorAction {
-  type: StudentsActionTypes.GET_STUDENTS_ERROR,
+export interface IFetchDataErrorAction {
+  type: StudentsActionTypes.FETCH_DATA_ERROR,
   payload: string
 }
 
-export type StudentsAction = IGetStudentsAction | IGetStudentsSuccessAction | IGetStudentsErrorAction;
+export interface IFetchStudentsSuccessAction {
+  type: StudentsActionTypes.FETCH_STUDENTS_SUCCESS,
+  payload: IUser[]
+}
+
+export interface IFetchStudentByIdSuccessAction {
+  type: StudentsActionTypes.FETCH_STUDENTS_BY_ID_SUCCESS,
+  payload: IUser
+}
+
+export type StudentsAction = IFetchDataAction | IFetchDataErrorAction | IFetchStudentsSuccessAction | IFetchStudentByIdSuccessAction;

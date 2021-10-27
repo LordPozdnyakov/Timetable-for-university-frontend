@@ -1,26 +1,35 @@
 import {
-  IGetStudentsAction,
-  IGetStudentsErrorAction,
-  IGetStudentsSuccessAction,
+  IFetchDataAction,
+  IFetchDataErrorAction,
+  IFetchStudentsSuccessAction,
+  IFetchStudentByIdSuccessAction,
   StudentsActionTypes
 } from '../../Types/IStudentsReducer';
+import IUser from '../../Types/IUser';
 
-export const getStudentsAction = (): IGetStudentsAction => {
+export const fetchDataAction = (): IFetchDataAction => {
   return {
-    type: StudentsActionTypes.GET_STUDENTS
+    type: StudentsActionTypes.FETCH_DATA
   };
 }
 
-export const getStudentsSuccessAction = (payload: any): IGetStudentsSuccessAction => {
+export const fetchDataErrorAction = (payload: string): IFetchDataErrorAction => {
   return {
-    type: StudentsActionTypes.GET_STUDENTS_SUCCESS,
+    type: StudentsActionTypes.FETCH_DATA_ERROR,
+    payload
+  };
+}
+
+export const fetchStudentsSuccessAction = (payload: IUser[]): IFetchStudentsSuccessAction => {
+  return {
+    type: StudentsActionTypes.FETCH_STUDENTS_SUCCESS,
     payload,
   };
 }
 
-export const getStudentsErrorAction = (payload: string): IGetStudentsErrorAction => {
+export const fetchStudentByIdSuccessAction = (payload: IUser): IFetchStudentByIdSuccessAction => {
   return {
-    type: StudentsActionTypes.GET_STUDENTS_ERROR,
-    payload
+    type: StudentsActionTypes.FETCH_STUDENTS_BY_ID_SUCCESS,
+    payload,
   };
 }
