@@ -30,7 +30,7 @@ const pathnamesProperties: IPathnamesProperties[] = [
   }
 ]
 
-const Breadcrumbs = () => {
+const Breadcrumbs: React.FC = () => {
   const location = useLocation();
   const pathnames: string[] = createPathnamesArray(location.pathname);
   const isProfile: boolean = checkIfPageIsProfile(location.pathname);

@@ -4,7 +4,7 @@ import {useTypedSelector} from "../../hooks/useTypedSelector";
 import { useParams } from 'react-router-dom';
 import { useActions } from '../../hooks/useActions';
 
-const StudentProfilePage = () => {
+const StudentProfilePage: React.FC = () => {
   const {selectedStudent, loading, error} = useTypedSelector((state) => state.studentsReducer);
   const {id} = useParams<{id: string}>();
   const {getStudentById} = useActions();

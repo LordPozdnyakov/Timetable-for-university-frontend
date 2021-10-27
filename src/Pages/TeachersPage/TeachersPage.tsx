@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TeachersPage = () => {
+const TeachersPage: React.FC = () => {
   return (
     <div>
       TeachersPage

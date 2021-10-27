@@ -4,12 +4,11 @@ import Student from '../../Components/Student/Student';
 import {Button} from 'antd';
 import {PlusOutlined} from '@ant-design/icons';
 import {useTypedSelector} from '../../hooks/useTypedSelector';
-import {getStudents} from '../../Redux/Actions/studentsActions';
 import {useActions} from '../../hooks/useActions';
 import './StudentsPage.scss';
 import IUser from "../../Types/IUser";
 
-const StudentsPage = () => {
+const StudentsPage: React.FC = () => {
   const {students, loading, error} = useTypedSelector((state) => state.studentsReducer);
   const {getStudents} = useActions();
 
