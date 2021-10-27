@@ -22,7 +22,6 @@ export const getStudentById = (id: number) => {
       dispatch(fetchDataAction());
       //TODO: any type
       const response: any = await getStundentByIdAPI(id);
-      console.log(response)
       dispatch(fetchStudentByIdSuccessAction(response));
     } catch (e) {
       dispatch(fetchDataErrorAction(`Помилка при завантаженні: ${(e as Error).message}`));

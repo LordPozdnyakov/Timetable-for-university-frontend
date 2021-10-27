@@ -3,7 +3,8 @@ import {Breadcrumb} from 'antd';
 import {HomeFilled, UserOutlined} from '@ant-design/icons';
 import {useLocation} from 'react-router-dom';
 import IPathnamesProperties from '../../Types/IPathnamesProperties';
-import {checkIfPageIsProfile, createPathnamesArray} from '../../Shared/helpers';
+import {useTypedSelector} from '../../hooks/useTypedSelector';
+import {createPathnamesArray, checkIfPageIsProfile, createBreadcrumpsForUserName} from '../../Utils/helpers/breadcrumbs-helpers';
 import './Breadcrumbs.scss';
 
 const pathnamesProperties: IPathnamesProperties[] = [
@@ -21,6 +22,11 @@ const pathnamesProperties: IPathnamesProperties[] = [
     path: 'add-student',
     title: 'Додати студента',
     icon: null
+  },
+  {
+    path: 'edit-student',
+    title: 'Редагувати студента',
+    icon: null
   }
 ]
 
@@ -28,9 +34,10 @@ const Breadcrumbs = () => {
   const location = useLocation();
   const pathnames: string[] = createPathnamesArray(location.pathname);
   const isProfile: boolean = checkIfPageIsProfile(location.pathname);
+  const {selectedStudent} = useTypedSelector((state) => state.studentsReducer);
 
   return (
-    <Breadcrumb className='breadcrumps'>
+    <Breadcrumb className='breadcrumbs'>
       {
         pathnames.length > 0 ? (
           <Breadcrumb.Item href="/">
@@ -48,8 +55,14 @@ const Breadcrumbs = () => {
         pathnames.map((path: string, index: number) => {
           let pathProperty: IPathnamesProperties | undefined = pathnamesProperties.find((pathProps: IPathnamesProperties) => path === pathProps.path);
           if (!pathProperty && index === pathnames.length - 1 && isProfile) {
-            // console.log('create')
-          //  pathProperty = createBreadcrumpsForUserName(pathnames, path);
+            let fullName: string = '';
+            if (pathnames[0] === 'students') {
+              if (selectedStudent) {
+                const {lastName, firstName, surName} = selectedStudent;
+                fullName = `${lastName} ${firstName} ${surName}`;
+              }
+            }
+            pathProperty = createBreadcrumpsForUserName(pathnames, path, fullName);
           }
           if (!pathProperty) return null;
           const {title, icon} = pathProperty;
