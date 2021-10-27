@@ -53,7 +53,7 @@ const StudentsPage = () => {
             </tr>
             {
               students.map((student: IUser) => {
-                return <Student student={student} key={student.UserId}/>;
+                return <Student student={student} key={student.userId}/>;
               })
             }
           </tbody>

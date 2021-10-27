@@ -8,8 +8,8 @@ import IUser from "../../Types/IUser";
 
 const Student = ({student} : { student: IUser }) => {
 
-  const {UserId, FirstName, LastName, SurName, GroupId, BirthDay, PhoneNumber, Email, Address} = student;
-  const fullName = `${LastName} ${FirstName} ${SurName}`;
+  const {userId, firstName, lastName, surName, groupId, birthDay, phoneNumber, email} = student;
+  const fullName = `${lastName} ${firstName} ${surName}`;
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -34,27 +34,27 @@ const Student = ({student} : { student: IUser }) => {
     <React.Fragment>
       <tr>
         <td>
-          <Link to={`/students/${UserId}`}>
+          <Link to={`/students/${userId}`}>
             {fullName}
           </Link>
         </td>
         <td>
-          <Link to={`/groups/${GroupId}`}>
-            {GroupId}
+          <Link to={`/groups/${groupId}`}>
+            {groupId}
           </Link>
         </td>
-        <td>{BirthDay}</td>
+        <td>{birthDay}</td>
         <td>
-          <a href={`tel:${PhoneNumber}`}>
-            {PhoneNumber}
+          <a href={`tel:${phoneNumber}`}>
+            {phoneNumber}
           </a>
         </td>
         <td>
-          <a href={`mailto:${Email}`}>
-            {Email}
+          <a href={`mailto:${email}`}>
+            {email}
           </a>
         </td>
-        <td>{Address}</td>
+        <td>Address</td>
         <td className='table-icon edit-icon'>
           <Link to='/students/edit-student'>
             <EditFilled/>
