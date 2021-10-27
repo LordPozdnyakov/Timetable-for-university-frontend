@@ -1,6 +1,10 @@
-import * as axios from "axios";
+import axios from "axios";
+
+
+axios.defaults.baseURL = 'http://localhost:5000/';
+axios.defaults.headers.common["token"] = window.localStorage.token
 
 // @ts-ignore
-export const instance = axios.create({
-    baseURL: 'http://localhost:5000/'
-});
+window.axios = axios;
+
+export default axios;

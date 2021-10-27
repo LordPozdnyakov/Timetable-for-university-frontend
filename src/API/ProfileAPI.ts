@@ -1,12 +1,13 @@
-import { instance } from "./core"
+import axios from "./core"
+
 
 
 export const getProfileAPI = () => {
-    // @ts-ignore
-    return instance.get('').then(response => response.data.user)
+    //@ts-ignore
+    return axios.get('').then(response => response.data.user)
 }
 
 export  const setUserLoginAPI = (values:any) => {
     // @ts-ignore
-    return instance.post("login", values).then(response => console.log(response))
+    return axios.post("login", values).then(response => response)
 }
