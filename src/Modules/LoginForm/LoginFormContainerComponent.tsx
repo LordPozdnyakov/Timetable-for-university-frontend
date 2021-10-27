@@ -1,21 +1,24 @@
-import { withFormik } from "formik";
+import {FormikErrors, withFormik } from "formik";
 import { setUserLogin } from "../../Redux/Reducers/userReducer";
 import store from "../../Redux/Store";
+import MyFormProps from "../../Types/IFormikType";
 import validator from "../../Utils/validator";
 import LoginFormComponent from "./LoginFormComponent";
 
+interface FormValues {
+
+}
 
 
-
-const LoginFormContainerComponent = withFormik({
+const LoginFormContainerComponent = withFormik<FormValues, MyFormProps>({
     enableReinitialize: true,
     mapPropsToValues: () => ({
         email: '',
         password: '',
         rememberMe: false,
     }),
-    validate: values => {
-        // let errors = {};
+    validate: (values:MyFormProps) => {
+        // let errors: FormikErrors<MyFormProps> = {};
         //
         // validator({ isAuth: true, values, errors });
         //
@@ -23,8 +26,7 @@ const LoginFormContainerComponent = withFormik({
     },
 
 
-    handleSubmit: (values, { setSubmitting,props}) => {
-        // @ts-ignore
+    handleSubmit: (values:MyFormProps, { setSubmitting,props}) => {
         store.dispatch(setUserLogin(values))
         // @ts-ignore
         // props.history.push("/")
@@ -33,6 +35,7 @@ const LoginFormContainerComponent = withFormik({
 
 
     displayName: "LoginForm"
+    // @ts-ignore
 })(LoginFormComponent)
 
 

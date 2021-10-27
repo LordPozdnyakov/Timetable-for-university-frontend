@@ -1,4 +1,3 @@
-import React from 'react';
 import { setUserLoginAPI } from '../../API/ProfileAPI';
 import { SET_DATA } from '../../Constant/Constant';
 

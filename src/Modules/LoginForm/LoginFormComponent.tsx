@@ -1,13 +1,18 @@
 import { LockOutlined } from '@ant-design/icons';
 import {Form, Input, Checkbox} from 'antd';
+import { FormikProps } from 'formik';
 import React from 'react';
 import {Link} from 'react-router-dom';
 import ButtonComponent from '../../Components/Button/ButtonComponent';
 import FormWrapper from '../../Components/FormWrapper/FormWrapper';
+import MyFormProps from '../../Types/IFormikType';
 import validateField from '../../Utils/helpers/validateField';
 import "./LoginFormStyles.scss"
 
-const LoginFormComponent = (props:any) => {
+
+
+
+const LoginFormComponent = (props:  FormikProps<MyFormProps>) => {
     const layout = {
         labelCol: {span: 4},
         wrapperCol: {span: 30},
@@ -24,8 +29,6 @@ const LoginFormComponent = (props:any) => {
         handleBlur,
         handleSubmit,
         isSubmitting,
-        history,
-        isAuth
     } = props;
     return (
         <div className="wrapper__form">
@@ -46,7 +49,7 @@ const LoginFormComponent = (props:any) => {
                         validateStatus={validateField('email', touched, errors)}
                     >
                         <Input size={"large"} placeholder="Email *" onChange={handleChange} onBlur={handleBlur}
-                               id='email' value={values.name}/>
+                               id='email' value={values.email}/>
                     </Form.Item>
                     {errors.email && touched.email && <div className="wrapper__form-error" >{errors.email}</div>}
                     <Form.Item
