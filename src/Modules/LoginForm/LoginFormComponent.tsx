@@ -73,7 +73,7 @@ const LoginFormComponent = (props:  FormikProps<MyFormProps>) => {
                         </div>
                     </Form.Item>
                     <Form.Item {...tailLayout}>
-                        <ButtonComponent  type="primary" htmlType="submit" onClick={handleSubmit} disabled={isSubmitting}>
+                        <ButtonComponent  type="primary" htmltype="submit" onClick={handleSubmit} disabled={isSubmitting}>
                             Увійти
                         </ButtonComponent>
                     </Form.Item>
