@@ -6,7 +6,8 @@ import validator from "../../Utils/validator";
 import LoginFormComponent from "./LoginFormComponent";
 
 interface FormValues {
-
+        status: number
+        history: any
 }
 
 
@@ -27,9 +28,15 @@ const LoginFormContainerComponent = withFormik<FormValues, MyFormProps>({
 
 
     handleSubmit: (values:MyFormProps, { setSubmitting,props}) => {
-        store.dispatch(setUserLogin(values))
         // @ts-ignore
-        // props.history.push("/")
+        store.dispatch(setUserLogin(values)).then( (status) => {
+            if(status = 200) {
+                props.history.push('/')
+                setSubmitting(false)
+            } else {
+                setSubmitting(true)
+            }
+        })
 
     },
 

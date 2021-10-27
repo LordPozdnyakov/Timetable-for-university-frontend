@@ -1,4 +1,4 @@
-import { GET_USER } from "../../Constant/Constant"
+import { GET_USER} from "../../Constant/Constant"
 
 
 export type getUserActionType = {
@@ -8,4 +8,6 @@ export type getUserActionType = {
 
 
 
+
 export const getUser = (user: object):getUserActionType => ({type: GET_USER, user})
+
