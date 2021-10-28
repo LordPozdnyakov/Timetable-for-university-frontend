@@ -11,7 +11,7 @@ export function checkIfPageIsProfile(fullPathname: string): boolean {
     && pathnames.length === 2 && containsId;
 }
 
-export function createBreadcrumpsForUserName (pathnames: string[], path: string, fullName: string): IPathnamesProperties {
+export function createBreadcrumpsForUserName (path: string, fullName: string): IPathnamesProperties {
   if (!fullName) return {
     path,
     title: 'Користувач не знайден',

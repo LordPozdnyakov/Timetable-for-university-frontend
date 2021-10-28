@@ -62,7 +62,7 @@ const Breadcrumbs: React.FC = () => {
                 fullName = `${lastName} ${firstName} ${surName}`;
               }
             }
-            pathProperty = createBreadcrumpsForUserName(pathnames, path, fullName);
+            pathProperty = createBreadcrumpsForUserName(path, fullName);
           }
           if (!pathProperty) return null;
           const {title, icon} = pathProperty;
