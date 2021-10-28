@@ -5,7 +5,6 @@ export {default as FormWrapper} from "./FormWrapper/FormWrapper"
 export {default as InfoCard} from "./InfoCard/InfoCard"
 
 export {default as HeaderContainerComponent} from "./Header/HeaderContainerComponent"
-export {default as ProfileContainerComponent} from "./Profile/ProfileContainerComponent"
 export {default as SidebarContainerComponent} from "./Sidebar/SidebarContainerComponent"
 
 export {default as Student} from "./Student/Student"

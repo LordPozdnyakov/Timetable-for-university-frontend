@@ -1,5 +1,7 @@
+import {Action, Dispatch } from 'redux';
 import { setUserLoginAPI } from '../../API/ProfileAPI';
 import { SET_DATA } from '../../Constant/Constant';
+import MyFormProps from '../../Types/IFormikType';
 import openNotification from '../../Utils/helpers/openNotification';
 import { setData } from '../Actions/setData';
 
@@ -26,27 +28,24 @@ export const UserReducer = (state = initialState, {type,payload}) => {
 };
 
 
-export const setUserLogin =  (values:any) => (dispatch:any) => {
-             // @ts-ignore
+
+export const setUserLogin =  (values:MyFormProps) => (dispatch:Dispatch<setData>) => {
              return setUserLoginAPI(values).then((promise) => {
-                 // @ts-ignore
-                    const {status,data,token} = promise;
+                    const {status,data} = promise;
                     if(status === 200) {
-                        // @ts-ignore
                         openNotification({
                             text: "Авторизация прошла успешно",
-                            type: "success"
+                            type: "success",
                         })
                         // @ts-ignore
-                        window.axios.defaults.headers.common['token'] = token;
-                        window.localStorage['token'] = token;
+                        window.axios.defaults.headers.common['token'] = data.token;
+                        // @ts-ignore
+                        window.localStorage['token'] = data.token;
                         // @ts-ignore
                         dispatch(setData(data))
                     } else {
-
                         openNotification({
                             text: "Ошибка авторизации",
-                            // @ts-ignore
                             message: "Проверьте логин или пароль",
                             type: "error"
                         })
