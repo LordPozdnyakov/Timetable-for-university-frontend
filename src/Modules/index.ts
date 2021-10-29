@@ -1,2 +1,2 @@
-export {default as LoginFormContainerComponent } from "./LoginForm/LoginFormContainerComponent"
+export {default as LoginFormComponent } from "./LoginForm/LoginFormComponent"
 export {default as RecoveryFormContainerComponent } from "./RecoveryForm/RecoveryFormContainerComponent"

@@ -1,10 +1,19 @@
 import axios from "axios";
 
+const instance = axios.create({
+    baseURL: 'http://localhost:5000/'
+});
 
-axios.defaults.baseURL = 'http://localhost:5000/';
-axios.defaults.headers.common["token"] = window.localStorage.token
+instance.interceptors.request.use(
+    async config => {
+        const token = localStorage.get('token');
+        config.headers = {
+            'token': `${token}`,
+        }
+        return config;
+    },
+    error => {
+        Promise.reject(error)
+    });
 
-// @ts-ignore
-window.axios = axios;
-
-export default axios;
+export default instance

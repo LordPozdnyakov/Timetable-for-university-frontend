@@ -1,18 +1,18 @@
-import { LockOutlined } from '@ant-design/icons';
-import {Form, Input, Checkbox} from 'antd';
-import { FormikProps } from 'formik';
 import React from 'react';
 import {Link} from 'react-router-dom';
+import {LockOutlined} from '@ant-design/icons';
+import {Form, Input, Checkbox} from 'antd';
+import {useFormik} from 'formik';
 import ButtonComponent from '../../Components/Button/ButtonComponent';
 import FormWrapper from '../../Components/FormWrapper/FormWrapper';
-import MyFormProps from '../../Types/IFormikType';
+import {setUserLogin} from '../../Redux/Reducers/userReducer';
 import validateField from '../../Utils/helpers/validateField';
+import {useDispatch} from 'react-redux';
 import "./LoginFormStyles.scss"
 
 
-
-
-const LoginFormComponent = (props:  FormikProps<MyFormProps>) => {
+const LoginFormComponent = (props: any) => {
+    const dispatch = useDispatch();
     const layout = {
         labelCol: {span: 4},
         wrapperCol: {span: 30},
@@ -21,20 +21,33 @@ const LoginFormComponent = (props:  FormikProps<MyFormProps>) => {
         wrapperCol: {offset: 0, span: 30},
     };
 
-    const {
-        values,
-        touched,
-        errors,
-        handleChange,
-        handleBlur,
-        handleSubmit,
-        isSubmitting,
-    } = props;
+    const formik = useFormik({
+        initialValues: {
+            email: '',
+            password: '',
+            rememberMe: false
+        },
+        onSubmit: (values, {setSubmitting}) => {
+            // @ts-ignore
+            dispatch(setUserLogin(values)).then((status) => {
+                if (status = 200) {
+                    props.history.push('/')
+                    setSubmitting(false)
+                } else {
+                    setSubmitting(true)
+                }
+            })
+        },
+
+
+    })
+    const {touched, errors, handleBlur, handleChange, values, handleSubmit, isSubmitting} = formik;
+
     return (
         <div className="wrapper__form">
             <FormWrapper>
                 <span className="wrapper__form-icon">
-                    <LockOutlined className="wrapper__form-icon-i" />
+                    <LockOutlined className="wrapper__form-icon-i"/>
                 </span>
                 <h3>Увійти</h3>
                 <Form
@@ -51,16 +64,17 @@ const LoginFormComponent = (props:  FormikProps<MyFormProps>) => {
                         <Input size={"large"} placeholder="Email *" onChange={handleChange} onBlur={handleBlur}
                                id='email' value={values.email}/>
                     </Form.Item>
-                    {errors.email && touched.email && <div className="wrapper__form-error" >{errors.email}</div>}
+                    {errors.email && touched.email && <div className="wrapper__form-error">{errors.email}</div>}
                     <Form.Item
                         name="password"
                         hasFeedback
                         validateStatus={validateField('password', touched, errors)}
                     >
                         <Input.Password size={"large"} placeholder="Пароль *" onChange={handleChange} type="password"
-                               onBlur={handleBlur} id='password' value={values.password}/>
+                                        onBlur={handleBlur} id='password' value={values.password}/>
                     </Form.Item>
-                    {errors.password && touched.password && <div className="wrapper__form-error">{errors.password}</div>}
+                    {errors.password && touched.password &&
+                    <div className="wrapper__form-error">{errors.password}</div>}
                     <Form.Item
                         name="rememberMe"
                         hasFeedback
@@ -68,12 +82,13 @@ const LoginFormComponent = (props:  FormikProps<MyFormProps>) => {
                         valuePropName="checked"
                     >
                         <div className="checkbox">
-                            <div><Checkbox onChange={handleChange} id='rememberMe' value={values.rememberMe} /></div>
+                            <div><Checkbox onChange={handleChange} id='rememberMe' value={values.rememberMe}/></div>
                             <div><p>Запам’ятати мене</p></div>
                         </div>
                     </Form.Item>
                     <Form.Item {...tailLayout}>
-                        <ButtonComponent  type="primary" htmltype="submit" onClick={handleSubmit} disabled={isSubmitting}>
+                        <ButtonComponent type="primary" htmltype="submit" onClick={handleSubmit}
+                                         disabled={isSubmitting}>
                             Увійти
                         </ButtonComponent>
                     </Form.Item>
