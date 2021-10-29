@@ -5,6 +5,11 @@ import SimpleModal from "../SimpleModal/SimpleModal";
 import { message } from "antd";
 import IUser from "../../Types/IUser";
 import "./Student.scss";
+import {
+  EDIT_STUDENT_PAGE_ROUTE,
+  GROUPS_PAGE_ROUTE,
+  STUDENTS_PAGE_ROUTE,
+} from "../../Constant/routes-constants";
 
 const Student = ({ student }: { student: IUser }) => {
   const {
@@ -42,10 +47,10 @@ const Student = ({ student }: { student: IUser }) => {
     <React.Fragment>
       <tr>
         <td>
-          <Link to={`/students/${userId}`}>{fullName}</Link>
+          <Link to={`${STUDENTS_PAGE_ROUTE}/${userId}`}>{fullName}</Link>
         </td>
         <td>
-          <Link to={`/groups/${groupId}`}>{groupId}</Link>
+          <Link to={`${GROUPS_PAGE_ROUTE}/${groupId}`}>{groupId}</Link>
         </td>
         <td>{birthDay}</td>
         <td>
@@ -56,7 +61,7 @@ const Student = ({ student }: { student: IUser }) => {
         </td>
         <td>Address</td>
         <td className="table-icon edit-icon">
-          <Link to="/students/edit-student">
+          <Link to={EDIT_STUDENT_PAGE_ROUTE}>
             <EditFilled />
           </Link>
         </td>
