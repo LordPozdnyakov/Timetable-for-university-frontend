@@ -29,13 +29,13 @@ const Student = ({ student }: { student: IUser }) => {
     setIsModalVisible(false);
   };
 
-  const handleYes = (): void => {
+  const handleCancelDeleting = (): void => {
     setIsModalVisible(false);
-    message.success("Студента успішно видалено");
   };
 
-  const handleNo = (): void => {
+  const handleConfirmDeleting = (): void => {
     setIsModalVisible(false);
+    message.success("Студента успішно видалено");
   };
 
   return (
@@ -70,8 +70,8 @@ const Student = ({ student }: { student: IUser }) => {
                    Продовжити?`}
         isModalVisible={isModalVisible}
         hideModal={hideModal}
-        handleNo={handleNo}
-        handleYes={handleYes}
+        handleCancel={handleCancelDeleting}
+        handleConfirm={handleConfirmDeleting}
       />
     </React.Fragment>
   );

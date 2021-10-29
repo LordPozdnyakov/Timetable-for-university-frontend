@@ -7,8 +7,8 @@ type SimpleModalProps = {
   content: string;
   isModalVisible: boolean;
   hideModal: () => void;
-  handleNo: () => void;
-  handleYes: () => void;
+  handleCancel: () => void;
+  handleConfirm: () => void;
 };
 
 const SimpleModal: FC<SimpleModalProps> = ({
@@ -16,8 +16,8 @@ const SimpleModal: FC<SimpleModalProps> = ({
   content,
   isModalVisible,
   hideModal,
-  handleNo,
-  handleYes,
+  handleCancel,
+  handleConfirm,
 }) => {
   return (
     <Modal
@@ -27,16 +27,16 @@ const SimpleModal: FC<SimpleModalProps> = ({
       footer={[
         <Button
           type="link"
-          onClick={handleNo}
-          className="simple-modal__btn-no"
+          onClick={handleCancel}
+          className="simple-modal__btn-cancel"
           key="modal-btn-no"
         >
           Ні
         </Button>,
         <Button
           type="link"
-          onClick={handleYes}
-          className="simple-modal__btn-yes"
+          onClick={handleConfirm}
+          className="simple-modal__btn-confirm"
           key="modal-btn-yes"
         >
           Так
