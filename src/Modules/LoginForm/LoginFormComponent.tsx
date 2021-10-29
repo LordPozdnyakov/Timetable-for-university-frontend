@@ -97,12 +97,7 @@ const LoginFormComponent = (props: any) => {
           {errors.password && touched.password && (
             <div className="wrapper__form-error">{errors.password}</div>
           )}
-          <Form.Item
-            name="rememberMe"
-            hasFeedback
-            validateStatus={validateField("checkbox", touched, errors)}
-            valuePropName="checked"
-          >
+          <Form.Item name="rememberMe" valuePropName="checked">
             <div className="checkbox">
               <div>
                 <Checkbox

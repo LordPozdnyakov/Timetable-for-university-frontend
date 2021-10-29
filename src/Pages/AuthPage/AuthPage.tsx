@@ -2,21 +2,17 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import {
   LoginFormComponent,
-  RecoveryFormContainerComponent,
+  RecoveryFormComponent,
   RecoveryPasswordComponent,
 } from "../../Modules";
 
-import "./LoginFormStyles.scss";
+import "./AuthStyles.scss";
 
 const AuthPage = () => {
   return (
     <Switch>
       <Route exact path="/login" component={LoginFormComponent} />
-      <Route
-        exact
-        path="/recovery"
-        component={RecoveryFormContainerComponent}
-      />
+      <Route exact path="/recovery" component={RecoveryFormComponent} />
       <Route
         exact
         path="/recovery/password"
