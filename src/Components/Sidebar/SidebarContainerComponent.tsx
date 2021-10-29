@@ -1,10 +1,8 @@
 import React from 'react';
-import SidebarComponent from "./SidebarComponent";
+import SidebarComponent from './SidebarComponent';
 
 const SidebarContainerComponent = () => {
-    return (
-        <SidebarComponent />
-    );
+	return <SidebarComponent />;
 };
 
 export default SidebarContainerComponent;

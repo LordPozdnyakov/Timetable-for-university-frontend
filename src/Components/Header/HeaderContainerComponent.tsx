@@ -1,10 +1,8 @@
 import React from 'react';
-import HeaderComponent from "./HeaderComponent";
+import HeaderComponent from './HeaderComponent';
 
 const HeaderContainerComponent = () => {
-    return (
-        <HeaderComponent />
-    );
+	return <HeaderComponent />;
 };
 
 export default HeaderContainerComponent;

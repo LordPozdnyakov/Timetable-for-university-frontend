@@ -1,23 +1,20 @@
 @import 'src/Shared/variables';
 
 td.table-icon {
-  cursor: pointer;
-  padding-right: 15px;
-  padding-left: 15px;
-  transition: all 0.2s linear;
+	cursor: pointer;
+	padding-right: 15px;
+	padding-left: 15px;
+	transition: all 0.2s linear;
 
-  &.edit-icon {
-    color: $primary-color;
-  }
+	&.edit-icon {
+		color: $primary-color;
+	}
 
-  &.delete-icon {
-    color: $error-color;
-  }
+	&.delete-icon {
+		color: $error-color;
+	}
 
-  &:hover {
-    filter: $hover-shadow;
-  }
+	&:hover {
+		filter: $hover-shadow;
+	}
 }
-
-
-
