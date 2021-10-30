@@ -6,7 +6,7 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
   async (config) => {
-    const token = localStorage.getItem("token");
+    const token = window.localStorage.token;
     config.headers = {
       token: `${token}`,
     };

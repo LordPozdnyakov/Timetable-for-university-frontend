@@ -7,7 +7,7 @@ export const LoginSchema = Yup.object().shape({
   password: Yup.string()
     .required(`Це поле обов'язковое`)
     .min(7, "Пароль має бути 7 символів"),
-  passwordConfirmation: Yup.string()
-    .required(`Це поле обов'язковое`)
-    .oneOf([Yup.ref("password"), null], "Пароли повинні співпадати"),
+  // passwordConfirmation: Yup.string()
+  //   .required(`Це поле обов'язковое`)
+  //   .oneOf([Yup.ref("password"), null], "Пароли повинні співпадати"),
 });
