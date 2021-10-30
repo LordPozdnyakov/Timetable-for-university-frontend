@@ -3,7 +3,7 @@ import { Breadcrumb } from "antd";
 import { HomeFilled, UserOutlined } from "@ant-design/icons";
 import { useLocation } from "react-router-dom";
 import IPathnamesProperties from "../../Types/IPathnamesProperties";
-import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { useTypedSelector } from "../../hooks/redux-hooks";
 import {
   createPathnamesArray,
   checkIfPageIsProfile,
