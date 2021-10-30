@@ -113,7 +113,7 @@ const LoginFormComponent = (props: any) => {
           </Form.Item>
           <Form.Item {...tailLayout}>
             <ButtonComponent
-              type="primary"
+              type="submit"
               htmltype="submit"
               onClick={handleSubmit}
               disabled={isSubmitting}
