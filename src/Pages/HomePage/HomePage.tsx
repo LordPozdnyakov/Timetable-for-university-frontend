@@ -1,48 +1,60 @@
-import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import React from "react";
+import { Route, Switch } from "react-router-dom";
 
 import {
-	AddStudentPage,
-	MainPage,
-	StudentEditPage,
-	StudentsPage,
-	TeachersPage,
-	StudentProfilePage,
-} from '..';
+  AddStudentPage,
+  MainPage,
+  StudentEditPage,
+  StudentsPage,
+  TeachersPage,
+  StudentProfilePage,
+} from "..";
 import {
-	Breadcrumbs,
-	HeaderContainerComponent,
-	SidebarContainerComponent,
-} from '../../Components';
+  Breadcrumbs,
+  HeaderContainerComponent,
+  SidebarContainerComponent,
+} from "../../Components";
 
-import '../../App.scss';
+import "../../App.scss";
+import {
+  ADD_STUDENT_PAGE_ROUTE,
+  EDIT_STUDENT_PAGE_ROUTE,
+  MAIN_PAGE_ROUTE,
+  STUDENT_PROFILE_PAGE_ROUTE,
+  STUDENTS_PAGE_ROUTE,
+  TEACHERS_PAGE_ROUTE,
+} from "../../Constant/routes-constants";
 
 const HomePage = () => {
-	return (
-		<div className="wrapper">
-			<HeaderContainerComponent />
-			<SidebarContainerComponent />
-			<div className="content">
-				<Breadcrumbs />
-				<Switch>
-					<Route exact path="/" component={MainPage} />
-					<Route exact path="/students" component={StudentsPage} />
-					<Route
-						exact
-						path="/students/add-student"
-						component={AddStudentPage}
-					/>
-					<Route
-						exact
-						path="/students/edit-student"
-						component={StudentEditPage}
-					/>
-					<Route exact path="/students/:id" component={StudentProfilePage} />
-					<Route exact path="/teachers" component={TeachersPage} />
-				</Switch>
-			</div>
-		</div>
-	);
+  return (
+    <div className="wrapper">
+      <HeaderContainerComponent />
+      <SidebarContainerComponent />
+      <div className="content">
+        <Breadcrumbs />
+        <Switch>
+          <Route exact path={MAIN_PAGE_ROUTE} component={MainPage} />
+          <Route exact path={STUDENTS_PAGE_ROUTE} component={StudentsPage} />
+          <Route
+            exact
+            path={ADD_STUDENT_PAGE_ROUTE}
+            component={AddStudentPage}
+          />
+          <Route
+            exact
+            path={EDIT_STUDENT_PAGE_ROUTE}
+            component={StudentEditPage}
+          />
+          <Route
+            exact
+            path={STUDENT_PROFILE_PAGE_ROUTE}
+            component={StudentProfilePage}
+          />
+          <Route exact path={TEACHERS_PAGE_ROUTE} component={TeachersPage} />
+        </Switch>
+      </div>
+    </div>
+  );
 };
 
 export default HomePage;

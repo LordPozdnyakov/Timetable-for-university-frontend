@@ -1,0 +1,11 @@
+@import "../../Shared/variables";
+
+.simple-modal {
+  &__btn-cancel {
+    color: $primary-color !important;
+  }
+
+  &__btn-confirm {
+    color: $error-color !important;
+  }
+}
