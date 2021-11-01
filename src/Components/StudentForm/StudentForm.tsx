@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import { Button, DatePicker, Form, Input, Select, message } from "antd";
 import moment from "moment";
 import "./StudentForm.scss";
@@ -44,11 +44,28 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
     motherPhone,
   } = student;
 
-  const handleChangeInfo = (event: ChangeEvent<HTMLInputElement>) => {
+  const dispatch = useTypedDispatch();
+  const { error, studentAddedSuccess } = useTypedSelector(
+    (state) => state.studentsReducer
+  );
+
+  useEffect(() => {
+    if (studentAddedSuccess) {
+      setStudent(initalState);
+      message.success("Студента успішно додано");
+    }
+    if (error) {
+      message.error(error);
+    }
+    dispatch(clearAddStudentDataForm());
+  }, [studentAddedSuccess, error]);
+
+  const handleChangeInfo = (event: FormEvent<HTMLFormElement>) => {
+    const target = event.target as HTMLInputElement;
     setStudent((state) => {
       return {
         ...state,
-        [event.target.id]: event.target.value,
+        [target.id]: target.value,
       };
     });
   };
@@ -71,22 +88,6 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
     });
   };
 
-  const dispatch = useTypedDispatch();
-  const { error, studentAddedSuccess } = useTypedSelector(
-    (state) => state.studentsReducer
-  );
-
-  useEffect(() => {
-    if (studentAddedSuccess) {
-      setStudent(initalState);
-      message.success("Студента успішно додано");
-    }
-    if (error) {
-      message.error(error);
-    }
-    dispatch(clearAddStudentDataForm());
-  }, [studentAddedSuccess, error]);
-
   const handleAddStudent = () => {
     dispatch(addStudent(student));
     dispatch(clearAddStudentDataForm());
@@ -96,41 +97,30 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
     message.success("Студента успішно видалено");
   };
 
+  const handleCancel = (): void => {
+    setStudent(initalState);
+  };
+
   return (
-    <Form layout="vertical" className="form">
+    <Form layout="vertical" className="form" onChange={handleChangeInfo}>
       <div className="form__row">
         <Form.Item className="form__item">
           <label htmlFor="lastName" className="form-label">
             Прізвище
           </label>
-          <Input
-            id="lastName"
-            className="form__input"
-            value={lastName}
-            onChange={handleChangeInfo}
-          />
+          <Input id="lastName" className="form__input" value={lastName} />
         </Form.Item>
         <Form.Item className="form__item">
           <label htmlFor="firstName" className="form-label">
             Ім'я
           </label>
-          <Input
-            id="firstName"
-            className="form__input"
-            value={firstName}
-            onChange={handleChangeInfo}
-          />
+          <Input id="firstName" className="form__input" value={firstName} />
         </Form.Item>
         <Form.Item className="form__item">
           <label htmlFor="surName" className="form-label">
             По-батькові
           </label>
-          <Input
-            id="surName"
-            className="form__input"
-            value={surName}
-            onChange={handleChangeInfo}
-          />
+          <Input id="surName" className="form__input" value={surName} />
         </Form.Item>
       </div>
       <div className="form__row">
@@ -150,23 +140,13 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
           <label htmlFor="phoneNumber" className="form-label">
             Номер телефону
           </label>
-          <Input
-            id="phoneNumber"
-            className="form__input"
-            value={phoneNumber}
-            onChange={handleChangeInfo}
-          />
+          <Input id="phoneNumber" className="form__input" value={phoneNumber} />
         </Form.Item>
         <Form.Item className="form__item">
           <label htmlFor="email" className="form-label">
             E-mail
           </label>
-          <Input
-            id="email"
-            className="form__input"
-            value={email}
-            onChange={handleChangeInfo}
-          />
+          <Input id="email" className="form__input" value={email} />
         </Form.Item>
       </div>
       <div className="form__row">
@@ -188,12 +168,7 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
           <label htmlFor="address" className="form-label">
             Місце проживання
           </label>
-          <Input
-            id="address"
-            className="form__input"
-            value={address}
-            onChange={handleChangeInfo}
-          />
+          <Input id="address" className="form__input" value={address} />
         </Form.Item>
       </div>
       <div className="form__row">
@@ -202,23 +177,13 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
           <label htmlFor="fatherName" className="form-label">
             ПІБ
           </label>
-          <Input
-            id="fatherName"
-            className="form__input"
-            value={fatherName}
-            onChange={handleChangeInfo}
-          />
+          <Input id="fatherName" className="form__input" value={fatherName} />
         </Form.Item>
         <Form.Item className="form__item medium-input">
           <label htmlFor="fatherPhone" className="form-label">
             Номер телефону
           </label>
-          <Input
-            id="fatherPhone"
-            className="form__input"
-            value={fatherPhone}
-            onChange={handleChangeInfo}
-          />
+          <Input id="fatherPhone" className="form__input" value={fatherPhone} />
         </Form.Item>
       </div>
       <div className="form__row">
@@ -227,23 +192,13 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
           <label htmlFor="motherName" className="form-label">
             ПІБ
           </label>
-          <Input
-            id="motherName"
-            className="form__input"
-            value={motherName}
-            onChange={handleChangeInfo}
-          />
+          <Input id="motherName" className="form__input" value={motherName} />
         </Form.Item>
         <Form.Item className="form__item medium-input">
           <label htmlFor="motherPhone" className="form-label">
             Номер телефону
           </label>
-          <Input
-            id="motherPhone"
-            className="form__input"
-            value={motherPhone}
-            onChange={handleChangeInfo}
-          />
+          <Input id="motherPhone" className="form__input" value={motherPhone} />
         </Form.Item>
       </div>
       <div className="form__row--buttons">
@@ -254,7 +209,11 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
         >
           Зберегти
         </Button>
-        <Button htmlType="button" className="form__button form__button--cancel">
+        <Button
+          htmlType="button"
+          className="form__button form__button--cancel"
+          onClick={handleCancel}
+        >
           Скасувати
         </Button>
         {editMode ? (
