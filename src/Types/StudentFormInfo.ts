@@ -1,4 +1,5 @@
 export default interface StudentFormInfo {
+  userId: number | null;
   firstName: string;
   lastName: string;
   surName: string;

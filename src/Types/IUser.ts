@@ -1,28 +1,30 @@
 export default interface IUser {
-	userId: number;
+  userId: number;
 
-	// Login
-	email: string;
-	password: string;
-	rememberMe: boolean;
-	token: string;
+  // Login
+  email: string;
+  password: string;
+  rememberMe: boolean;
+  token: string;
 
-	// Privilege
-	privilege: string;
+  // Privilege
+  privilege: string;
 
-	// Name
-	firstName: string;
-	lastName: string;
-	surName: string;
+  // Name
+  firstName: string;
+  lastName: string;
+  surName: string;
 
-	// Parents
-	fatherName: string;
-	fatherPhone: string;
-	motherName: string;
-	motherPhone: string;
+  // Parents
+  fatherName: string;
+  fatherPhone: string;
+  motherName: string;
+  motherPhone: string;
 
-	// Others
-	birthDay: string;
-	phoneNumber: string;
-	groupId: number;
+  // Others
+  birthDay: string;
+  phoneNumber: string;
+  groupId: number;
+  group: string;
+  address: string;
 }

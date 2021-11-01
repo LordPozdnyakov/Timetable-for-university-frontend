@@ -2,6 +2,7 @@ import {
   addStundentAPI,
   getAllStudentsAPI,
   getStundentByIdAPI,
+  editStundentAPI,
 } from "../../API/studentsAPI";
 import { AppDispatch } from "../Store";
 import { studentsSlice } from "../Reducers/studentsSlice";
@@ -14,6 +15,7 @@ const {
   fetchStudentByIdSuccess,
   addStudentSuccess,
   clearAddStudentData,
+  editStudentSuccess,
 } = studentsSlice.actions;
 
 export const getStudents = () => {
@@ -59,5 +61,17 @@ export const addStudent = (student: StudentFormInfo) => {
 export const clearAddStudentDataForm = () => {
   return (dispatch: AppDispatch) => {
     dispatch(clearAddStudentData());
+  };
+};
+
+export const editStudent = (id: number, updatedStudent: StudentFormInfo) => {
+  return async (dispatch: AppDispatch) => {
+    try {
+      dispatch(fetchData());
+      const response = await editStundentAPI(id, updatedStudent);
+      dispatch(editStudentSuccess(response));
+    } catch (e) {
+      dispatch(fetchDataError(`Помилка: ${(e as Error).message}`));
+    }
   };
 };

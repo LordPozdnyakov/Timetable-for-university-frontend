@@ -17,7 +17,9 @@
       "motherPhone": "MotherPhone",
       "birthDay": "01.02.1992",
       "phoneNumber": "PhoneNumber",
-      "groupId": 121
+      "groupId": 121,
+      "group": "5PR2",
+      "address": "address 1"
     },
     {
       "id": 2,
@@ -36,7 +38,9 @@
       "motherPhone": "MotherPhone2",
       "birthDay": "02.02.1992",
       "phoneNumber": "PhoneNumber2",
-      "groupId": 122
+      "groupId": 122,
+      "group": "5RR2",
+      "address": "address 2"
     },
     {
       "id": 3,
@@ -55,7 +59,9 @@
       "motherPhone": "MotherPhone3",
       "birthDay": "03.02.1992",
       "phoneNumber": "PhoneNumber3",
-      "groupId": 123
+      "groupId": 123,
+      "group": "6PR2",
+      "address": "address 3"
     }
   ]
 }

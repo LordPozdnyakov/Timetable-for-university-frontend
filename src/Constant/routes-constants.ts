@@ -4,6 +4,7 @@ export const MAIN_PAGE_ROUTE = "/";
 export const STUDENTS_PAGE_ROUTE = "/students";
 export const ADD_STUDENT_PAGE_ROUTE = "/students/add-student";
 export const EDIT_STUDENT_PAGE_ROUTE = "/students/edit-student";
+export const EDIT_STUDENT_PAGE_WITH_PARAMS_ROUTE = "/students/edit-student/:id";
 export const STUDENT_PROFILE_PAGE_ROUTE = "/students/:id";
 
 //OTHERS

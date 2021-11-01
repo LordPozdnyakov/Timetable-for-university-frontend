@@ -16,3 +16,11 @@ export const addStundentAPI = async (student: StudentFormInfo) => {
   const response = await axios.post<IUser>("users", student);
   return response.data;
 };
+
+export const editStundentAPI = async (
+  id: number,
+  updatedStudent: StudentFormInfo
+) => {
+  const response = await axios.put<IUser>(`users/${id}`, updatedStudent);
+  return response.data;
+};

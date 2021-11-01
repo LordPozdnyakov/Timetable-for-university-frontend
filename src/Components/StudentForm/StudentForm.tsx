@@ -1,4 +1,5 @@
 import React, { FormEvent, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { Button, DatePicker, Form, Input, Select, message } from "antd";
 import moment from "moment";
 import "./StudentForm.scss";
@@ -8,13 +9,18 @@ import { useTypedDispatch, useTypedSelector } from "../../hooks/redux-hooks";
 import {
   addStudent,
   clearAddStudentDataForm,
+  editStudent,
+  getStudentById,
 } from "../../Redux/Actions/studentsActions";
 
-const initalState: StudentFormInfo = {
+const dateFormat = "DD/MM/YYYY";
+
+const initialState: StudentFormInfo = {
+  userId: null,
   firstName: "",
   lastName: "",
   surName: "",
-  birthDay: "01.01.2001",
+  birthDay: moment(new Date()).format(dateFormat),
   phoneNumber: "",
   email: "",
   group: "",
@@ -25,10 +31,35 @@ const initalState: StudentFormInfo = {
   motherPhone: "",
 };
 
-const dateFormat = "DD/MM/YYYY";
-
 const StudentForm = ({ editMode }: { editMode: boolean }) => {
-  const [student, setStudent] = useState<StudentFormInfo>(initalState);
+  const dispatch = useTypedDispatch();
+  const { error, studentAddedSuccess, selectedStudent } = useTypedSelector(
+    (state) => state.studentsReducer
+  );
+
+  const { id } = useParams<{ id: string }>();
+
+  useEffect(() => {
+    if (!editMode || !id) return;
+    if (!selectedStudent || selectedStudent.userId !== +id) {
+      dispatch(getStudentById(+id));
+    }
+    if (!selectedStudent) return;
+    setStudent(selectedStudent);
+  }, [selectedStudent]);
+
+  useEffect(() => {
+    if (studentAddedSuccess) {
+      setStudent(initialState);
+      message.success("Студента успішно додано");
+    }
+    if (error) {
+      message.error(error);
+    }
+    dispatch(clearAddStudentDataForm());
+  }, [studentAddedSuccess, error]);
+
+  let [student, setStudent] = useState<StudentFormInfo>(initialState);
   const {
     firstName,
     lastName,
@@ -44,22 +75,6 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
     motherPhone,
   } = student;
 
-  const dispatch = useTypedDispatch();
-  const { error, studentAddedSuccess } = useTypedSelector(
-    (state) => state.studentsReducer
-  );
-
-  useEffect(() => {
-    if (studentAddedSuccess) {
-      setStudent(initalState);
-      message.success("Студента успішно додано");
-    }
-    if (error) {
-      message.error(error);
-    }
-    dispatch(clearAddStudentDataForm());
-  }, [studentAddedSuccess, error]);
-
   const handleChangeInfo = (event: FormEvent<HTMLFormElement>) => {
     const target = event.target as HTMLInputElement;
     setStudent((state) => {
@@ -74,7 +89,7 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
     setStudent((state) => {
       return {
         ...state,
-        birthDay: dateStr,
+        birthDay: moment(dateStr).format(dateFormat),
       };
     });
   };
@@ -88,9 +103,17 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
     });
   };
 
-  const handleAddStudent = () => {
-    dispatch(addStudent(student));
-    dispatch(clearAddStudentDataForm());
+  const handleSaveStudent = () => {
+    if (!editMode) {
+      dispatch(addStudent(student));
+      // dispatch(clearAddStudentDataForm());
+      return;
+    }
+    if (!student.userId) {
+      message.error("Студента з заданим id не існує");
+      return;
+    }
+    dispatch(editStudent(student.userId, student));
   };
 
   const handleDeleteStudent = (): void => {
@@ -98,7 +121,7 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
   };
 
   const handleCancel = (): void => {
-    setStudent(initalState);
+    setStudent(initialState);
   };
 
   return (
@@ -132,7 +155,7 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
             id="birthDay"
             className="form__input form__date-picker"
             placeholder=""
-            defaultValue={moment(birthDay, dateFormat)}
+            value={moment(birthDay, dateFormat)}
             onChange={handleChangeBirthDate}
           />
         </Form.Item>
@@ -205,7 +228,7 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
         <Button
           htmlType="submit"
           className="form__button form__button--save"
-          onClick={handleAddStudent}
+          onClick={handleSaveStudent}
         >
           Зберегти
         </Button>

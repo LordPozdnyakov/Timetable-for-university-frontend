@@ -61,7 +61,7 @@ const Student = ({ student }: { student: IUser }) => {
         </td>
         <td>Address</td>
         <td className="table-icon edit-icon">
-          <Link to={EDIT_STUDENT_PAGE_ROUTE}>
+          <Link to={`${EDIT_STUDENT_PAGE_ROUTE}/${userId}`}>
             <EditFilled />
           </Link>
         </td>

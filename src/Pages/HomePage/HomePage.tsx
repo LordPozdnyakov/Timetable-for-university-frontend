@@ -18,7 +18,7 @@ import {
 import "../../App.scss";
 import {
   ADD_STUDENT_PAGE_ROUTE,
-  EDIT_STUDENT_PAGE_ROUTE,
+  EDIT_STUDENT_PAGE_WITH_PARAMS_ROUTE,
   MAIN_PAGE_ROUTE,
   STUDENT_PROFILE_PAGE_ROUTE,
   STUDENTS_PAGE_ROUTE,
@@ -42,7 +42,7 @@ const HomePage = () => {
           />
           <Route
             exact
-            path={EDIT_STUDENT_PAGE_ROUTE}
+            path={EDIT_STUDENT_PAGE_WITH_PARAMS_ROUTE}
             component={StudentEditPage}
           />
           <Route

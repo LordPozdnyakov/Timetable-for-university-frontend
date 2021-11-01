@@ -51,6 +51,9 @@ export const studentsSlice = createSlice({
       state.studentAddedSuccess = false;
       state.addedStudent = null;
     },
+    editStudentSuccess(state, action: PayloadAction<IUser>) {
+      state.selectedStudent = action.payload;
+    },
   },
 });
 
