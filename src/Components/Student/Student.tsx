@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { DeleteFilled, EditFilled } from "@ant-design/icons";
 import SimpleModal from "../SimpleModal/SimpleModal";
-import { message } from "antd";
 import IUser from "../../Types/IUser";
 import "./Student.scss";
 import {
@@ -10,6 +9,8 @@ import {
   GROUPS_PAGE_ROUTE,
   STUDENTS_PAGE_ROUTE,
 } from "../../Constant/routes-constants";
+import { deleteStudent } from "../../Redux/Actions/studentsActions";
+import { useTypedDispatch } from "../../hooks/redux-hooks";
 
 const Student = ({ student }: { student: IUser }) => {
   const {
@@ -25,6 +26,7 @@ const Student = ({ student }: { student: IUser }) => {
   const fullName = `${lastName} ${firstName} ${surName}`;
 
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const dispatch = useTypedDispatch();
 
   const showModal = (): void => {
     setIsModalVisible(true);
@@ -40,7 +42,7 @@ const Student = ({ student }: { student: IUser }) => {
 
   const handleConfirmDeleting = (): void => {
     setIsModalVisible(false);
-    message.success("Студента успішно видалено");
+    dispatch(deleteStudent(userId));
   };
 
   return (
@@ -61,7 +63,7 @@ const Student = ({ student }: { student: IUser }) => {
         </td>
         <td>Address</td>
         <td className="table-icon edit-icon">
-          <Link to={EDIT_STUDENT_PAGE_ROUTE}>
+          <Link to={`${EDIT_STUDENT_PAGE_ROUTE}/${userId}`}>
             <EditFilled />
           </Link>
         </td>
