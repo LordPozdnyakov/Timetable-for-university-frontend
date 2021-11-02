@@ -24,3 +24,8 @@ export const editStundentAPI = async (
   const response = await axios.put<IUser>(`users/${id}`, updatedStudent);
   return response.data;
 };
+
+export const deleteStundentAPI = async (id: number) => {
+  const response = await axios.delete(`users/${id}`);
+  return response.data;
+};

@@ -9,6 +9,7 @@ import { useTypedDispatch, useTypedSelector } from "../../hooks/redux-hooks";
 import {
   addStudent,
   clearAddStudentDataForm,
+  deleteStudent,
   editStudent,
   getStudentById,
 } from "../../Redux/Actions/studentsActions";
@@ -134,7 +135,9 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
   };
 
   const handleDeleteStudent = (): void => {
-    message.success("Студента успішно видалено");
+    if (!selectedStudent) return;
+    dispatch(deleteStudent(selectedStudent.userId));
+    setStudent(initialState);
   };
 
   const handleCancel = (): void => {
@@ -269,6 +272,7 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
             htmlType="button"
             className="form__button form__button--delete"
             onClick={handleDeleteStudent}
+            disabled={student === initialState ? true : false}
           >
             Видалити
           </Button>

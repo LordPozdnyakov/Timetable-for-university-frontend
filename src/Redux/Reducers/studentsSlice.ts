@@ -42,6 +42,7 @@ export const studentsSlice = createSlice({
     },
     addStudentSuccess(state, action: PayloadAction<IUser>) {
       state.error = null;
+      state.loading = false;
       state.studentAddedSuccess = true;
       state.addedStudent = action.payload;
       state.students.push(action.payload);
@@ -53,6 +54,15 @@ export const studentsSlice = createSlice({
     },
     editStudentSuccess(state, action: PayloadAction<IUser>) {
       state.selectedStudent = action.payload;
+      state.error = null;
+      state.loading = false;
+    },
+    deleteStudentSuccess(state, action: PayloadAction<number>) {
+      state.students = state.students.filter(
+        (student: IUser) => student.userId !== action.payload
+      );
+      state.error = null;
+      state.loading = false;
     },
   },
 });
