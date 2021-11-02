@@ -12,6 +12,7 @@ import {
   editStudent,
   getStudentById,
 } from "../../Redux/Actions/studentsActions";
+import IUser from "../../Types/IUser";
 
 const dateFormat = "DD/MM/YYYY";
 
@@ -75,6 +76,8 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
     motherPhone,
   } = student;
 
+  const [cancelIsActive, setCancelIsActive] = useState<boolean>(false);
+
   const handleChangeInfo = (event: FormEvent<HTMLFormElement>) => {
     const target = event.target as HTMLInputElement;
     setStudent((state) => {
@@ -83,6 +86,19 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
         [target.id]: target.value,
       };
     });
+    if (!editMode) {
+      if (target.value === initialState[target.id as keyof StudentFormInfo]) {
+        setCancelIsActive(false);
+      } else {
+        setCancelIsActive(true);
+      }
+    }
+    if (!selectedStudent) return;
+    if (target.value === selectedStudent[target.id as keyof IUser]) {
+      setCancelIsActive(false);
+    } else {
+      setCancelIsActive(true);
+    }
   };
 
   const handleChangeBirthDate = (dateObj: Moment | null, dateStr: string) => {
@@ -114,6 +130,7 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
       return;
     }
     dispatch(editStudent(student.userId, student));
+    setCancelIsActive(false);
   };
 
   const handleDeleteStudent = (): void => {
@@ -121,7 +138,14 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
   };
 
   const handleCancel = (): void => {
-    setStudent(initialState);
+    if (!editMode) {
+      setStudent(initialState);
+      setCancelIsActive(false);
+      return;
+    }
+    if (!selectedStudent) return;
+    setStudent(selectedStudent);
+    setCancelIsActive(false);
   };
 
   return (
@@ -236,6 +260,7 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
           htmlType="button"
           className="form__button form__button--cancel"
           onClick={handleCancel}
+          disabled={!cancelIsActive}
         >
           Скасувати
         </Button>

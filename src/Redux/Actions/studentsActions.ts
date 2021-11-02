@@ -7,6 +7,7 @@ import {
 import { AppDispatch } from "../Store";
 import { studentsSlice } from "../Reducers/studentsSlice";
 import StudentFormInfo from "../../Types/StudentFormInfo";
+import { message } from "antd";
 
 const {
   fetchData,
@@ -70,6 +71,7 @@ export const editStudent = (id: number, updatedStudent: StudentFormInfo) => {
       dispatch(fetchData());
       const response = await editStundentAPI(id, updatedStudent);
       dispatch(editStudentSuccess(response));
+      message.success("Студента успішно оновлено");
     } catch (e) {
       dispatch(fetchDataError(`Помилка: ${(e as Error).message}`));
     }
