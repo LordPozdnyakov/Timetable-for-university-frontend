@@ -1,17 +1,22 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, RouteComponentProps } from "react-router-dom";
 import { LockOutlined } from "@ant-design/icons";
 import { Form, Input, Checkbox } from "antd";
-import { useFormik } from "formik";
+import { useFormik, FormikProps } from "formik";
 import ButtonComponent from "../../Components/Button/ButtonComponent";
 import FormWrapper from "../../Components/FormWrapper/FormWrapper";
-import { setUserLogin } from "../../Redux/Reducers/userReducer";
-import validateField from "../../Utils/helpers/validateField";
-import { useDispatch } from "react-redux";
+import { validateField } from "../../Utils/helpers/validateField";
 import { LoginSchema } from "../../Utils/validator";
+import { useTypedDispatch } from "../../hooks/redux-hooks";
+import { setLogin } from "../../Redux/Actions/setLogin";
+import { FormikValues } from "..";
 
-const LoginFormComponent = (props: any) => {
-  const dispatch = useDispatch();
+interface logginType<Values = FormikValues> extends RouteComponentProps {
+  initialValues: Values;
+}
+
+const LoginFormComponent: React.FC<logginType> = (props) => {
+  const dispatch = useTypedDispatch();
   const layout = {
     labelCol: { span: 4 },
     wrapperCol: { span: 30 },
@@ -20,23 +25,22 @@ const LoginFormComponent = (props: any) => {
     wrapperCol: { offset: 0, span: 30 },
   };
 
-  const formik = useFormik({
+  const formik: FormikProps<FormikValues> = useFormik<FormikValues>({
+    enableReinitialize: true,
     initialValues: {
       email: "",
       password: "",
       rememberMe: false,
     },
     validationSchema: LoginSchema,
-    onSubmit: (values, { setSubmitting }) => {
-      // @ts-ignore
-      dispatch(setUserLogin(values)).then((status) => {
-        if ((status = 200)) {
-          props.history.push("/");
-          setSubmitting(false);
-        } else {
-          setSubmitting(true);
-        }
-      });
+    onSubmit: async (values, { setSubmitting }) => {
+      const status = await dispatch(setLogin(values));
+      if (status === 200) {
+        props.history.push("/");
+        setSubmitting(true);
+      } else {
+        setSubmitting(true);
+      }
     },
   });
   const {
@@ -56,12 +60,7 @@ const LoginFormComponent = (props: any) => {
           <LockOutlined className="wrapper__form-icon-i" />
         </span>
         <h3>Увійти</h3>
-        <Form
-          {...layout}
-          name="LoginForm"
-          // @ts-ignore
-          onSubmit={handleSubmit}
-        >
+        <Form {...layout} name="LoginForm" onFinish={handleSubmit}>
           <Form.Item
             name="email"
             hasFeedback
@@ -103,7 +102,7 @@ const LoginFormComponent = (props: any) => {
                 <Checkbox
                   onChange={handleChange}
                   id="rememberMe"
-                  value={values.rememberMe}
+                  checked={values.rememberMe}
                 />
               </div>
               <div>

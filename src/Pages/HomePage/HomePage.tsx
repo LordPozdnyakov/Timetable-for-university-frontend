@@ -25,7 +25,7 @@ import {
   TEACHERS_PAGE_ROUTE,
 } from "../../Constant/routes-constants";
 
-const HomePage = () => {
+const HomePage: React.FC = () => {
   return (
     <div className="wrapper">
       <HeaderContainerComponent />

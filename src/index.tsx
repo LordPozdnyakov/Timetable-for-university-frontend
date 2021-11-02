@@ -15,7 +15,7 @@ const store = setupStore();
 ReactDOM.render(
   <BrowserRouter>
     <Provider store={store}>
-      <App isAuth={true} />
+      <App />
     </Provider>
   </BrowserRouter>,
   document.getElementById("root")

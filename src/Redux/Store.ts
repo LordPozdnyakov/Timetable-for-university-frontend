@@ -1,7 +1,8 @@
 import { combineReducers } from "redux";
 import { ProfileReducer } from "./Reducers/ProfileReducer";
-import { UserReducer } from "./Reducers/userReducer";
+
 import studentsReducer from "./Reducers/studentsSlice";
+import loginSlice from "./Reducers/loginSlice";
 import { configureStore } from "@reduxjs/toolkit";
 
 type redusersType = typeof reducers;
@@ -11,7 +12,7 @@ export type AppDispatch = AppStore["dispatch"];
 
 let reducers = combineReducers({
   profile: ProfileReducer,
-  user: UserReducer,
+  loginSlice,
   studentsReducer,
 });
 

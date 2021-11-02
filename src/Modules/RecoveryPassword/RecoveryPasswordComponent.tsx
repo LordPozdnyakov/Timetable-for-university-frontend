@@ -5,10 +5,11 @@ import { Form, Input } from "antd";
 import { useFormik } from "formik";
 import ButtonComponent from "../../Components/Button/ButtonComponent";
 import FormWrapper from "../../Components/FormWrapper/FormWrapper";
-import { setUserLogin } from "../../Redux/Reducers/userReducer";
-import validateField from "../../Utils/helpers/validateField";
+
+import { validateField } from "../../Utils/helpers/validateField";
 import { useDispatch } from "react-redux";
 import { LoginSchema } from "../../Utils/validator";
+import { setLogin } from "../../Redux/Actions/setLogin";
 
 const RecoveryPasswordComponent = (props: any) => {
   const dispatch = useDispatch();
@@ -28,7 +29,7 @@ const RecoveryPasswordComponent = (props: any) => {
     validationSchema: LoginSchema,
     onSubmit: (values, { setSubmitting }) => {
       // @ts-ignore
-      dispatch(setUserLogin(values)).then((status) => {
+      dispatch(setLogin(values)).then((status) => {
         if ((status = 200)) {
           props.history.push("/");
           setSubmitting(false);

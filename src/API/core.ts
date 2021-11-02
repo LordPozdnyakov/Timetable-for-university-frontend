@@ -1,14 +1,14 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "http://localhost:5000/",
+  baseURL: "https://react-chat-serv.herokuapp.com/",
 });
 
 instance.interceptors.request.use(
   async (config) => {
     const token = window.localStorage.token;
     config.headers = {
-      token: `${token}`,
+      Authorization: `Bearer${token}`,
     };
     return config;
   },
