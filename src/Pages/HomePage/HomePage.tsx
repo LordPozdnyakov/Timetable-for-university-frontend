@@ -25,10 +25,14 @@ import {
   TEACHERS_PAGE_ROUTE,
 } from "../../Constant/routes-constants";
 
-const HomePage: React.FC = () => {
+interface homeProps {
+  logOut: () => void;
+}
+
+const HomePage: React.FC<homeProps> = ({ logOut }) => {
   return (
     <div className="wrapper">
-      <HeaderContainerComponent />
+      <HeaderContainerComponent logOut={logOut} />
       <SidebarContainerComponent />
       <div className="content">
         <Breadcrumbs />
