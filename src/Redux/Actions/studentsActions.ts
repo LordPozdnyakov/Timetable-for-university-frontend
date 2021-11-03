@@ -84,7 +84,7 @@ export const deleteStudent = (id: number) => {
   return async (dispatch: AppDispatch) => {
     try {
       dispatch(fetchData());
-      const response = await deleteStundentAPI(id);
+      await deleteStundentAPI(id);
       dispatch(deleteStudentSuccess(id));
       message.success("Студента успішно видалено");
     } catch (e) {

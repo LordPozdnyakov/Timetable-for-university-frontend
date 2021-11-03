@@ -13,7 +13,7 @@ const StudentProfilePage: React.FC = () => {
 
   useEffect(() => {
     dispatch(getStudentById(+id));
-  }, []);
+  }, [dispatch, id]);
 
   if (loading) {
     return <div>Завантаження...</div>;

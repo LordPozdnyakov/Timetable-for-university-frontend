@@ -17,7 +17,7 @@ const StudentsPage: React.FC = () => {
 
   useEffect(() => {
     dispatch(getStudents());
-  }, []);
+  }, [dispatch]);
 
   if (loading) {
     return <div>Завантаження...</div>;

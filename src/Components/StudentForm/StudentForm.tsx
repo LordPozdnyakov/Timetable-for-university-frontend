@@ -49,7 +49,7 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
     }
     if (!selectedStudent) return;
     setStudent(selectedStudent);
-  }, [selectedStudent]);
+  }, [selectedStudent, dispatch, editMode, id]);
 
   useEffect(() => {
     if (studentAddedSuccess) {
@@ -60,7 +60,7 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
       message.error(error);
     }
     dispatch(clearAddStudentDataForm());
-  }, [studentAddedSuccess, error]);
+  }, [studentAddedSuccess, error, dispatch]);
 
   let [student, setStudent] = useState<StudentFormInfo>(initialState);
   const {
