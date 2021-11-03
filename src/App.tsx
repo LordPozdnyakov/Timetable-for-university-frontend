@@ -1,10 +1,16 @@
 import React from "react";
-import { Redirect, Route, Switch } from "react-router-dom";
-
+import { Redirect, Route, Switch, useHistory } from "react-router-dom";
 import { AuthPage, HomePage } from "./Pages";
 import { MAIN_PAGE_ROUTE } from "./Constant/routes-constants";
+import { AuthVerify } from "./Modules";
 
-const App = (props: any) => {
+const App: React.FC = () => {
+  const isAuth = localStorage.getItem("token");
+  const history = useHistory();
+  const logOut = () => {
+    window.localStorage.token = "";
+    history.push("/login");
+  };
   return (
     <>
       <Switch>
@@ -16,10 +22,11 @@ const App = (props: any) => {
         <Route
           path={MAIN_PAGE_ROUTE}
           render={() =>
-            props.isAuth ? <HomePage /> : <Redirect to="/login" />
+            isAuth ? <HomePage logOut={logOut} /> : <Redirect to="/login" />
           }
         />
       </Switch>
+      <AuthVerify logOut={logOut} />
     </>
   );
 };

@@ -1,8 +1,13 @@
-import React from 'react';
-import HeaderComponent from './HeaderComponent';
+import React from "react";
 
-const HeaderContainerComponent = () => {
-	return <HeaderComponent />;
+import HeaderComponent from "./HeaderComponent";
+
+interface HeaderContainer {
+  logOut: () => void;
+}
+
+const HeaderContainerComponent: React.FC<HeaderContainer> = ({ logOut }) => {
+  return <HeaderComponent logOut={logOut} />;
 };
 
 export default HeaderContainerComponent;

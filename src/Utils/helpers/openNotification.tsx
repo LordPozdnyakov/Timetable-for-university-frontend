@@ -1,14 +1,18 @@
-import { notification } from 'antd';
+import { notification } from "antd";
 
 type Notification = {
-	text: string;
-	type: string;
-	title: string;
+  text: string;
+  title: string;
+  type: any;
 };
 
-// @ts-ignore
-export default ({ text, type = 'info', title }: Object<Notification>) =>
-	notification.open({
-		message: title,
-		description: text,
-	});
+export const openNotification: (arg0: Notification) => void = ({
+  text,
+  type,
+  title,
+}) =>
+  notification.open({
+    message: title,
+    description: text,
+    type: type,
+  });
