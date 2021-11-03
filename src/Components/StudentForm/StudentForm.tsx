@@ -82,7 +82,6 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
   const fullName = `${lastName} ${firstName} ${patronymic}`;
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  //TODO: refactor delete modal
   const showModal = (): void => {
     setIsModalVisible(true);
   };
@@ -142,7 +141,10 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
   };
 
   const handleSaveStudent = () => {
-    if (!firstName || !lastName || !patronymic) return;
+    if (!firstName || !lastName || !patronymic) {
+      message.error("Поля: Прізвище, Ім'я, По-батькові - обов'язкові");
+      return;
+    }
     if (!editMode) {
       dispatch(addStudent(student));
       // dispatch(clearAddStudentDataForm());
@@ -177,31 +179,19 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
     <React.Fragment>
       <Form layout="vertical" className="form" onChange={handleChangeInfo}>
         <div className="form__row">
-          <Form.Item
-            className="form__item"
-            name="lastName"
-            rules={[{ required: true, message: `Це поле обов'язкове` }]}
-          >
+          <Form.Item className="form__item">
             <label htmlFor="lastName" className="form-label">
               Прізвище
             </label>
             <Input id="lastName" className="form__input" value={lastName} />
           </Form.Item>
-          <Form.Item
-            className="form__item"
-            name="firstName"
-            rules={[{ required: true, message: `Це поле обов'язкове` }]}
-          >
+          <Form.Item className="form__item">
             <label htmlFor="firstName" className="form-label">
               Ім'я
             </label>
             <Input id="firstName" className="form__input" value={firstName} />
           </Form.Item>
-          <Form.Item
-            className="form__item"
-            name="patronymic"
-            rules={[{ required: true, message: `Це поле обов'язкове` }]}
-          >
+          <Form.Item className="form__item">
             <label htmlFor="patronymic" className="form-label">
               По-батькові
             </label>
