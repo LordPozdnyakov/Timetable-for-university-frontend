@@ -22,6 +22,7 @@ const Student = ({ student }: { student: IUser }) => {
     birthDay,
     phoneNumber,
     email,
+    address,
   } = student;
   const fullName = `${lastName} ${firstName} ${patronymic}`;
 
@@ -61,7 +62,7 @@ const Student = ({ student }: { student: IUser }) => {
         <td>
           <a href={`mailto:${email}`}>{email}</a>
         </td>
-        <td>Address</td>
+        <td>{address}</td>
         <td className="table-icon edit-icon">
           <Link to={`${EDIT_STUDENT_PAGE_ROUTE}/${id}`}>
             <EditFilled />
