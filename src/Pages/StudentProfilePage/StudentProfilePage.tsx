@@ -26,11 +26,11 @@ const StudentProfilePage: React.FC = () => {
   const {
     firstName,
     lastName,
-    surName,
+    patronymic,
     birthDay,
     phoneNumber,
     email,
-    groupId,
+    groupName,
     fatherName,
     fatherPhone,
     motherName,
@@ -46,7 +46,7 @@ const StudentProfilePage: React.FC = () => {
               <div className="profile__info-subtitle">
                 Прізвище, ім’я, по-батькові
               </div>
-              <div className="profile__info-important">{`${lastName} ${firstName} ${surName}`}</div>
+              <div className="profile__info-important">{`${lastName} ${firstName} ${patronymic}`}</div>
             </div>
           </div>
           <div className="profile__info-row">
@@ -71,7 +71,7 @@ const StudentProfilePage: React.FC = () => {
         <div className="profile_info-row profile__info-block">
           <div className="profile__info-elem">
             <div className="profile__info-subtitle">Група</div>
-            <div className="profile__info-important">{groupId}</div>
+            <div className="profile__info-important">{groupName}</div>
           </div>
         </div>
         <div className="profile_info-row profile__info-block">

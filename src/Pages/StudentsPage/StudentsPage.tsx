@@ -58,7 +58,7 @@ const StudentsPage: React.FC = () => {
               <th></th>
             </tr>
             {students.map((student: IUser) => {
-              return <Student student={student} key={student.userId} />;
+              return <Student student={student} key={student.id} />;
             })}
           </tbody>
         </table>

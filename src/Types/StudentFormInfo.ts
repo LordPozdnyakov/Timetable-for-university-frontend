@@ -1,12 +1,12 @@
 export default interface StudentFormInfo {
-  userId: number | null;
+  id: number | null;
   firstName: string;
   lastName: string;
-  surName: string;
+  patronymic: string;
   birthDay: string;
   phoneNumber: string;
   email: string;
-  group: string;
+  groupName: string;
   address: string;
   fatherName: string;
   fatherPhone: string;

@@ -18,14 +18,14 @@ import IUser from "../../Types/IUser";
 const dateFormat = "DD/MM/YYYY";
 
 const initialState: StudentFormInfo = {
-  userId: null,
+  id: null,
   firstName: "",
   lastName: "",
-  surName: "",
+  patronymic: "",
   birthDay: moment(new Date()).format(dateFormat),
   phoneNumber: "",
   email: "",
-  group: "",
+  groupName: "",
   address: "",
   fatherName: "",
   fatherPhone: "",
@@ -43,7 +43,7 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
 
   useEffect(() => {
     if (!editMode || !id) return;
-    if (!selectedStudent || selectedStudent.userId !== +id) {
+    if (!selectedStudent || selectedStudent.id !== +id) {
       dispatch(getStudentById(+id));
     }
     if (!selectedStudent) return;
@@ -65,11 +65,11 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
   const {
     firstName,
     lastName,
-    surName,
+    patronymic,
     birthDay,
     phoneNumber,
     email,
-    group,
+    groupName,
     address,
     fatherName,
     fatherPhone,
@@ -111,11 +111,11 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
     });
   };
 
-  const handleChangeGroup = (group: string) => {
+  const handleChangeGroup = (groupName: string) => {
     setStudent((state) => {
       return {
         ...state,
-        group,
+        groupName,
       };
     });
   };
@@ -126,17 +126,17 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
       // dispatch(clearAddStudentDataForm());
       return;
     }
-    if (!student.userId) {
+    if (!student.id) {
       message.error("Студента з заданим id не існує");
       return;
     }
-    dispatch(editStudent(student.userId, student));
+    dispatch(editStudent(student.id, student));
     setCancelIsActive(false);
   };
 
   const handleDeleteStudent = (): void => {
     if (!selectedStudent) return;
-    dispatch(deleteStudent(selectedStudent.userId));
+    dispatch(deleteStudent(selectedStudent.id));
     setStudent(initialState);
   };
 
@@ -167,10 +167,10 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
           <Input id="firstName" className="form__input" value={firstName} />
         </Form.Item>
         <Form.Item className="form__item">
-          <label htmlFor="surName" className="form-label">
+          <label htmlFor="patronymic" className="form-label">
             По-батькові
           </label>
-          <Input id="surName" className="form__input" value={surName} />
+          <Input id="patronymic" className="form__input" value={patronymic} />
         </Form.Item>
       </div>
       <div className="form__row">
@@ -201,13 +201,13 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
       </div>
       <div className="form__row">
         <Form.Item className="form__item">
-          <label htmlFor="group" className="form-label">
+          <label htmlFor="groupName" className="form-label">
             Група
           </label>
           <Select
-            id="group"
+            id="groupName"
             className="form__input"
-            value={group}
+            value={groupName}
             onChange={handleChangeGroup}
           >
             <Select.Option value="415">415</Select.Option>

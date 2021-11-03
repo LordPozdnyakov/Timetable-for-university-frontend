@@ -14,16 +14,16 @@ import { useTypedDispatch } from "../../hooks/redux-hooks";
 
 const Student = ({ student }: { student: IUser }) => {
   const {
-    userId,
+    id,
     firstName,
     lastName,
-    surName,
-    groupId,
+    patronymic,
+    groupName,
     birthDay,
     phoneNumber,
     email,
   } = student;
-  const fullName = `${lastName} ${firstName} ${surName}`;
+  const fullName = `${lastName} ${firstName} ${patronymic}`;
 
   const [isModalVisible, setIsModalVisible] = useState(false);
   const dispatch = useTypedDispatch();
@@ -42,17 +42,17 @@ const Student = ({ student }: { student: IUser }) => {
 
   const handleConfirmDeleting = (): void => {
     setIsModalVisible(false);
-    dispatch(deleteStudent(userId));
+    dispatch(deleteStudent(id));
   };
 
   return (
     <React.Fragment>
       <tr>
         <td>
-          <Link to={`${STUDENTS_PAGE_ROUTE}/${userId}`}>{fullName}</Link>
+          <Link to={`${STUDENTS_PAGE_ROUTE}/${id}`}>{fullName}</Link>
         </td>
         <td>
-          <Link to={`${GROUPS_PAGE_ROUTE}/${groupId}`}>{groupId}</Link>
+          <Link to={`${GROUPS_PAGE_ROUTE}/${groupName}`}>{groupName}</Link>
         </td>
         <td>{birthDay}</td>
         <td>
@@ -63,7 +63,7 @@ const Student = ({ student }: { student: IUser }) => {
         </td>
         <td>Address</td>
         <td className="table-icon edit-icon">
-          <Link to={`${EDIT_STUDENT_PAGE_ROUTE}/${userId}`}>
+          <Link to={`${EDIT_STUDENT_PAGE_ROUTE}/${id}`}>
             <EditFilled />
           </Link>
         </td>

@@ -1,9 +1,9 @@
 export default interface IUser {
-  userId: number;
+  id: number;
 
   // Login
   email: string;
-  password: string;
+  passwordHash: string;
   rememberMe: boolean;
   token: string;
 
@@ -13,7 +13,7 @@ export default interface IUser {
   // Name
   firstName: string;
   lastName: string;
-  surName: string;
+  patronymic: string;
 
   // Parents
   fatherName: string;
@@ -24,7 +24,6 @@ export default interface IUser {
   // Others
   birthDay: string;
   phoneNumber: string;
-  groupId: number;
-  group: string;
   address: string;
+  groupName: string;
 }
