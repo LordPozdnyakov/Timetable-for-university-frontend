@@ -142,6 +142,7 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
   };
 
   const handleSaveStudent = () => {
+    if (!firstName || !lastName || !patronymic) return;
     if (!editMode) {
       dispatch(addStudent(student));
       // dispatch(clearAddStudentDataForm());
@@ -176,19 +177,31 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
     <React.Fragment>
       <Form layout="vertical" className="form" onChange={handleChangeInfo}>
         <div className="form__row">
-          <Form.Item className="form__item">
+          <Form.Item
+            className="form__item"
+            name="lastName"
+            rules={[{ required: true, message: `Це поле обов'язкове` }]}
+          >
             <label htmlFor="lastName" className="form-label">
               Прізвище
             </label>
             <Input id="lastName" className="form__input" value={lastName} />
           </Form.Item>
-          <Form.Item className="form__item">
+          <Form.Item
+            className="form__item"
+            name="firstName"
+            rules={[{ required: true, message: `Це поле обов'язкове` }]}
+          >
             <label htmlFor="firstName" className="form-label">
               Ім'я
             </label>
             <Input id="firstName" className="form__input" value={firstName} />
           </Form.Item>
-          <Form.Item className="form__item">
+          <Form.Item
+            className="form__item"
+            name="patronymic"
+            rules={[{ required: true, message: `Це поле обов'язкове` }]}
+          >
             <label htmlFor="patronymic" className="form-label">
               По-батькові
             </label>
