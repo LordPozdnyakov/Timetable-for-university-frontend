@@ -21,6 +21,8 @@ const {
   deleteStudentSuccess,
 } = studentsSlice.actions;
 
+//TODO: refactor
+
 export const getStudents = () => {
   return async (dispatch: AppDispatch) => {
     try {
