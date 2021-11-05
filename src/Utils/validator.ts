@@ -11,3 +11,9 @@ export const LoginSchema = Yup.object().shape({
   //   .required(`Це поле обов'язковое`)
   //   .oneOf([Yup.ref("password"), null], "Пароли повинні співпадати"),
 });
+
+export const recoverySchema = Yup.object().shape({
+  email: Yup.string()
+    .email("Введіть коректне емаил")
+    .required(`Це поле обов'язковое`),
+});

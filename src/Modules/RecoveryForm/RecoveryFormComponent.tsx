@@ -6,7 +6,7 @@ import { useFormik } from "formik";
 import ButtonComponent from "../../Components/Button/ButtonComponent";
 import FormWrapper from "../../Components/FormWrapper/FormWrapper";
 import { validateField } from "../../Utils/helpers/validateField";
-import { LoginSchema } from "../../Utils/validator";
+import { recoverySchema } from "../../Utils/validator";
 import { SetRecoveryEmail } from "../../Redux/Actions/setRecoveryEmail";
 import { useTypedDispatch, useTypedSelector } from "../../hooks/redux-hooks";
 
@@ -25,7 +25,7 @@ const RecoveryFormComponent = (props: any) => {
     initialValues: {
       email: "",
     },
-    validationSchema: LoginSchema,
+    validationSchema: recoverySchema,
     onSubmit: async (values, { setSubmitting }) => {
       const status = await dispatch(
         SetRecoveryEmail(values, "forgot-password")
