@@ -17,7 +17,7 @@ const StudentsPage: React.FC = () => {
 
   useEffect(() => {
     dispatch(getStudents());
-  }, []);
+  }, [dispatch]);
 
   if (loading) {
     return <div>Завантаження...</div>;
@@ -58,7 +58,7 @@ const StudentsPage: React.FC = () => {
               <th></th>
             </tr>
             {students.map((student: IUser) => {
-              return <Student student={student} key={student.userId} />;
+              return <Student student={student} key={student.id} />;
             })}
           </tbody>
         </table>

@@ -59,7 +59,7 @@ export const studentsSlice = createSlice({
     },
     deleteStudentSuccess(state, action: PayloadAction<number>) {
       state.students = state.students.filter(
-        (student: IUser) => student.userId !== action.payload
+        (student: IUser) => student.id !== action.payload
       );
       state.error = null;
       state.loading = false;

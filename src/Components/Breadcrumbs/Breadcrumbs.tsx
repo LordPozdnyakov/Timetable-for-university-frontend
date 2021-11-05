@@ -65,8 +65,8 @@ const Breadcrumbs: React.FC = () => {
           let fullName: string = "";
           if (pathnames[0] === "students") {
             if (selectedStudent) {
-              const { lastName, firstName, surName } = selectedStudent;
-              fullName = `${lastName} ${firstName} ${surName}`;
+              const { lastName, firstName, patronymic } = selectedStudent;
+              fullName = `${lastName} ${firstName} ${patronymic}`;
             }
           }
           pathProperty = createBreadcrumpsForUserName(path, fullName);

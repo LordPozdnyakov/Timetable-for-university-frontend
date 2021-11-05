@@ -14,18 +14,19 @@ import {
   getStudentById,
 } from "../../Redux/Actions/studentsActions";
 import IUser from "../../Types/IUser";
+import SimpleModal from "../SimpleModal/SimpleModal";
 
 const dateFormat = "DD/MM/YYYY";
 
 const initialState: StudentFormInfo = {
-  userId: null,
+  id: null,
   firstName: "",
   lastName: "",
-  surName: "",
+  patronymic: "",
   birthDay: moment(new Date()).format(dateFormat),
   phoneNumber: "",
   email: "",
-  group: "",
+  groupName: "",
   address: "",
   fatherName: "",
   fatherPhone: "",
@@ -43,12 +44,12 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
 
   useEffect(() => {
     if (!editMode || !id) return;
-    if (!selectedStudent || selectedStudent.userId !== +id) {
+    if (!selectedStudent || selectedStudent.id !== +id) {
       dispatch(getStudentById(+id));
     }
     if (!selectedStudent) return;
     setStudent(selectedStudent);
-  }, [selectedStudent]);
+  }, [selectedStudent, dispatch, editMode, id]);
 
   useEffect(() => {
     if (studentAddedSuccess) {
@@ -59,17 +60,17 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
       message.error(error);
     }
     dispatch(clearAddStudentDataForm());
-  }, [studentAddedSuccess, error]);
+  }, [studentAddedSuccess, error, dispatch]);
 
   let [student, setStudent] = useState<StudentFormInfo>(initialState);
   const {
     firstName,
     lastName,
-    surName,
+    patronymic,
     birthDay,
     phoneNumber,
     email,
-    group,
+    groupName,
     address,
     fatherName,
     fatherPhone,
@@ -78,6 +79,25 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
   } = student;
 
   const [cancelIsActive, setCancelIsActive] = useState<boolean>(false);
+  const fullName = `${lastName} ${firstName} ${patronymic}`;
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const showModal = (): void => {
+    setIsModalVisible(true);
+  };
+
+  const hideModal = (): void => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancelDeleting = (): void => {
+    setIsModalVisible(false);
+  };
+
+  const handleConfirmDeleting = (): void => {
+    setIsModalVisible(false);
+    handleDeleteStudent();
+  };
 
   const handleChangeInfo = (event: FormEvent<HTMLFormElement>) => {
     const target = event.target as HTMLInputElement;
@@ -111,32 +131,36 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
     });
   };
 
-  const handleChangeGroup = (group: string) => {
+  const handleChangeGroup = (groupName: string) => {
     setStudent((state) => {
       return {
         ...state,
-        group,
+        groupName,
       };
     });
   };
 
   const handleSaveStudent = () => {
+    if (!firstName || !lastName || !patronymic) {
+      message.error("Поля: Прізвище, Ім'я, По-батькові - обов'язкові");
+      return;
+    }
     if (!editMode) {
       dispatch(addStudent(student));
       // dispatch(clearAddStudentDataForm());
       return;
     }
-    if (!student.userId) {
+    if (!student.id) {
       message.error("Студента з заданим id не існує");
       return;
     }
-    dispatch(editStudent(student.userId, student));
+    dispatch(editStudent(student.id, student));
     setCancelIsActive(false);
   };
 
   const handleDeleteStudent = (): void => {
     if (!selectedStudent) return;
-    dispatch(deleteStudent(selectedStudent.userId));
+    dispatch(deleteStudent(selectedStudent.id));
     setStudent(initialState);
   };
 
@@ -152,136 +176,156 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
   };
 
   return (
-    <Form layout="vertical" className="form" onChange={handleChangeInfo}>
-      <div className="form__row">
-        <Form.Item
-          rules={[{ required: true, message: "Please input your password!" }]}
-          className="form__item"
-        >
-          <label htmlFor="lastName" className="form-label">
-            Прізвище
-          </label>
-          <Input id="lastName" className="form__input" value={lastName} />
-        </Form.Item>
-        <Form.Item className="form__item">
-          <label htmlFor="firstName" className="form-label">
-            Ім'я
-          </label>
-          <Input id="firstName" className="form__input" value={firstName} />
-        </Form.Item>
-        <Form.Item className="form__item">
-          <label htmlFor="surName" className="form-label">
-            По-батькові
-          </label>
-          <Input id="surName" className="form__input" value={surName} />
-        </Form.Item>
-      </div>
-      <div className="form__row">
-        <Form.Item className="form__item">
-          <label htmlFor="birthDay" className="form-label">
-            Дата народження
-          </label>
-          <DatePicker
-            id="birthDay"
-            className="form__input form__date-picker"
-            placeholder=""
-            value={moment(birthDay, dateFormat)}
-            onChange={handleChangeBirthDate}
-          />
-        </Form.Item>
-        <Form.Item className="form__item">
-          <label htmlFor="phoneNumber" className="form-label">
-            Номер телефону
-          </label>
-          <Input id="phoneNumber" className="form__input" value={phoneNumber} />
-        </Form.Item>
-        <Form.Item className="form__item">
-          <label htmlFor="email" className="form-label">
-            E-mail
-          </label>
-          <Input id="email" className="form__input" value={email} />
-        </Form.Item>
-      </div>
-      <div className="form__row">
-        <Form.Item className="form__item">
-          <label htmlFor="group" className="form-label">
-            Група
-          </label>
-          <Select
-            id="group"
-            className="form__input"
-            value={group}
-            onChange={handleChangeGroup}
+    <React.Fragment>
+      <Form layout="vertical" className="form" onChange={handleChangeInfo}>
+        <div className="form__row">
+          <Form.Item className="form__item">
+            <label htmlFor="lastName" className="form-label">
+              Прізвище
+            </label>
+            <Input id="lastName" className="form__input" value={lastName} />
+          </Form.Item>
+          <Form.Item className="form__item">
+            <label htmlFor="firstName" className="form-label">
+              Ім'я
+            </label>
+            <Input id="firstName" className="form__input" value={firstName} />
+          </Form.Item>
+          <Form.Item className="form__item">
+            <label htmlFor="patronymic" className="form-label">
+              По-батькові
+            </label>
+            <Input id="patronymic" className="form__input" value={patronymic} />
+          </Form.Item>
+        </div>
+        <div className="form__row">
+          <Form.Item className="form__item">
+            <label htmlFor="birthDay" className="form-label">
+              Дата народження
+            </label>
+            <DatePicker
+              id="birthDay"
+              className="form__input form__date-picker"
+              placeholder=""
+              value={moment(birthDay, dateFormat)}
+              onChange={handleChangeBirthDate}
+            />
+          </Form.Item>
+          <Form.Item className="form__item">
+            <label htmlFor="phoneNumber" className="form-label">
+              Номер телефону
+            </label>
+            <Input
+              id="phoneNumber"
+              className="form__input"
+              value={phoneNumber}
+            />
+          </Form.Item>
+          <Form.Item className="form__item">
+            <label htmlFor="email" className="form-label">
+              E-mail
+            </label>
+            <Input id="email" className="form__input" value={email} />
+          </Form.Item>
+        </div>
+        <div className="form__row">
+          <Form.Item className="form__item">
+            <label htmlFor="groupName" className="form-label">
+              Група
+            </label>
+            <Select
+              id="groupName"
+              className="form__input"
+              value={groupName}
+              onChange={handleChangeGroup}
+            >
+              <Select.Option value="415">415</Select.Option>
+              <Select.Option value="221">221</Select.Option>
+            </Select>
+          </Form.Item>
+          <Form.Item className="form__item form__input--big">
+            <label htmlFor="address" className="form-label">
+              Місце проживання
+            </label>
+            <Input id="address" className="form__input" value={address} />
+          </Form.Item>
+        </div>
+        <div className="form__row">
+          <div className="form__subtitle">Батько</div>
+          <Form.Item className="form__item form__input--medium">
+            <label htmlFor="fatherName" className="form-label">
+              ПІБ
+            </label>
+            <Input id="fatherName" className="form__input" value={fatherName} />
+          </Form.Item>
+          <Form.Item className="form__item medium-input">
+            <label htmlFor="fatherPhone" className="form-label">
+              Номер телефону
+            </label>
+            <Input
+              id="fatherPhone"
+              className="form__input"
+              value={fatherPhone}
+            />
+          </Form.Item>
+        </div>
+        <div className="form__row">
+          <div className="form__subtitle">Мати</div>
+          <Form.Item className="form__item form__input--medium">
+            <label htmlFor="motherName" className="form-label">
+              ПІБ
+            </label>
+            <Input id="motherName" className="form__input" value={motherName} />
+          </Form.Item>
+          <Form.Item className="form__item medium-input">
+            <label htmlFor="motherPhone" className="form-label">
+              Номер телефону
+            </label>
+            <Input
+              id="motherPhone"
+              className="form__input"
+              value={motherPhone}
+            />
+          </Form.Item>
+        </div>
+        <div className="form__row--buttons">
+          <Button
+            htmlType="submit"
+            className="form__button form__button--save"
+            onClick={handleSaveStudent}
           >
-            <Select.Option value="415">415</Select.Option>
-            <Select.Option value="221">221</Select.Option>
-          </Select>
-        </Form.Item>
-        <Form.Item className="form__item form__input--big">
-          <label htmlFor="address" className="form-label">
-            Місце проживання
-          </label>
-          <Input id="address" className="form__input" value={address} />
-        </Form.Item>
-      </div>
-      <div className="form__row">
-        <div className="form__subtitle">Батько</div>
-        <Form.Item className="form__item form__input--medium">
-          <label htmlFor="fatherName" className="form-label">
-            ПІБ
-          </label>
-          <Input id="fatherName" className="form__input" value={fatherName} />
-        </Form.Item>
-        <Form.Item className="form__item medium-input">
-          <label htmlFor="fatherPhone" className="form-label">
-            Номер телефону
-          </label>
-          <Input id="fatherPhone" className="form__input" value={fatherPhone} />
-        </Form.Item>
-      </div>
-      <div className="form__row">
-        <div className="form__subtitle">Мати</div>
-        <Form.Item className="form__item form__input--medium">
-          <label htmlFor="motherName" className="form-label">
-            ПІБ
-          </label>
-          <Input id="motherName" className="form__input" value={motherName} />
-        </Form.Item>
-        <Form.Item className="form__item medium-input">
-          <label htmlFor="motherPhone" className="form-label">
-            Номер телефону
-          </label>
-          <Input id="motherPhone" className="form__input" value={motherPhone} />
-        </Form.Item>
-      </div>
-      <div className="form__row--buttons">
-        <Button
-          htmlType="submit"
-          className="form__button form__button--save"
-          onClick={handleSaveStudent}
-        >
-          Зберегти
-        </Button>
-        <Button
-          htmlType="button"
-          className="form__button form__button--cancel"
-          onClick={handleCancel}
-          disabled={!cancelIsActive}
-        >
-          Скасувати
-        </Button>
-        {editMode ? (
+            Зберегти
+          </Button>
           <Button
             htmlType="button"
-            className="form__button form__button--delete"
-            onClick={handleDeleteStudent}
-            disabled={student === initialState ? true : false}
+            className="form__button form__button--cancel"
+            onClick={handleCancel}
+            disabled={!cancelIsActive}
           >
-            Видалити
+            Скасувати
           </Button>
-        ) : null}
-      </div>
-    </Form>
+          {editMode ? (
+            <Button
+              htmlType="button"
+              className="form__button form__button--delete"
+              onClick={showModal}
+              disabled={student === initialState ? true : false}
+            >
+              Видалити
+            </Button>
+          ) : null}
+        </div>
+      </Form>
+      <SimpleModal
+        title="Видалити студента?"
+        content={`Студент ${fullName} буде повністю видалений із системи.
+                   Продовжити?`}
+        isModalVisible={isModalVisible}
+        hideModal={hideModal}
+        handleCancel={handleCancelDeleting}
+        handleConfirm={handleConfirmDeleting}
+      />
+    </React.Fragment>
   );
 };
 
