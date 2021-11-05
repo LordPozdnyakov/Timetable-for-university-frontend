@@ -1,17 +1,16 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { LockOutlined } from "@ant-design/icons";
 import { Form, Input } from "antd";
 import { useFormik } from "formik";
 import ButtonComponent from "../../Components/Button/ButtonComponent";
 import FormWrapper from "../../Components/FormWrapper/FormWrapper";
-
 import { validateField } from "../../Utils/helpers/validateField";
 import { useDispatch } from "react-redux";
 import { LoginSchema } from "../../Utils/validator";
-import { setLogin } from "../../Redux/Actions/setLogin";
 
-const LoginFormComponent = (props: any) => {
+const RecoveryFormComponent = (props: any) => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const layout = {
     labelCol: { span: 4 },
@@ -26,16 +25,14 @@ const LoginFormComponent = (props: any) => {
       email: "",
     },
     validationSchema: LoginSchema,
-    onSubmit: (values, { setSubmitting }) => {
-      // @ts-ignore
-      dispatch(setLogin(values)).then((status) => {
-        if ((status = 200)) {
-          props.history.push("/");
-          setSubmitting(false);
-        } else {
-          setSubmitting(true);
-        }
-      });
+    onSubmit: async (values, { setSubmitting }) => {
+      const { status } = await dispatch(setRecoveryEmail(values));
+      if (status === 200) {
+        history.push("/");
+        setSubmitting(true);
+      } else {
+        setSubmitting(true);
+      }
     },
   });
   const {
@@ -55,12 +52,7 @@ const LoginFormComponent = (props: any) => {
           <LockOutlined className="wrapper__form-icon-i" />
         </span>
         <h3>Відновлення</h3>
-        <Form
-          {...layout}
-          name="RecoveryForm"
-          // @ts-ignore
-          onSubmit={handleSubmit}
-        >
+        <Form {...layout} name="RecoveryForm" onFinish={handleSubmit}>
           <Form.Item
             name="email"
             hasFeedback
@@ -95,4 +87,7 @@ const LoginFormComponent = (props: any) => {
   );
 };
 
-export default LoginFormComponent;
+export default RecoveryFormComponent;
+function setRecoveryEmail(values: { email: string }): any {
+  throw new Error("Function not implemented.");
+}
