@@ -2,7 +2,7 @@ import * as Yup from "yup";
 
 export const LoginSchema = Yup.object().shape({
   email: Yup.string()
-    .email("Введіть коректне мило")
+    .email("Введіть коректне емаил")
     .required(`Це поле обов'язковое`),
   password: Yup.string()
     .required(`Це поле обов'язковое`)

@@ -30,7 +30,7 @@ const HeaderComponent: React.FC<propsHeader> = (props) => {
             icon={<ExportOutlined />}
           />
           <Modal
-            title="Вийди звідси, Розбійник!"
+            title="Вийди , !"
             visible={isModalVisible}
             onOk={logOut}
             onCancel={handle}
