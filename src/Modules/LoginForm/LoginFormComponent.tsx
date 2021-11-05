@@ -39,7 +39,7 @@ const LoginFormComponent: React.FC<logginType> = (props) => {
     onSubmit: async (values, { setSubmitting }) => {
       const status = await dispatch(setLogin(values));
       if (status === 200) {
-        history.push("/");
+        setTimeout(() => history.push("/"), 500);
         openNotification({
           title: "Авторизация прошла успешно",
           type: "success",

@@ -28,7 +28,6 @@ const RecoveryFormComponent = (props: any) => {
     onSubmit: async (values, { setSubmitting }) => {
       const { status } = await dispatch(setRecoveryEmail(values));
       if (status === 200) {
-        history.push("/");
         setSubmitting(true);
       } else {
         setSubmitting(true);
