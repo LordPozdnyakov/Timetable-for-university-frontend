@@ -19,7 +19,7 @@ import SimpleModal from "../SimpleModal/SimpleModal";
 const dateFormat = "DD/MM/YYYY";
 
 const initialState: StudentFormInfo = {
-  id: null,
+  id: 0,
   firstName: "",
   lastName: "",
   patronymic: "",
@@ -148,6 +148,7 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
     if (!editMode) {
       dispatch(addStudent(student));
       // dispatch(clearAddStudentDataForm());
+      setCancelIsActive(false);
       return;
     }
     if (!student.id) {
