@@ -1,1 +1,1 @@
-export const SetRecoveryEmail = () => {};
+export const SetRecoveryEmail = (values: any) => {};

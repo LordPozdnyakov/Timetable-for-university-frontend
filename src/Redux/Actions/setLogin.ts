@@ -11,11 +11,6 @@ export const setLogin =
       const { status, data } = await setUserLoginAPI(values);
       window.localStorage["token"] = data.token;
       dispatch(loginSlice.actions.loginFetchingSuccess(data));
-      openNotification({
-        title: "Авторизация прошла успешно",
-        type: "success",
-        text: "Вы успешно авторизировались",
-      });
       return status;
     } catch (e) {
       dispatch(
