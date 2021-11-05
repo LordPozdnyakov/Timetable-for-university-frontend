@@ -19,7 +19,7 @@ import SimpleModal from "../SimpleModal/SimpleModal";
 const dateFormat = "DD/MM/YYYY";
 
 const initialState: StudentFormInfo = {
-  id: null,
+  id: 0,
   firstName: "",
   lastName: "",
   patronymic: "",
