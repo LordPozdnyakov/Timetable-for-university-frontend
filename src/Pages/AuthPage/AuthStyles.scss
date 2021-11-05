@@ -5,9 +5,13 @@
   height: 100vh;
   &-error {
     color: red;
-    margin-top: -15px;
+    margin-top: -13px;
     margin-bottom: 15px;
     display: block;
+  }
+  &-global-error {
+    margin-top: 5px;
+    color: red;
   }
   &-icon {
     height: 40px;

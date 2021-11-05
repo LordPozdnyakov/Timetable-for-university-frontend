@@ -1,13 +1,13 @@
 import React from "react";
-import { Link, RouteComponentProps } from "react-router-dom";
+import { Link, RouteComponentProps, useHistory } from "react-router-dom";
 import { LockOutlined } from "@ant-design/icons";
-import { Form, Input, Checkbox } from "antd";
+import { Form, Input, Checkbox, Space, Spin } from "antd";
 import { useFormik, FormikProps } from "formik";
 import ButtonComponent from "../../Components/Button/ButtonComponent";
 import FormWrapper from "../../Components/FormWrapper/FormWrapper";
 import { validateField } from "../../Utils/helpers/validateField";
 import { LoginSchema } from "../../Utils/validator";
-import { useTypedDispatch } from "../../hooks/redux-hooks";
+import { useTypedDispatch, useTypedSelector } from "../../hooks/redux-hooks";
 import { setLogin } from "../../Redux/Actions/setLogin";
 import { FormikValues } from "..";
 
@@ -16,7 +16,9 @@ interface logginType<Values = FormikValues> extends RouteComponentProps {
 }
 
 const LoginFormComponent: React.FC<logginType> = (props) => {
+  const history = useHistory();
   const dispatch = useTypedDispatch();
+  const { loading, error } = useTypedSelector((state) => state.loginSlice);
   const layout = {
     labelCol: { span: 4 },
     wrapperCol: { span: 30 },
@@ -36,7 +38,7 @@ const LoginFormComponent: React.FC<logginType> = (props) => {
     onSubmit: async (values, { setSubmitting }) => {
       const status = await dispatch(setLogin(values));
       if (status === 200) {
-        props.history.push("/");
+        history.push("/");
         setSubmitting(true);
       } else {
         setSubmitting(true);
@@ -52,6 +54,16 @@ const LoginFormComponent: React.FC<logginType> = (props) => {
     handleSubmit,
     isSubmitting,
   } = formik;
+
+  if (loading) {
+    return (
+      <div className="wrapper__form">
+        <Space size="middle">
+          <Spin size="large" />
+        </Space>
+      </div>
+    );
+  }
 
   return (
     <div className="wrapper__form">
@@ -122,6 +134,11 @@ const LoginFormComponent: React.FC<logginType> = (props) => {
           </Form.Item>
           <Link to={"/recovery"}>Забули пароль?</Link>
         </Form>
+        {error ? (
+          <div className="wrapper__form-global-error">{error}</div>
+        ) : (
+          <></>
+        )}
       </FormWrapper>
     </div>
   );

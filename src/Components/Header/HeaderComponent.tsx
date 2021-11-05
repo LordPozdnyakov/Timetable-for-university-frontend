@@ -1,5 +1,5 @@
-import React from "react";
-import { Button, Layout } from "antd";
+import React, { useState } from "react";
+import { Button, Layout, Modal } from "antd";
 import "./HeaderStyles.scss";
 import { UserOutlined, ExportOutlined } from "@ant-design/icons";
 
@@ -8,8 +8,13 @@ interface propsHeader {
 }
 
 const HeaderComponent: React.FC<propsHeader> = (props) => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const { logOut } = props;
   const { Header } = Layout;
+  const handle = () => {
+    setIsModalVisible(!isModalVisible);
+  };
+
   return (
     <Header className="header">
       <div className="header__page">Главная</div>
@@ -21,9 +26,17 @@ const HeaderComponent: React.FC<propsHeader> = (props) => {
           <Button
             shape="circle"
             type="primary"
-            onClick={logOut}
+            onClick={handle}
             icon={<ExportOutlined />}
           />
+          <Modal
+            title="Вийди звідси, Розбійник!"
+            visible={isModalVisible}
+            onOk={logOut}
+            onCancel={handle}
+          >
+            <p>Ви дійсно бажаєті покинути цей бездоганний додаток?</p>
+          </Modal>
         </div>
       </div>
     </Header>

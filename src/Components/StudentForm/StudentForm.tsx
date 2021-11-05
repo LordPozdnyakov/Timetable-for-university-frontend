@@ -154,7 +154,10 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
   return (
     <Form layout="vertical" className="form" onChange={handleChangeInfo}>
       <div className="form__row">
-        <Form.Item className="form__item">
+        <Form.Item
+          rules={[{ required: true, message: "Please input your password!" }]}
+          className="form__item"
+        >
           <label htmlFor="lastName" className="form-label">
             Прізвище
           </label>
