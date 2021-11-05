@@ -1,4 +1,4 @@
-import { setUserLoginAPI } from "../../API/AuthAPI";
+import { setVerificationDataAPI } from "../../API/AuthAPI";
 import { FormikValues } from "../../Modules";
 import { openNotification } from "../../Utils/helpers/openNotification";
 import { loginSlice } from "../Reducers/loginSlice";
@@ -8,7 +8,7 @@ export const setLogin =
   (values: FormikValues, path: string) => async (dispatch: AppDispatch) => {
     try {
       dispatch(loginSlice.actions.loginFetching());
-      const { status, data } = await setUserLoginAPI(values, path);
+      const { status, data } = await setVerificationDataAPI(values, path);
       window.localStorage["token"] = data.token;
       dispatch(loginSlice.actions.loginFetchingSuccess(data));
       openNotification({

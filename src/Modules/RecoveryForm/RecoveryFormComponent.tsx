@@ -1,17 +1,18 @@
 import React from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { LockOutlined } from "@ant-design/icons";
-import { Form, Input } from "antd";
+import { Form, Input, Space, Spin } from "antd";
 import { useFormik } from "formik";
 import ButtonComponent from "../../Components/Button/ButtonComponent";
 import FormWrapper from "../../Components/FormWrapper/FormWrapper";
 import { validateField } from "../../Utils/helpers/validateField";
-import { useDispatch } from "react-redux";
 import { LoginSchema } from "../../Utils/validator";
+import { SetRecoveryEmail } from "../../Redux/Actions/setRecoveryEmail";
+import { useTypedDispatch, useTypedSelector } from "../../hooks/redux-hooks";
 
 const RecoveryFormComponent = (props: any) => {
-  const history = useHistory();
-  const dispatch = useDispatch();
+  const dispatch = useTypedDispatch();
+  const { loading, error } = useTypedSelector((state) => state.recoverySlice);
   const layout = {
     labelCol: { span: 4 },
     wrapperCol: { span: 30 },
@@ -26,7 +27,9 @@ const RecoveryFormComponent = (props: any) => {
     },
     validationSchema: LoginSchema,
     onSubmit: async (values, { setSubmitting }) => {
-      const { status } = await dispatch(setRecoveryEmail(values));
+      const status = await dispatch(
+        SetRecoveryEmail(values, "forgot-password")
+      );
       if (status === 200) {
         setSubmitting(true);
       } else {
@@ -43,6 +46,15 @@ const RecoveryFormComponent = (props: any) => {
     handleSubmit,
     isSubmitting,
   } = formik;
+  if (loading) {
+    return (
+      <div className="wrapper__form">
+        <Space size="middle">
+          <Spin size="large" />
+        </Space>
+      </div>
+    );
+  }
 
   return (
     <div className="wrapper__form">
@@ -81,12 +93,14 @@ const RecoveryFormComponent = (props: any) => {
           </Form.Item>
           <Link to={"/login"}>Згадали пароль?</Link>
         </Form>
+        {error ? (
+          <div className="wrapper__form-global-error">{error}</div>
+        ) : (
+          <></>
+        )}
       </FormWrapper>
     </div>
   );
 };
 
 export default RecoveryFormComponent;
-function setRecoveryEmail(values: { email: string }): any {
-  throw new Error("Function not implemented.");
-}

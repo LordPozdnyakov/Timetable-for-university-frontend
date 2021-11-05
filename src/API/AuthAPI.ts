@@ -13,7 +13,10 @@ export interface responseType {
   };
 }
 
-export const setUserLoginAPI = async (values: FormikValues, path: string) => {
+export const setVerificationDataAPI = async (
+  values: FormikValues,
+  path: string
+) => {
   const response: responseType = await instance.post(path, values);
   return response;
 };
