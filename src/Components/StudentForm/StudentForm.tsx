@@ -148,6 +148,7 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
     if (!editMode) {
       dispatch(addStudent(student));
       // dispatch(clearAddStudentDataForm());
+      setCancelIsActive(false);
       return;
     }
     if (!student.id) {
