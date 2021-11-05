@@ -1,5 +1,5 @@
 import React from "react";
-import { Redirect, Route, Switch, useHistory } from "react-router-dom";
+import { Route, Switch, useHistory } from "react-router-dom";
 import { AuthPage, HomePage } from "./Pages";
 import { MAIN_PAGE_ROUTE } from "./Constant/routes-constants";
 import { AuthVerify } from "./Modules";
@@ -21,9 +21,7 @@ const App: React.FC = () => {
         />
         <Route
           path={MAIN_PAGE_ROUTE}
-          render={() =>
-            isAuth ? <HomePage logOut={logOut} /> : <Redirect to="/login" />
-          }
+          render={() => (isAuth ? <HomePage logOut={logOut} /> : <AuthPage />)}
         />
       </Switch>
       <AuthVerify logOut={logOut} />

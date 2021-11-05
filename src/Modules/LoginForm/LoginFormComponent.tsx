@@ -10,7 +10,6 @@ import { LoginSchema } from "../../Utils/validator";
 import { useTypedDispatch, useTypedSelector } from "../../hooks/redux-hooks";
 import { setLogin } from "../../Redux/Actions/setLogin";
 import { FormikValues } from "..";
-import { openNotification } from "../../Utils/helpers/openNotification";
 
 interface logginType<Values = FormikValues> extends RouteComponentProps {
   initialValues: Values;
@@ -37,14 +36,9 @@ const LoginFormComponent: React.FC<logginType> = (props) => {
     },
     validationSchema: LoginSchema,
     onSubmit: async (values, { setSubmitting }) => {
-      const status = await dispatch(setLogin(values));
+      const status = await dispatch(setLogin(values, "login"));
       if (status === 200) {
-        setTimeout(() => history.push("/"), 500);
-        openNotification({
-          title: "Авторизация прошла успешно",
-          type: "success",
-          text: "Вы успешно авторизировались",
-        });
+        history.push("/");
         setSubmitting(true);
       } else {
         setSubmitting(true);
