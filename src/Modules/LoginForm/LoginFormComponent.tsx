@@ -15,7 +15,10 @@ interface logginType<Values = FormikValues> extends RouteComponentProps {
   initialValues: Values;
 }
 
-const LoginFormComponent: React.FC<logginType> = (props) => {
+const LoginFormComponent: React.FC<logginType> = ({ history }) => {
+  const onRedirect = () => {
+    history.push("/");
+  };
   const dispatch = useTypedDispatch();
   const { loading, error } = useTypedSelector((state) => state.loginSlice);
   const layout = {
@@ -37,7 +40,8 @@ const LoginFormComponent: React.FC<logginType> = (props) => {
     onSubmit: async (values, { setSubmitting }) => {
       const status = await dispatch(setLogin(values, "login"));
       if (status === 200) {
-        props.history.push("/");
+        onRedirect();
+        setSubmitting(true);
       } else {
         setSubmitting(true);
       }
