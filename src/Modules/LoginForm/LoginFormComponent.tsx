@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, RouteComponentProps, useHistory } from "react-router-dom";
+import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 import { LockOutlined } from "@ant-design/icons";
 import { Form, Input, Checkbox, Space, Spin } from "antd";
 import { useFormik, FormikProps } from "formik";
@@ -16,7 +16,6 @@ interface logginType<Values = FormikValues> extends RouteComponentProps {
 }
 
 const LoginFormComponent: React.FC<logginType> = (props) => {
-  const history = useHistory();
   const dispatch = useTypedDispatch();
   const { loading, error } = useTypedSelector((state) => state.loginSlice);
   const layout = {
@@ -38,7 +37,7 @@ const LoginFormComponent: React.FC<logginType> = (props) => {
     onSubmit: async (values, { setSubmitting }) => {
       const status = await dispatch(setLogin(values, "login"));
       if (status === 200) {
-        history.push("/");
+        props.history.push("/");
         setSubmitting(true);
       } else {
         setSubmitting(true);
@@ -144,4 +143,4 @@ const LoginFormComponent: React.FC<logginType> = (props) => {
   );
 };
 
-export default LoginFormComponent;
+export default withRouter(LoginFormComponent);

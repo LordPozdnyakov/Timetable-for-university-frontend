@@ -30,7 +30,6 @@ interface homeProps {
 }
 
 const HomePage: React.FC<homeProps> = ({ logOut }) => {
-  debugger;
   return (
     <div className="wrapper">
       <HeaderContainerComponent logOut={logOut} />
