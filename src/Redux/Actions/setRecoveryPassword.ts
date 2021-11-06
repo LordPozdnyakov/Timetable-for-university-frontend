@@ -13,7 +13,7 @@ export const setRecoveryPassword =
       );
       openNotification({
         title: "Пароль успешно сменен",
-        type: "error",
+        type: "success",
         text: "Пожалуйста авторизируйтесь",
       });
       return status;
