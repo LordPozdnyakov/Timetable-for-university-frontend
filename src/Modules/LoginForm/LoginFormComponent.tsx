@@ -38,7 +38,6 @@ const LoginFormComponent: React.FC<logginType> = (props) => {
       const status = await dispatch(setLogin(values, "login"));
       if (status === 200) {
         props.history.push("/");
-        setSubmitting(true);
       } else {
         setSubmitting(true);
       }
