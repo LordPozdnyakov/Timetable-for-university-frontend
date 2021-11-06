@@ -90,13 +90,9 @@ const RecoveryPasswordComponent = () => {
             <div className="wrapper__form-error">{errors.password}</div>
           )}
           <Form.Item
-            name="passwordConfirmation"
+            name="confirmPassword"
             hasFeedback
-            validateStatus={validateField(
-              "passwordConfirmation",
-              touched,
-              errors
-            )}
+            validateStatus={validateField("confirmPassword", touched, errors)}
           >
             <Input.Password
               size={"large"}
@@ -104,7 +100,7 @@ const RecoveryPasswordComponent = () => {
               onChange={handleChange}
               type="password"
               onBlur={handleBlur}
-              id="passwordConfirmation"
+              id="confirmPassword"
               value={values.confirmPassword}
             />
           </Form.Item>
