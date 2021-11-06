@@ -29,7 +29,7 @@ const RecoveryPasswordComponent = () => {
     initialValues: {
       token: location.search.split("=")[1],
       password: "",
-      passwordConfirmation: "",
+      confirmPassword: "",
     },
     validationSchema: recoveryPasswordSchema,
     onSubmit: async (values, { setSubmitting }) => {
@@ -105,13 +105,11 @@ const RecoveryPasswordComponent = () => {
               type="password"
               onBlur={handleBlur}
               id="passwordConfirmation"
-              value={values.passwordConfirmation}
+              value={values.confirmPassword}
             />
           </Form.Item>
-          {errors.passwordConfirmation && touched.passwordConfirmation && (
-            <div className="wrapper__form-error">
-              {errors.passwordConfirmation}
-            </div>
+          {errors.confirmPassword && touched.confirmPassword && (
+            <div className="wrapper__form-error">{errors.confirmPassword}</div>
           )}
           <Form.Item {...tailLayout}>
             <ButtonComponent

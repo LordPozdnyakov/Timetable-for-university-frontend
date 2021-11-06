@@ -19,7 +19,7 @@ export const recoveryPasswordSchema = Yup.object().shape({
   password: Yup.string()
     .required(`Це поле обов'язковое`)
     .min(7, "Пароль має бути не маньше 7 символів"),
-  passwordConfirmation: Yup.string()
+  confirmPassword: Yup.string()
     .required(`Це поле обов'язковое`)
     .oneOf([Yup.ref("password"), null], "Пароли повинні співпадати"),
 });
