@@ -1,18 +1,22 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import { LockOutlined } from "@ant-design/icons";
-import { Form, Input } from "antd";
+import { Form, Input, Space, Spin } from "antd";
 import { useFormik } from "formik";
 import ButtonComponent from "../../Components/Button/ButtonComponent";
 import FormWrapper from "../../Components/FormWrapper/FormWrapper";
-
 import { validateField } from "../../Utils/helpers/validateField";
-import { useDispatch } from "react-redux";
-import { LoginSchema } from "../../Utils/validator";
-import { setLogin } from "../../Redux/Actions/setLogin";
+import { useTypedDispatch, useTypedSelector } from "../../hooks/redux-hooks";
+import { recoveryPasswordSchema } from "../../Utils/validator";
+import { setRecoveryPassword } from "../../Redux/Actions/setRecoveryPassword";
 
-const RecoveryPasswordComponent = (props: any) => {
-  const dispatch = useDispatch();
+const RecoveryPasswordComponent = () => {
+  const { loading, error } = useTypedSelector(
+    (state) => state.RecoveryPasswordSlice
+  );
+  const location = useLocation();
+  const dispatch = useTypedDispatch();
+  const history = useHistory();
   const layout = {
     labelCol: { span: 4 },
     wrapperCol: { span: 30 },
@@ -20,23 +24,24 @@ const RecoveryPasswordComponent = (props: any) => {
   const tailLayout = {
     wrapperCol: { offset: 0, span: 30 },
   };
-
   const formik = useFormik({
+    enableReinitialize: true,
     initialValues: {
+      token: location.search.split("=")[1],
       password: "",
       passwordConfirmation: "",
     },
-    validationSchema: LoginSchema,
-    onSubmit: (values, { setSubmitting }) => {
-      // @ts-ignore
-      dispatch(setLogin(values)).then((status) => {
-        if ((status = 200)) {
-          props.history.push("/");
-          setSubmitting(false);
-        } else {
-          setSubmitting(true);
-        }
-      });
+    validationSchema: recoveryPasswordSchema,
+    onSubmit: async (values, { setSubmitting }) => {
+      const status = await dispatch(
+        setRecoveryPassword(values, "reset-password")
+      );
+      if (status === 200) {
+        history.push("/login");
+        setSubmitting(true);
+      } else {
+        setSubmitting(true);
+      }
     },
   });
   const {
@@ -48,6 +53,15 @@ const RecoveryPasswordComponent = (props: any) => {
     handleSubmit,
     isSubmitting,
   } = formik;
+  if (loading) {
+    return (
+      <div className="wrapper__form">
+        <Space size="middle">
+          <Spin size="large" />
+        </Space>
+      </div>
+    );
+  }
 
   return (
     <div className="wrapper__form">
@@ -56,12 +70,7 @@ const RecoveryPasswordComponent = (props: any) => {
           <LockOutlined className="wrapper__form-icon-i" />
         </span>
         <h3>Зміна паролю</h3>
-        <Form
-          {...layout}
-          name="LoginForm"
-          // @ts-ignore
-          onSubmit={handleSubmit}
-        >
+        <Form {...layout} name="LoginForm" onFinish={handleSubmit}>
           <Form.Item
             name="password"
             hasFeedback
@@ -116,6 +125,11 @@ const RecoveryPasswordComponent = (props: any) => {
           </Form.Item>
           <Link to={"/login"}>Згадали пароль?</Link>
         </Form>
+        {error ? (
+          <div className="wrapper__form-global-error">{error}</div>
+        ) : (
+          <></>
+        )}
       </FormWrapper>
     </div>
   );

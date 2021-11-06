@@ -3,6 +3,7 @@ import { ProfileReducer } from "./Reducers/ProfileReducer";
 
 import studentsReducer from "./Reducers/studentsSlice";
 import loginSlice from "./Reducers/loginSlice";
+import RecoveryPasswordSlice from "./Reducers/RecoveryPasswordSlice";
 import recoverySlice from "./Reducers/RecoverySlice";
 import { configureStore } from "@reduxjs/toolkit";
 
@@ -16,6 +17,7 @@ let reducers = combineReducers({
   loginSlice,
   recoverySlice,
   studentsReducer,
+  RecoveryPasswordSlice,
 });
 
 const setupStore = () => {

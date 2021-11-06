@@ -10,7 +10,7 @@ import { recoverySchema } from "../../Utils/validator";
 import { SetRecoveryEmail } from "../../Redux/Actions/setRecoveryEmail";
 import { useTypedDispatch, useTypedSelector } from "../../hooks/redux-hooks";
 
-const RecoveryFormComponent = (props: any) => {
+const RecoveryFormComponent = () => {
   const dispatch = useTypedDispatch();
   const { loading, error } = useTypedSelector((state) => state.recoverySlice);
   const layout = {
@@ -22,6 +22,7 @@ const RecoveryFormComponent = (props: any) => {
   };
 
   const formik = useFormik({
+    enableReinitialize: true,
     initialValues: {
       email: "",
     },
