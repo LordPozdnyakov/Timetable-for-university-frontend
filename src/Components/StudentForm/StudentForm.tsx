@@ -15,6 +15,14 @@ import {
 } from "../../Redux/Actions/studentsActions";
 import IUser from "../../Types/IUser";
 import SimpleModal from "../SimpleModal/SimpleModal";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+
+const StudentFormSchema = Yup.object().shape({
+  firstName: Yup.string().required(`Це поле обов'язкове`),
+  lastName: Yup.string().required(`Це поле обов'язкове`),
+  patronymic: Yup.string().required(`Це поле обов'язкове`),
+});
 
 const dateFormat = "DD/MM/YYYY";
 
@@ -49,6 +57,9 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
     }
     if (!selectedStudent) return;
     setStudent(selectedStudent);
+    formik.values.lastName = selectedStudent.lastName;
+    formik.values.firstName = selectedStudent.firstName;
+    formik.values.patronymic = selectedStudent.patronymic;
   }, [selectedStudent, dispatch, editMode, id]);
 
   useEffect(() => {
@@ -141,14 +152,11 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
   };
 
   const handleSaveStudent = () => {
-    if (!firstName || !lastName || !patronymic) {
-      message.error("Поля: Прізвище, Ім'я, По-батькові - обов'язкові");
-      return;
-    }
     if (!editMode) {
       dispatch(addStudent(student));
       // dispatch(clearAddStudentDataForm());
       setCancelIsActive(false);
+      formik.resetForm();
       return;
     }
     if (!student.id) {
@@ -157,6 +165,7 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
     }
     dispatch(editStudent(student.id, student));
     setCancelIsActive(false);
+    formik.resetForm();
   };
 
   const handleDeleteStudent = (): void => {
@@ -169,34 +178,84 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
     if (!editMode) {
       setStudent(initialState);
       setCancelIsActive(false);
+      formik.values.lastName = "";
+      formik.values.firstName = "";
+      formik.values.patronymic = "";
       return;
     }
     if (!selectedStudent) return;
     setStudent(selectedStudent);
     setCancelIsActive(false);
+    formik.values.lastName = selectedStudent.lastName;
+    formik.values.firstName = selectedStudent.firstName;
+    formik.values.patronymic = selectedStudent.patronymic;
   };
+
+  const formik = useFormik({
+    initialValues: {
+      firstName: student.firstName,
+      lastName: student.lastName,
+      patronymic: student.patronymic,
+    },
+    validationSchema: StudentFormSchema,
+    onSubmit: (values) => {
+      console.log("teest");
+      //validateYupSchema(values, StudentFormSchema)
+      handleSaveStudent();
+    },
+  });
 
   return (
     <React.Fragment>
-      <Form layout="vertical" className="form" onChange={handleChangeInfo}>
+      <Form
+        layout="vertical"
+        className="form"
+        onChange={handleChangeInfo}
+        onFinish={formik.handleSubmit}
+      >
         <div className="form__row">
           <Form.Item className="form__item">
             <label htmlFor="lastName" className="form-label">
               Прізвище
             </label>
-            <Input id="lastName" className="form__input" value={lastName} />
+            <Input
+              id="lastName"
+              className="form__input"
+              value={formik.values.lastName}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
+            {formik.errors.lastName && (
+              <div className="error-message">{formik.errors.lastName}</div>
+            )}
           </Form.Item>
           <Form.Item className="form__item">
             <label htmlFor="firstName" className="form-label">
               Ім'я
             </label>
-            <Input id="firstName" className="form__input" value={firstName} />
+            <Input
+              id="firstName"
+              className="form__input"
+              value={formik.values.firstName}
+              onChange={formik.handleChange}
+            />
+            {formik.errors.firstName && (
+              <div className="error-message">{formik.errors.firstName}</div>
+            )}
           </Form.Item>
           <Form.Item className="form__item">
             <label htmlFor="patronymic" className="form-label">
               По-батькові
             </label>
-            <Input id="patronymic" className="form__input" value={patronymic} />
+            <Input
+              id="patronymic"
+              className="form__input"
+              value={formik.values.patronymic}
+              onChange={formik.handleChange}
+            />
+            {formik.errors.patronymic && (
+              <div className="error-message">{formik.errors.patronymic}</div>
+            )}
           </Form.Item>
         </div>
         <div className="form__row">
@@ -290,11 +349,7 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
           </Form.Item>
         </div>
         <div className="form__row--buttons">
-          <Button
-            htmlType="submit"
-            className="form__button form__button--save"
-            onClick={handleSaveStudent}
-          >
+          <Button htmlType="submit" className="form__button form__button--save">
             Зберегти
           </Button>
           <Button
