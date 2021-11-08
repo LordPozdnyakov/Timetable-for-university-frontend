@@ -1,15 +1,14 @@
 import React from "react";
-import { Route, Switch, useHistory } from "react-router-dom";
+import { Redirect, Route, Switch, useHistory } from "react-router-dom";
 import { AuthPage, HomePage } from "./Pages";
 import { MAIN_PAGE_ROUTE } from "./Constant/routes-constants";
 import { AuthVerify } from "./Modules";
 
-const isAuth = localStorage.getItem("token");
-
 const App: React.FC = () => {
+  const isAuth = localStorage.getItem("token");
   const history = useHistory();
   const logOut = () => {
-    window.localStorage.token = "";
+    window.localStorage.clear();
     history.push("/login");
   };
   return (
@@ -22,7 +21,9 @@ const App: React.FC = () => {
         />
         <Route
           path={MAIN_PAGE_ROUTE}
-          render={() => (isAuth ? <HomePage logOut={logOut} /> : <AuthPage />)}
+          render={() =>
+            isAuth ? <HomePage logOut={logOut} /> : <Redirect to="/login" />
+          }
         />
       </Switch>
       <AuthVerify logOut={logOut} />

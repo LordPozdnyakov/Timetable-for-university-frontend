@@ -14,7 +14,7 @@ const AuthVerify = (props: propsType) => {
     }
   };
   props.history.listen(() => {
-    const token = window.localStorage["token"];
+    const token = localStorage.getItem("token");
     if (token) {
       const decodedJWT = parseJwt(token);
       if (decodedJWT.exp * 1000 < Date.now()) {
