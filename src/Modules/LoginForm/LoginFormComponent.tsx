@@ -40,8 +40,8 @@ const LoginFormComponent: React.FC<logginType> = ({ history }) => {
     onSubmit: async (values, { setSubmitting }) => {
       const status = await dispatch(setLogin(values, "login"));
       if (status === 200) {
-        onRedirect();
         setSubmitting(true);
+        onRedirect();
       } else {
         setSubmitting(true);
       }
