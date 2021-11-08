@@ -9,16 +9,14 @@ import { validateField } from "../../Utils/helpers/validateField";
 import { LoginSchema } from "../../Utils/validator";
 import { useTypedDispatch, useTypedSelector } from "../../hooks/redux-hooks";
 import { setLogin } from "../../Redux/Actions/setLogin";
+
 import { FormikValues } from "..";
 
 interface logginType<Values = FormikValues> extends RouteComponentProps {
   initialValues: Values;
 }
 
-const LoginFormComponent: React.FC<logginType> = ({ history }) => {
-  const onRedirect = () => {
-    history.push("/");
-  };
+const LoginFormComponent: React.FC<logginType> = () => {
   const dispatch = useTypedDispatch();
   const { loading, error } = useTypedSelector((state) => state.loginSlice);
   const layout = {
@@ -40,8 +38,7 @@ const LoginFormComponent: React.FC<logginType> = ({ history }) => {
     onSubmit: async (values, { setSubmitting }) => {
       const status = await dispatch(setLogin(values, "login"));
       if (status === 200) {
-        setSubmitting(true);
-        onRedirect();
+        window.location.replace("/");
       } else {
         setSubmitting(true);
       }
