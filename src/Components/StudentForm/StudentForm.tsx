@@ -182,19 +182,13 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
     if (!editMode) {
       setStudent(initialState);
       setCancelIsActive(false);
-      formik.values.lastName = "";
-      formik.values.firstName = "";
-      formik.values.patronymic = "";
-      formik.values.email = "";
+      formik.resetForm();
       return;
     }
     if (!selectedStudent) return;
     setStudent(selectedStudent);
     setCancelIsActive(false);
-    formik.values.lastName = selectedStudent.lastName;
-    formik.values.firstName = selectedStudent.firstName;
-    formik.values.patronymic = selectedStudent.patronymic;
-    formik.values.email = selectedStudent.email;
+    formik.resetForm();
   };
 
   const formik = useFormik({
