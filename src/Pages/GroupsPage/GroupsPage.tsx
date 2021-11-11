@@ -1,38 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import GroupItem from "../../Components/GroupItem/GroupItem";
-import GroupType from "../../Types/GroupType";
-
-const groupsData: GroupType[] = [
-  {
-    id: 1,
-    shortName: "1PR1",
-    fullName: "Програмна інженерія",
-    course: 1,
-    educationForm: "Денна",
-    year: 2021,
-    studentCount: 35,
-  },
-  {
-    id: 2,
-    shortName: "2PR1",
-    fullName: "Програмна інженерія",
-    course: 2,
-    educationForm: "Денна",
-    year: 2020,
-    studentCount: 45,
-  },
-  {
-    id: 3,
-    shortName: "5PR1",
-    fullName: "Програмна інженерія",
-    course: 5,
-    educationForm: "Денна",
-    year: 2017,
-    studentCount: 29,
-  },
-];
+import { useTypedDispatch, useTypedSelector } from "../../hooks/redux-hooks";
+import { getGroups } from "../../Redux/Actions/groupsActions";
 
 const GroupsPage = () => {
+  const { groups, loading, error } = useTypedSelector(
+    (state) => state.groupsReducer
+  );
+
+  const dispatch = useTypedDispatch();
+
+  useEffect(() => {
+    dispatch(getGroups());
+  }, [dispatch]);
+
+  if (loading) {
+    return <div>Завантаження...</div>;
+  }
+
+  if (error) {
+    return <h3>{error}</h3>;
+  }
+
+  if (groups.length < 1) {
+    return <div>Групи відсутні</div>;
+  }
   return (
     <div>
       <h5 className="page-title">Групи</h5>
@@ -44,8 +36,8 @@ const GroupsPage = () => {
               <th>Повна назва</th>
               <th>Кількість студентів</th>
             </tr>
-            {groupsData.map((group) => {
-              return <GroupItem {...group} />;
+            {groups.map((group) => {
+              return <GroupItem key={group.id} {...group} />;
             })}
           </tbody>
         </table>

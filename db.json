@@ -63,5 +63,34 @@
       "address": "address 3",
       "groupName": "6PR2"
     }
+  ],
+  "groups": [
+    {
+      "id": 1,
+      "shortName": "1PR1",
+      "fullName": "Програмна інженерія",
+      "course": 1,
+      "educationForm": "Денна",
+      "year": 2021,
+      "studentCount": 35
+    },
+    {
+      "id": 2,
+      "shortName": "2PR1",
+      "fullName": "Програмна інженерія",
+      "course": 2,
+      "educationForm": "Денна",
+      "year": 2020,
+      "studentCount": 45
+    },
+    {
+      "id": 3,
+      "shortName": "5PR1",
+      "fullName": "Програмна інженерія",
+      "course": 5,
+      "educationForm": "Денна",
+      "year": 2017,
+      "studentCount": 29
+    }
   ]
 }

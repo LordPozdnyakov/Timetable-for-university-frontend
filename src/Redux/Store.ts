@@ -2,6 +2,7 @@ import { combineReducers } from "redux";
 import { ProfileReducer } from "./Reducers/ProfileReducer";
 
 import studentsReducer from "./Reducers/studentsSlice";
+import groupsReducer from "./Reducers/groupsSlice";
 import loginSlice from "./Reducers/loginSlice";
 import RecoveryPasswordSlice from "./Reducers/RecoveryPasswordSlice";
 import recoverySlice from "./Reducers/RecoverySlice";
@@ -17,6 +18,7 @@ let reducers = combineReducers({
   loginSlice,
   recoverySlice,
   studentsReducer,
+  groupsReducer,
   RecoveryPasswordSlice,
 });
 
