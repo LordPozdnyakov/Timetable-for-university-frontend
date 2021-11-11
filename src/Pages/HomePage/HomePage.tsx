@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 
 import {
@@ -25,6 +25,8 @@ import {
   STUDENTS_PAGE_ROUTE,
   TEACHERS_PAGE_ROUTE,
 } from "../../Constant/routes-constants";
+import routes, { RouteType } from "../../Shared/route-config";
+import { Spin } from "antd";
 
 interface homeProps {
   logOut: () => void;
@@ -37,26 +39,7 @@ const HomePage: React.FC<homeProps> = ({ logOut }) => {
       <SidebarContainerComponent />
       <div className="content">
         <Breadcrumbs />
-        <Switch>
-          <Route exact path={MAIN_PAGE_ROUTE} component={MainPage} />
-          <Route exact path={STUDENTS_PAGE_ROUTE} component={StudentsPage} />
-          <Route
-            exact
-            path={ADD_STUDENT_PAGE_ROUTE}
-            component={AddStudentPage}
-          />
-          <Route
-            exact
-            path={EDIT_STUDENT_PAGE_WITH_PARAMS_ROUTE}
-            component={StudentEditPage}
-          />
-          <Route
-            exact
-            path={STUDENT_PROFILE_PAGE_ROUTE}
-            component={StudentProfilePage}
-          />
-          <Route exact path={TEACHERS_PAGE_ROUTE} component={TeachersPage} />
-        </Switch>
+
         <DownloadStudentsComponent />
       </div>
     </div>

@@ -1,7 +1,8 @@
 import { HomeFilled, UserOutlined } from "@ant-design/icons";
+
 import {
-  AddStudentPage,
   MainPage,
+  AddStudentPage,
   StudentEditPage,
   StudentProfilePage,
   StudentsPage,
@@ -21,18 +22,11 @@ export type RouteType = {
   fullPath: string;
   shortPath?: string;
   title?: string;
-  component: React.FC;
+  component: any;
   icon?: any;
 };
 
 const routes: RouteType[] = [
-  {
-    fullPath: MAIN_PAGE_ROUTE,
-    shortPath: "/",
-    title: "Головна",
-    icon: <HomeFilled />,
-    component: MainPage,
-  },
   {
     fullPath: STUDENTS_PAGE_ROUTE,
     shortPath: "students",
@@ -62,6 +56,13 @@ const routes: RouteType[] = [
     title: "Викладачі",
     icon: <UserOutlined />,
     component: TeachersPage,
+  },
+  {
+    component: MainPage,
+    fullPath: MAIN_PAGE_ROUTE,
+    shortPath: "/",
+    title: "Головна",
+    icon: <HomeFilled />,
   },
 ];
 
