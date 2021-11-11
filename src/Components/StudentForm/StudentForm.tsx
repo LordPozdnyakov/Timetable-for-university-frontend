@@ -22,6 +22,9 @@ const StudentFormSchema = Yup.object().shape({
   firstName: Yup.string().required(`Це поле обов'язкове`),
   lastName: Yup.string().required(`Це поле обов'язкове`),
   patronymic: Yup.string().required(`Це поле обов'язкове`),
+  email: Yup.string()
+    .required(`Це поле обов'язкове`)
+    .email("Введіть коректний email"),
 });
 
 const dateFormat = "DD/MM/YYYY";
@@ -60,6 +63,7 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
     formik.values.lastName = selectedStudent.lastName;
     formik.values.firstName = selectedStudent.firstName;
     formik.values.patronymic = selectedStudent.patronymic;
+    formik.values.email = selectedStudent.email;
   }, [selectedStudent, dispatch, editMode, id]);
 
   useEffect(() => {
@@ -178,17 +182,13 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
     if (!editMode) {
       setStudent(initialState);
       setCancelIsActive(false);
-      formik.values.lastName = "";
-      formik.values.firstName = "";
-      formik.values.patronymic = "";
+      formik.resetForm();
       return;
     }
     if (!selectedStudent) return;
     setStudent(selectedStudent);
     setCancelIsActive(false);
-    formik.values.lastName = selectedStudent.lastName;
-    formik.values.firstName = selectedStudent.firstName;
-    formik.values.patronymic = selectedStudent.patronymic;
+    formik.resetForm();
   };
 
   const formik = useFormik({
@@ -196,11 +196,10 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
       firstName: student.firstName,
       lastName: student.lastName,
       patronymic: student.patronymic,
+      email: student.email,
     },
     validationSchema: StudentFormSchema,
     onSubmit: (values) => {
-      console.log("teest");
-      //validateYupSchema(values, StudentFormSchema)
       handleSaveStudent();
     },
   });
@@ -285,7 +284,16 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
             <label htmlFor="email" className="form-label">
               E-mail
             </label>
-            <Input id="email" className="form__input" value={email} />
+            <Input
+              id="email"
+              className="form__input"
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
+            {formik.errors.email && (
+              <div className="error-message">{formik.errors.email}</div>
+            )}
           </Form.Item>
         </div>
         <div className="form__row">

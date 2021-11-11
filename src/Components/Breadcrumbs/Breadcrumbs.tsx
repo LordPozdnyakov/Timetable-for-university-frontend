@@ -1,8 +1,7 @@
 import React from "react";
 import { Breadcrumb } from "antd";
-import { HomeFilled, UserOutlined } from "@ant-design/icons";
+import { HomeFilled } from "@ant-design/icons";
 import { useLocation } from "react-router-dom";
-import IPathnamesProperties from "../../Types/IPathnamesProperties";
 import { useTypedSelector } from "../../hooks/redux-hooks";
 import {
   createPathnamesArray,
@@ -11,29 +10,7 @@ import {
 } from "../../Utils/helpers/breadcrumbs-helpers";
 import "./Breadcrumbs.scss";
 import { MAIN_PAGE_ROUTE } from "../../Constant/routes-constants";
-
-const pathnamesProperties: IPathnamesProperties[] = [
-  {
-    path: "students",
-    title: "Студенти",
-    icon: <UserOutlined />,
-  },
-  {
-    path: "teachers",
-    title: "Викладачі",
-    icon: <UserOutlined />,
-  },
-  {
-    path: "add-student",
-    title: "Додати студента",
-    icon: null,
-  },
-  {
-    path: "edit-student",
-    title: "Редагувати студента",
-    icon: null,
-  },
-];
+import routes, { RouteType } from "../../Shared/route-config";
 
 const Breadcrumbs: React.FC = () => {
   const location = useLocation();
@@ -57,10 +34,9 @@ const Breadcrumbs: React.FC = () => {
         </Breadcrumb.Item>
       )}
       {pathnames.map((path: string, index: number) => {
-        let pathProperty: IPathnamesProperties | undefined =
-          pathnamesProperties.find(
-            (pathProps: IPathnamesProperties) => path === pathProps.path
-          );
+        let pathProperty: RouteType | undefined = routes.find(
+          (pathProps: RouteType) => path === pathProps.shortPath
+        );
         if (!pathProperty && index === pathnames.length - 1 && isProfile) {
           let fullName: string = "";
           if (pathnames[0] === "students") {
