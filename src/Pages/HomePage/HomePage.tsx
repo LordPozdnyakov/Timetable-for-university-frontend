@@ -19,11 +19,13 @@ import "../../App.scss";
 import {
   ADD_STUDENT_PAGE_ROUTE,
   EDIT_STUDENT_PAGE_WITH_PARAMS_ROUTE,
+  GROUPS_PAGE_ROUTE,
   MAIN_PAGE_ROUTE,
   STUDENT_PROFILE_PAGE_ROUTE,
   STUDENTS_PAGE_ROUTE,
   TEACHERS_PAGE_ROUTE,
 } from "../../Constant/routes-constants";
+import GroupsPage from "../GroupsPage/GroupsPage";
 
 interface homeProps {
   logOut: () => void;
@@ -55,6 +57,7 @@ const HomePage: React.FC<homeProps> = ({ logOut }) => {
             component={StudentProfilePage}
           />
           <Route exact path={TEACHERS_PAGE_ROUTE} component={TeachersPage} />
+          <Route exact path={GROUPS_PAGE_ROUTE} component={GroupsPage} />
         </Switch>
       </div>
     </div>

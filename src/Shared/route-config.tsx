@@ -11,11 +11,13 @@ import React from "react";
 import {
   ADD_STUDENT_PAGE_ROUTE,
   EDIT_STUDENT_PAGE_WITH_PARAMS_ROUTE,
+  GROUPS_PAGE_ROUTE,
   MAIN_PAGE_ROUTE,
   STUDENT_PROFILE_PAGE_ROUTE,
   STUDENTS_PAGE_ROUTE,
   TEACHERS_PAGE_ROUTE,
 } from "../Constant/routes-constants";
+import GroupsPage from "../Pages/GroupsPage/GroupsPage";
 
 export type RouteType = {
   fullPath: string;
@@ -62,6 +64,12 @@ const routes: RouteType[] = [
     title: "Викладачі",
     icon: <UserOutlined />,
     component: TeachersPage,
+  },
+  {
+    fullPath: GROUPS_PAGE_ROUTE,
+    shortPath: "groups",
+    title: "Групи",
+    component: GroupsPage,
   },
 ];
 
