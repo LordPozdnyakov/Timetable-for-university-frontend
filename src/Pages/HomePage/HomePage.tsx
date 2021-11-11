@@ -11,6 +11,7 @@ import {
 } from "..";
 import {
   Breadcrumbs,
+  DownloadStudentsComponent,
   HeaderContainerComponent,
   SidebarContainerComponent,
 } from "../../Components";
@@ -56,6 +57,7 @@ const HomePage: React.FC<homeProps> = ({ logOut }) => {
           />
           <Route exact path={TEACHERS_PAGE_ROUTE} component={TeachersPage} />
         </Switch>
+        <DownloadStudentsComponent />
       </div>
     </div>
   );
