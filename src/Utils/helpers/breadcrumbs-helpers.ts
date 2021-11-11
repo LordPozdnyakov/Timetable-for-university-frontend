@@ -1,32 +1,35 @@
-import IPathnamesProperties from '../../Types/IPathnamesProperties';
+import routes, { Route } from "../../Shared/route-config";
+import { STUDENT_PROFILE_PAGE_ROUTE } from "../../Constant/routes-constants";
 
 export function createPathnamesArray(fullPathname: string): string[] {
-	return fullPathname.split('/').filter((p) => p);
+  return fullPathname.split("/").filter((p) => p);
 }
 
 export function checkIfPageIsProfile(fullPathname: string): boolean {
-	const pathnames: string[] = createPathnamesArray(fullPathname);
-	const containsId: boolean = !isNaN(+pathnames[1]);
-	return (
-		(pathnames[0] === 'students' || pathnames[0] === 'teachers') &&
-		pathnames.length === 2 &&
-		containsId
-	);
+  const pathnames: string[] = createPathnamesArray(fullPathname);
+  const containsId: boolean = !isNaN(+pathnames[1]);
+  return (
+    (pathnames[0] === "students" || pathnames[0] === "teachers") &&
+    pathnames.length === 2 &&
+    containsId
+  );
 }
 
 export function createBreadcrumpsForUserName(
-	path: string,
-	fullName: string
-): IPathnamesProperties {
-	if (!fullName)
-		return {
-			path,
-			title: 'Користувач не знайден',
-			icon: null,
-		};
-	return {
-		path,
-		title: fullName,
-		icon: null,
-	};
+  shortPath: string,
+  fullName: string
+): Route | undefined {
+  let route = routes.find(
+    (route) => route.fullPath === STUDENT_PROFILE_PAGE_ROUTE
+  );
+  if (!route) return;
+  if (!fullName)
+    return {
+      ...route,
+      title: "Користувач не знайден",
+    };
+  return {
+    ...route,
+    title: fullName,
+  };
 }
