@@ -1,4 +1,4 @@
-import routes, { Route } from "../../Shared/route-config";
+import routes, { RouteType } from "../../Shared/route-config";
 import { STUDENT_PROFILE_PAGE_ROUTE } from "../../Constant/routes-constants";
 
 export function createPathnamesArray(fullPathname: string): string[] {
@@ -18,7 +18,7 @@ export function checkIfPageIsProfile(fullPathname: string): boolean {
 export function createBreadcrumpsForUserName(
   shortPath: string,
   fullName: string
-): Route | undefined {
+): RouteType | undefined {
   let route = routes.find(
     (route) => route.fullPath === STUDENT_PROFILE_PAGE_ROUTE
   );

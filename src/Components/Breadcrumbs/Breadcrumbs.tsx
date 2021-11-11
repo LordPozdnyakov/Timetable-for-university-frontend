@@ -10,7 +10,7 @@ import {
 } from "../../Utils/helpers/breadcrumbs-helpers";
 import "./Breadcrumbs.scss";
 import { MAIN_PAGE_ROUTE } from "../../Constant/routes-constants";
-import routes, { Route } from "../../Shared/route-config";
+import routes, { RouteType } from "../../Shared/route-config";
 
 const Breadcrumbs: React.FC = () => {
   const location = useLocation();
@@ -34,8 +34,8 @@ const Breadcrumbs: React.FC = () => {
         </Breadcrumb.Item>
       )}
       {pathnames.map((path: string, index: number) => {
-        let pathProperty: Route | undefined = routes.find(
-          (pathProps: Route) => path === pathProps.shortPath
+        let pathProperty: RouteType | undefined = routes.find(
+          (pathProps: RouteType) => path === pathProps.shortPath
         );
         if (!pathProperty && index === pathnames.length - 1 && isProfile) {
           let fullName: string = "";

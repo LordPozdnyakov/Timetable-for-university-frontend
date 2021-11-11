@@ -17,7 +17,7 @@ import {
   TEACHERS_PAGE_ROUTE,
 } from "../Constant/routes-constants";
 
-export type Route = {
+export type RouteType = {
   fullPath: string;
   shortPath?: string;
   title?: string;
@@ -25,7 +25,7 @@ export type Route = {
   icon?: any;
 };
 
-const routes: Route[] = [
+const routes: RouteType[] = [
   {
     fullPath: MAIN_PAGE_ROUTE,
     shortPath: "/",
