@@ -4,6 +4,7 @@ import {
   getStundentByIdAPI,
   editStundentAPI,
   deleteStundentAPI,
+  getStudentsByGroupAPI,
 } from "../../API/studentsAPI";
 import { AppDispatch } from "../Store";
 import { studentsSlice } from "../Reducers/studentsSlice";
@@ -19,6 +20,7 @@ const {
   clearAddStudentData,
   editStudentSuccess,
   deleteStudentSuccess,
+  getStudentsByGroupSuccess,
 } = studentsSlice.actions;
 
 export const getStudents = () => {
@@ -87,6 +89,18 @@ export const deleteStudent = (id: number) => {
       await deleteStundentAPI(id);
       dispatch(deleteStudentSuccess(id));
       message.success("Студента успішно видалено");
+    } catch (e) {
+      dispatch(fetchDataError(`Помилка: ${(e as Error).message}`));
+    }
+  };
+};
+
+export const getStudentsByGroup = (groupId: number) => {
+  return async (dispatch: AppDispatch) => {
+    try {
+      dispatch(fetchData());
+      const response = await getStudentsByGroupAPI(groupId);
+      dispatch(getStudentsByGroupSuccess(response));
     } catch (e) {
       dispatch(fetchDataError(`Помилка: ${(e as Error).message}`));
     }

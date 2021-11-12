@@ -27,4 +27,5 @@ export default interface IUser {
   phoneNumber: string;
   address: string;
   groupName: string;
+  groupId: number;
 }

@@ -5,12 +5,14 @@ type GroupsState = {
   groups: GroupType[];
   loading: boolean;
   error: string | null;
+  selectedGroup: GroupType | null;
 };
 
 const initialGroupsState: GroupsState = {
   groups: [],
   loading: false,
   error: null,
+  selectedGroup: null,
 };
 
 export const groupsSlice = createSlice({
@@ -28,6 +30,11 @@ export const groupsSlice = createSlice({
       state.loading = false;
       state.error = null;
       state.groups = action.payload;
+    },
+    fetchGroupByIdSuccess(state, action: PayloadAction<GroupType>) {
+      state.loading = false;
+      state.error = null;
+      state.selectedGroup = action.payload;
     },
   },
 });

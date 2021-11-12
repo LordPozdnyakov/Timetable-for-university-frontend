@@ -7,6 +7,9 @@ export const EDIT_STUDENT_PAGE_ROUTE = "/students/edit-student";
 export const EDIT_STUDENT_PAGE_WITH_PARAMS_ROUTE = "/students/edit-student/:id";
 export const STUDENT_PROFILE_PAGE_ROUTE = "/students/:id";
 
+//GROUPS ROUTES
+export const GROUPS_PAGE_ROUTE = "/groups";
+export const GROUP_PAGE_ROUTE = "/groups/:id";
+
 //OTHERS
 export const TEACHERS_PAGE_ROUTE = "/teachers";
-export const GROUPS_PAGE_ROUTE = "/groups";

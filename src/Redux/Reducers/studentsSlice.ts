@@ -64,6 +64,11 @@ export const studentsSlice = createSlice({
       state.error = null;
       state.loading = false;
     },
+    getStudentsByGroupSuccess(state, action: PayloadAction<IUser[]>) {
+      state.error = null;
+      state.loading = false;
+      state.students = action.payload;
+    },
   },
 });
 

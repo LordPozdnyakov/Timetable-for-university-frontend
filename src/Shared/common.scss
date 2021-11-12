@@ -5,6 +5,11 @@
   font-weight: 400;
 }
 
+.page-subtitle {
+  padding: 20px 0 10px;
+  font-size: 18px;
+}
+
 .add-btn {
   width: 56px;
   height: 56px;
@@ -28,4 +33,35 @@
 
 .error-message {
   color: $error-color;
+}
+
+.students {
+  &__header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  &__title {
+    margin-bottom: 0;
+  }
+
+  &__table {
+    width: 100%;
+
+    tr {
+      border: 1px solid #e5e5e5;
+    }
+
+    th,
+    td {
+      text-align: center;
+      padding: 15px 10px;
+    }
+  }
+}
+
+.table-responsive {
+  overflow-x: auto;
 }

@@ -23,6 +23,7 @@ const Student = ({ student }: { student: IUser }) => {
     phoneNumber,
     email,
     address,
+    groupId,
   } = student;
   const fullName = `${lastName} ${firstName} ${patronymic}`;
 
@@ -53,7 +54,7 @@ const Student = ({ student }: { student: IUser }) => {
           <Link to={`${STUDENTS_PAGE_ROUTE}/${id}`}>{fullName}</Link>
         </td>
         <td>
-          <Link to={`${GROUPS_PAGE_ROUTE}/${groupName}`}>{groupName}</Link>
+          <Link to={`${GROUPS_PAGE_ROUTE}/${groupId}`}>{groupName}</Link>
         </td>
         <td>{birthDay}</td>
         <td>

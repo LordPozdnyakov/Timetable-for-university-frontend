@@ -5,7 +5,6 @@ import { Button } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { useTypedDispatch, useTypedSelector } from "../../hooks/redux-hooks";
 import IUser from "../../Types/IUser";
-import "./StudentsPage.scss";
 import { getStudents } from "../../Redux/Actions/studentsActions";
 
 const StudentsPage: React.FC = () => {

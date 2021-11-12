@@ -29,3 +29,8 @@ export const deleteStundentAPI = async (id: number) => {
   const response = await axios.delete(`users/${id}`);
   return response.data;
 };
+
+export const getStudentsByGroupAPI = async (groupId: number) => {
+  const response = await axios.get<IUser[]>(`users?groupId=${groupId}`);
+  return response.data;
+};
