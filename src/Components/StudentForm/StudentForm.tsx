@@ -17,6 +17,7 @@ import IUser from "../../Types/IUser";
 import SimpleModal from "../SimpleModal/SimpleModal";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { getGroups } from "../../Redux/Actions/groupsActions";
 
 const StudentFormSchema = Yup.object().shape({
   firstName: Yup.string().required(`Це поле обов'язкове`),
@@ -50,6 +51,12 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
   const { error, studentAddedSuccess, selectedStudent } = useTypedSelector(
     (state) => state.studentsReducer
   );
+
+  const { groups } = useTypedSelector((state) => state.groupsReducer);
+
+  useEffect(() => {
+    dispatch(getGroups());
+  }, []);
 
   const { id } = useParams<{ id: string }>();
 
@@ -307,8 +314,13 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
               value={groupName}
               onChange={handleChangeGroup}
             >
-              <Select.Option value="415">415</Select.Option>
-              <Select.Option value="221">221</Select.Option>
+              {groups.map((group) => {
+                return (
+                  <Select.Option value={`${group.shortName}`}>
+                    {group.shortName}
+                  </Select.Option>
+                );
+              })}
             </Select>
           </Form.Item>
           <Form.Item className="form__item form__input--big">
