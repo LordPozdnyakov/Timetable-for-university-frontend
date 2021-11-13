@@ -2,7 +2,6 @@ import React, { FormEvent, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Button, DatePicker, Form, Input, Select, message } from "antd";
 import moment from "moment";
-import "./StudentForm.scss";
 import StudentFormInfo from "../../Types/StudentFormInfo";
 import { Moment } from "moment";
 import { useTypedDispatch, useTypedSelector } from "../../hooks/redux-hooks";

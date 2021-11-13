@@ -2,6 +2,10 @@ import React, { useEffect } from "react";
 import GroupItem from "../../Components/GroupItem/GroupItem";
 import { useTypedDispatch, useTypedSelector } from "../../hooks/redux-hooks";
 import { getGroups } from "../../Redux/Actions/groupsActions";
+import { Link } from "react-router-dom";
+import { Button } from "antd";
+import { PlusOutlined } from "@ant-design/icons";
+import { ADD_GROUP_PAGE_ROUTE } from "../../Constant/routes-constants";
 
 const GroupsPage = () => {
   const { groups, loading, error } = useTypedSelector(
@@ -27,7 +31,17 @@ const GroupsPage = () => {
   }
   return (
     <div>
-      <h5 className="page-title">Групи</h5>
+      <div className="page__header">
+        <h5 className="page__title page__title--no-mb">Групи</h5>
+        <Link to={ADD_GROUP_PAGE_ROUTE}>
+          <Button
+            className="add-btn"
+            type="primary"
+            shape="circle"
+            icon={<PlusOutlined className="add-btn__inner" />}
+          />
+        </Link>
+      </div>
       <div className="table-responsive">
         <table className="students__table">
           <tbody>

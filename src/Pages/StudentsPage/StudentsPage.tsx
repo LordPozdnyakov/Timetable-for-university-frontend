@@ -6,6 +6,7 @@ import { PlusOutlined } from "@ant-design/icons";
 import { useTypedDispatch, useTypedSelector } from "../../hooks/redux-hooks";
 import IUser from "../../Types/IUser";
 import { getStudents } from "../../Redux/Actions/studentsActions";
+import { ADD_STUDENT_PAGE_ROUTE } from "../../Constant/routes-constants";
 
 const StudentsPage: React.FC = () => {
   const { students, loading, error } = useTypedSelector(
@@ -32,9 +33,9 @@ const StudentsPage: React.FC = () => {
 
   return (
     <div className="students">
-      <div className="students__header">
-        <h5 className="page-title students__title">Всі студенти</h5>
-        <Link to="/students/add-student">
+      <div className="page__header">
+        <h5 className="page__title page__title--no-mb">Всі студенти</h5>
+        <Link to={ADD_STUDENT_PAGE_ROUTE}>
           <Button
             className="add-btn"
             type="primary"

@@ -9,6 +9,7 @@ export const STUDENT_PROFILE_PAGE_ROUTE = "/students/:id";
 
 //GROUPS ROUTES
 export const GROUPS_PAGE_ROUTE = "/groups";
+export const ADD_GROUP_PAGE_ROUTE = "/groups/add-group";
 export const GROUP_PAGE_ROUTE = "/groups/:id";
 
 //OTHERS

@@ -44,7 +44,7 @@ const GroupPage = () => {
 
   return (
     <div>
-      <h5 className="page-title">{shortName}</h5>
+      <h5 className="page__title">{shortName}</h5>
       <Descriptions bordered layout="vertical">
         <Descriptions.Item label="Група" span={1}>
           {shortName}
@@ -65,7 +65,7 @@ const GroupPage = () => {
           {year}
         </Descriptions.Item>
       </Descriptions>
-      <div className="page-subtitle">Студенти</div>
+      <div className="page__subtitle">Студенти</div>
       {studentsLoading ? (
         <div>Завантаження...</div>
       ) : studentsError ? (

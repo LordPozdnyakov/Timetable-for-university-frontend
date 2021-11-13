@@ -16,8 +16,10 @@ import {
   STUDENT_PROFILE_PAGE_ROUTE,
   STUDENTS_PAGE_ROUTE,
   TEACHERS_PAGE_ROUTE,
+  ADD_GROUP_PAGE_ROUTE,
 } from "../Constant/routes-constants";
 import GroupsPage from "../Pages/GroupsPage/GroupsPage";
+import AddGroupPage from "../Pages/AddGroupPage/AddGroupPage";
 
 export type RouteType = {
   fullPath: string;
@@ -70,6 +72,12 @@ const routes: RouteType[] = [
     shortPath: "groups",
     title: "Групи",
     component: GroupsPage,
+  },
+  {
+    fullPath: ADD_GROUP_PAGE_ROUTE,
+    shortPath: "add-group",
+    title: "Додати групу",
+    component: AddGroupPage,
   },
 ];
 
