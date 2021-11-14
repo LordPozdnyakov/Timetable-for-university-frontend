@@ -1,9 +1,20 @@
 import { AppDispatch } from "../Store";
-import { getAllGroupsAPI, getGroupByIdAPI } from "../../API/groupsAPI";
+import {
+  getAllGroupsAPI,
+  getGroupByIdAPI,
+  addGroupAPI,
+} from "../../API/groupsAPI";
 import { groupsSlice } from "../Reducers/groupsSlice";
+import GroupFormInfo from "../../Types/GroupFormInfo";
 
-const { fetchData, fetchDataError, fetchGroupsSuccess, fetchGroupByIdSuccess } =
-  groupsSlice.actions;
+const {
+  fetchData,
+  fetchDataError,
+  fetchGroupsSuccess,
+  fetchGroupByIdSuccess,
+  addGroupSuccess,
+  clearAddGroupData,
+} = groupsSlice.actions;
 
 export const getGroups = () => {
   return async (dispatch: AppDispatch) => {
@@ -30,5 +41,23 @@ export const getGroupById = (id: number) => {
         fetchDataError(`Помилка при завантаженні: ${(e as Error).message}`)
       );
     }
+  };
+};
+
+export const addGroup = (group: GroupFormInfo) => {
+  return async (dispatch: AppDispatch) => {
+    try {
+      dispatch(fetchData());
+      const response = await addGroupAPI(group);
+      dispatch(addGroupSuccess(response));
+    } catch (e) {
+      dispatch(fetchDataError(`Помилка: ${(e as Error).message}`));
+    }
+  };
+};
+
+export const clearAddGroupDataForm = () => {
+  return (dispatch: AppDispatch) => {
+    dispatch(clearAddGroupData());
   };
 };

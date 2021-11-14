@@ -7,7 +7,7 @@ const AddGroupPage = () => {
       <div className="page__header">
         <h5 className="page__title page__title--no-mb">Додати групу</h5>
       </div>
-      <GroupForm />
+      <GroupForm editMode={false} />
     </div>
   );
 };

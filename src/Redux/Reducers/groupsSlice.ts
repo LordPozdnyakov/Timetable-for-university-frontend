@@ -6,6 +6,8 @@ type GroupsState = {
   loading: boolean;
   error: string | null;
   selectedGroup: GroupType | null;
+  groupAddedSuccess: boolean;
+  addedGroup: GroupType | null;
 };
 
 const initialGroupsState: GroupsState = {
@@ -13,6 +15,8 @@ const initialGroupsState: GroupsState = {
   loading: false,
   error: null,
   selectedGroup: null,
+  groupAddedSuccess: false,
+  addedGroup: null,
 };
 
 export const groupsSlice = createSlice({
@@ -35,6 +39,18 @@ export const groupsSlice = createSlice({
       state.loading = false;
       state.error = null;
       state.selectedGroup = action.payload;
+    },
+    addGroupSuccess(state, action: PayloadAction<GroupType>) {
+      state.error = null;
+      state.loading = false;
+      state.groupAddedSuccess = true;
+      state.addedGroup = action.payload;
+      state.groups.push(action.payload);
+    },
+    clearAddGroupData(state) {
+      state.error = null;
+      state.groupAddedSuccess = false;
+      state.addedGroup = null;
     },
   },
 });
