@@ -9,15 +9,18 @@ import {
 import { useTypedDispatch, useTypedSelector } from "../../hooks/redux-hooks";
 import { getStudents } from "../../Redux/Actions/studentsActions";
 import { getGroups } from "../../Redux/Actions/groupsActions";
+import { getTeachers } from "../../Redux/Actions/teachersActions";
 
 const MainPage = () => {
   const dispatch = useTypedDispatch();
   const { students } = useTypedSelector((state) => state.studentsReducer);
   const { groups } = useTypedSelector((state) => state.groupsReducer);
+  const { teachers } = useTypedSelector((state) => state.teachersReducer);
 
   useEffect(() => {
     dispatch(getStudents());
     dispatch(getGroups());
+    dispatch(getTeachers());
   }, [dispatch]);
 
   return (
@@ -30,7 +33,7 @@ const MainPage = () => {
       />
       <InfoCard
         title="Всього викладачів:"
-        content="0"
+        content={`${teachers.length}`}
         linkTitle="Перейти"
         routeTo={TEACHERS_PAGE_ROUTE}
       />
