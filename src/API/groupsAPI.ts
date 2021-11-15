@@ -22,3 +22,8 @@ export const editGroupAPI = async (id: number, updatedGroup: GroupFormInfo) => {
   const response = await axios.put<GroupType>(`groups/${id}`, updatedGroup);
   return response.data;
 };
+
+export const deleteGroupAPI = async (id: number) => {
+  const response = await axios.delete(`groups/${id}`);
+  return response.data;
+};

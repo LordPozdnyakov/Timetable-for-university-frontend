@@ -4,6 +4,7 @@ import {
   getGroupByIdAPI,
   addGroupAPI,
   editGroupAPI,
+  deleteGroupAPI,
 } from "../../API/groupsAPI";
 import { groupsSlice } from "../Reducers/groupsSlice";
 import GroupFormInfo from "../../Types/GroupFormInfo";
@@ -17,6 +18,7 @@ const {
   addGroupSuccess,
   clearAddGroupData,
   editGroupSuccess,
+  deleteGroupSuccess,
 } = groupsSlice.actions;
 
 export const getGroups = () => {
@@ -72,6 +74,19 @@ export const editGroup = (id: number, updatedGroup: GroupFormInfo) => {
       const response = await editGroupAPI(id, updatedGroup);
       dispatch(editGroupSuccess(response));
       message.success("Групу успішно оновлено");
+    } catch (e) {
+      dispatch(fetchDataError(`Помилка: ${(e as Error).message}`));
+    }
+  };
+};
+
+export const deleteGroup = (id: number) => {
+  return async (dispatch: AppDispatch) => {
+    try {
+      dispatch(fetchData());
+      await deleteGroupAPI(id);
+      dispatch(deleteGroupSuccess(id));
+      message.success("Групу успішно видалено");
     } catch (e) {
       dispatch(fetchDataError(`Помилка: ${(e as Error).message}`));
     }

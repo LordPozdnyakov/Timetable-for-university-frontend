@@ -7,11 +7,12 @@ import { useTypedDispatch, useTypedSelector } from "../../hooks/redux-hooks";
 import {
   addGroup,
   clearAddGroupDataForm,
+  deleteGroup,
   editGroup,
   getGroupById,
 } from "../../Redux/Actions/groupsActions";
 import { useParams } from "react-router-dom";
-import { editStudent } from "../../Redux/Actions/studentsActions";
+import SimpleModal from "../SimpleModal/SimpleModal";
 
 const initialState: GroupFormInfo = {
   id: 0,
@@ -128,6 +129,30 @@ const GroupForm = ({ editMode }: { editMode: boolean }) => {
     formik.resetForm();
   };
 
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const showModal = (): void => {
+    setIsModalVisible(true);
+  };
+
+  const hideModal = (): void => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancelDeleting = (): void => {
+    setIsModalVisible(false);
+  };
+
+  const handleConfirmDeleting = (): void => {
+    setIsModalVisible(false);
+    if (!selectedGroup) return;
+    dispatch(deleteGroup(selectedGroup.id));
+    setGroup(initialState);
+    formik.values.shortName = "";
+    formik.values.course = "";
+    formik.values.year = "";
+  };
+
   return (
     <div>
       <Form
@@ -202,12 +227,22 @@ const GroupForm = ({ editMode }: { editMode: boolean }) => {
             <Button
               htmlType="button"
               className="form__button form__button--delete"
+              onClick={showModal}
             >
               Видалити
             </Button>
           ) : null}
         </div>
       </Form>
+      <SimpleModal
+        title="Видалити группу?"
+        content={`Группа ${shortName} ${fullName} буде повністю видалена із системи.
+                     Продовжити?`}
+        isModalVisible={isModalVisible}
+        hideModal={hideModal}
+        handleCancel={handleCancelDeleting}
+        handleConfirm={handleConfirmDeleting}
+      />
     </div>
   );
 };

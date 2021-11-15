@@ -57,6 +57,13 @@ export const groupsSlice = createSlice({
       state.error = null;
       state.loading = false;
     },
+    deleteGroupSuccess(state, action: PayloadAction<number>) {
+      state.groups = state.groups.filter(
+        (group: GroupType) => group.id !== action.payload
+      );
+      state.error = null;
+      state.loading = false;
+    },
   },
 });
 
