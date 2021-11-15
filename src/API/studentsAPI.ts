@@ -7,17 +7,17 @@ export const getAllStudentsAPI = async () => {
   return response.data;
 };
 
-export const getStundentByIdAPI = async (id: number) => {
+export const getStudentByIdAPI = async (id: number) => {
   const response = await axios.get<IUser>(`users/${id}`);
   return response.data;
 };
 
-export const addStundentAPI = async (student: StudentFormInfo) => {
+export const addStudentAPI = async (student: StudentFormInfo) => {
   const response = await axios.post<IUser>("users", student);
   return response.data;
 };
 
-export const editStundentAPI = async (
+export const editStudentAPI = async (
   id: number,
   updatedStudent: StudentFormInfo
 ) => {
@@ -25,7 +25,7 @@ export const editStundentAPI = async (
   return response.data;
 };
 
-export const deleteStundentAPI = async (id: number) => {
+export const deleteStudentAPI = async (id: number) => {
   const response = await axios.delete(`users/${id}`);
   return response.data;
 };

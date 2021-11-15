@@ -1,9 +1,9 @@
 import {
-  addStundentAPI,
+  addStudentAPI,
   getAllStudentsAPI,
-  getStundentByIdAPI,
-  editStundentAPI,
-  deleteStundentAPI,
+  getStudentByIdAPI,
+  editStudentAPI,
+  deleteStudentAPI,
   getStudentsByGroupAPI,
   getSortedStudentsAPI,
 } from "../../API/studentsAPI";
@@ -42,7 +42,7 @@ export const getStudentById = (id: number) => {
   return async (dispatch: AppDispatch) => {
     try {
       dispatch(fetchData());
-      const response = await getStundentByIdAPI(id);
+      const response = await getStudentByIdAPI(id);
       dispatch(fetchStudentByIdSuccess(response));
     } catch (e) {
       dispatch(
@@ -56,7 +56,7 @@ export const addStudent = (student: StudentFormInfo) => {
   return async (dispatch: AppDispatch) => {
     try {
       dispatch(fetchData());
-      const response = await addStundentAPI(student);
+      const response = await addStudentAPI(student);
       dispatch(addStudentSuccess(response));
     } catch (e) {
       dispatch(fetchDataError(`Помилка: ${(e as Error).message}`));
@@ -74,7 +74,7 @@ export const editStudent = (id: number, updatedStudent: StudentFormInfo) => {
   return async (dispatch: AppDispatch) => {
     try {
       dispatch(fetchData());
-      const response = await editStundentAPI(id, updatedStudent);
+      const response = await editStudentAPI(id, updatedStudent);
       dispatch(editStudentSuccess(response));
       message.success("Студента успішно оновлено");
     } catch (e) {
@@ -87,7 +87,7 @@ export const deleteStudent = (id: number) => {
   return async (dispatch: AppDispatch) => {
     try {
       dispatch(fetchData());
-      await deleteStundentAPI(id);
+      await deleteStudentAPI(id);
       dispatch(deleteStudentSuccess(id));
       message.success("Студента успішно видалено");
     } catch (e) {
