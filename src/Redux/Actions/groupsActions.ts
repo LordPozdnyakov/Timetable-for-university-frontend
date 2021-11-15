@@ -3,9 +3,11 @@ import {
   getAllGroupsAPI,
   getGroupByIdAPI,
   addGroupAPI,
+  editGroupAPI,
 } from "../../API/groupsAPI";
 import { groupsSlice } from "../Reducers/groupsSlice";
 import GroupFormInfo from "../../Types/GroupFormInfo";
+import { message } from "antd";
 
 const {
   fetchData,
@@ -14,6 +16,7 @@ const {
   fetchGroupByIdSuccess,
   addGroupSuccess,
   clearAddGroupData,
+  editGroupSuccess,
 } = groupsSlice.actions;
 
 export const getGroups = () => {
@@ -59,5 +62,18 @@ export const addGroup = (group: GroupFormInfo) => {
 export const clearAddGroupDataForm = () => {
   return (dispatch: AppDispatch) => {
     dispatch(clearAddGroupData());
+  };
+};
+
+export const editGroup = (id: number, updatedGroup: GroupFormInfo) => {
+  return async (dispatch: AppDispatch) => {
+    try {
+      dispatch(fetchData());
+      const response = await editGroupAPI(id, updatedGroup);
+      dispatch(editGroupSuccess(response));
+      message.success("Групу успішно оновлено");
+    } catch (e) {
+      dispatch(fetchDataError(`Помилка: ${(e as Error).message}`));
+    }
   };
 };

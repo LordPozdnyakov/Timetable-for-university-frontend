@@ -7,9 +7,14 @@ import { useTypedDispatch, useTypedSelector } from "../../hooks/redux-hooks";
 import {
   addGroup,
   clearAddGroupDataForm,
+  editGroup,
+  getGroupById,
 } from "../../Redux/Actions/groupsActions";
+import { useParams } from "react-router-dom";
+import { editStudent } from "../../Redux/Actions/studentsActions";
 
 const initialState: GroupFormInfo = {
+  id: 0,
   shortName: "",
   fullName: "",
   course: "",
@@ -26,7 +31,7 @@ const GroupFormSchema = Yup.object().shape({
 const GroupForm = ({ editMode }: { editMode: boolean }) => {
   const dispatch = useTypedDispatch();
   const [group, setGroup] = useState<GroupFormInfo>(initialState);
-  const { error, groupAddedSuccess } = useTypedSelector(
+  const { error, groupAddedSuccess, selectedGroup } = useTypedSelector(
     (state) => state.groupsReducer
   );
 
@@ -54,12 +59,33 @@ const GroupForm = ({ editMode }: { editMode: boolean }) => {
     dispatch(clearAddGroupDataForm());
   }, [groupAddedSuccess, error, dispatch]);
 
+  const { id } = useParams<{ id: string }>();
+
+  useEffect(() => {
+    if (!editMode || !id) return;
+    if (!selectedGroup || selectedGroup.id !== +id) {
+      dispatch(getGroupById(+id));
+    }
+    if (!selectedGroup) return;
+    setGroup(selectedGroup);
+    formik.values.shortName = selectedGroup.shortName;
+    formik.values.course = selectedGroup.course;
+    formik.values.year = selectedGroup.year;
+  }, [selectedGroup, dispatch, editMode, id]);
+
   const handleSaveGroup = () => {
     if (!editMode) {
       dispatch(addGroup(group));
       setCancelIsActive(false);
       return;
     }
+    if (!group.id) {
+      message.error("Групи з заданим id не існує");
+      return;
+    }
+    dispatch(editGroup(group.id, group));
+    setCancelIsActive(false);
+    formik.resetForm();
   };
 
   const { shortName, fullName, year, educationForm, course } = group;
@@ -79,6 +105,12 @@ const GroupForm = ({ editMode }: { editMode: boolean }) => {
         setCancelIsActive(true);
       }
     }
+    if (!selectedGroup) return;
+    if (target.value === selectedGroup[target.id as keyof GroupFormInfo]) {
+      setCancelIsActive(false);
+    } else {
+      setCancelIsActive(true);
+    }
   };
 
   const [cancelIsActive, setCancelIsActive] = useState<boolean>(false);
@@ -90,6 +122,10 @@ const GroupForm = ({ editMode }: { editMode: boolean }) => {
       formik.resetForm();
       return;
     }
+    if (!selectedGroup) return;
+    setGroup(selectedGroup);
+    setCancelIsActive(false);
+    formik.resetForm();
   };
 
   return (

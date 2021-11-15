@@ -52,6 +52,11 @@ export const groupsSlice = createSlice({
       state.groupAddedSuccess = false;
       state.addedGroup = null;
     },
+    editGroupSuccess(state, action: PayloadAction<GroupType>) {
+      state.selectedGroup = action.payload;
+      state.error = null;
+      state.loading = false;
+    },
   },
 });
 
