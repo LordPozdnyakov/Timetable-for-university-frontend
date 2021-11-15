@@ -57,6 +57,13 @@ export const teachersSlice = createSlice({
       state.teacherAddedSuccess = false;
       state.addedTeacher = null;
     },
+    deleteTeacherSuccess(state, action: PayloadAction<number>) {
+      state.teachers = state.teachers.filter(
+        (teacher: IUser) => teacher.id !== action.payload
+      );
+      state.error = null;
+      state.loading = false;
+    },
   },
 });
 

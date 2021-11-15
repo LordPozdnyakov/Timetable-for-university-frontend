@@ -28,7 +28,7 @@ const TeachersPage: React.FC = () => {
   }
 
   if (teachers.length < 1) {
-    return <div>Вчителі відсутні</div>;
+    return <div>Викладачі відсутні</div>;
   }
 
   return (

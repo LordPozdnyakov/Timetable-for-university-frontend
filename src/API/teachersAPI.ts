@@ -25,3 +25,8 @@ export const editTeacherAPI = async (
   const response = await axios.put<IUser>(`teachers/${id}`, updatedTeacher);
   return response.data;
 };
+
+export const deleteTeacherAPI = async (id: number) => {
+  const response = await axios.delete(`teachers/${id}`);
+  return response.data;
+};

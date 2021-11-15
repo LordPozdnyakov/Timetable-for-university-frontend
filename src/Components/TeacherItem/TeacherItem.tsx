@@ -7,6 +7,7 @@ import {
 import { DeleteFilled, EditFilled } from "@ant-design/icons";
 import SimpleModal from "../SimpleModal/SimpleModal";
 import { useTypedDispatch } from "../../hooks/redux-hooks";
+import { deleteTeacher } from "../../Redux/Actions/teachersActions";
 
 type TeacherItemProps = {
   id: number;
@@ -48,7 +49,7 @@ const TeacherItem: FC<TeacherItemProps> = ({
 
   const handleConfirmDeleting = (): void => {
     setIsModalVisible(false);
-    // dispatch(deleteTeacher(id));
+    dispatch(deleteTeacher(id));
   };
 
   return (

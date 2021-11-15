@@ -2,6 +2,7 @@ import { AppDispatch } from "../Store";
 import { teachersSlice } from "../Reducers/teachersSlice";
 import {
   addTeacherAPI,
+  deleteTeacherAPI,
   editTeacherAPI,
   getAllTeachersAPI,
   getTeacherByIdAPI,
@@ -17,6 +18,7 @@ const {
   addTeacherSuccess,
   editTeacherSuccess,
   clearAddTeacherData,
+  deleteTeacherSuccess,
 } = teachersSlice.actions;
 
 export const getTeachers = () => {
@@ -75,5 +77,18 @@ export const editTeacher = (id: number, updatedTeacher: TeacherFormInfo) => {
 export const clearAddTeacherDataForm = () => {
   return (dispatch: AppDispatch) => {
     dispatch(clearAddTeacherData());
+  };
+};
+
+export const deleteTeacher = (id: number) => {
+  return async (dispatch: AppDispatch) => {
+    try {
+      dispatch(fetchData());
+      await deleteTeacherAPI(id);
+      dispatch(deleteTeacherSuccess(id));
+      message.success("Викладача успішно видалено");
+    } catch (e) {
+      dispatch(fetchDataError(`Помилка: ${(e as Error).message}`));
+    }
   };
 };

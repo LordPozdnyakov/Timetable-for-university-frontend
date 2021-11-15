@@ -9,6 +9,7 @@ import { useParams } from "react-router-dom";
 import {
   addTeacher,
   clearAddTeacherDataForm,
+  deleteTeacher,
   editTeacher,
   getTeacherById,
 } from "../../Redux/Actions/teachersActions";
@@ -167,6 +168,13 @@ const TeacherForm = ({ editMode }: { editMode: boolean }) => {
 
   const handleConfirmDeleting = (): void => {
     setIsModalVisible(false);
+    if (!selectedTeacher) return;
+    dispatch(deleteTeacher(selectedTeacher.id));
+    setTeacher(initialState);
+    formik.values.lastName = "";
+    formik.values.firstName = "";
+    formik.values.patronymic = "";
+    formik.values.email = "";
   };
 
   return (
