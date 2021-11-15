@@ -16,3 +16,4 @@ export const GROUP_PAGE_ROUTE = "/groups/:id";
 
 //OTHERS
 export const TEACHERS_PAGE_ROUTE = "/teachers";
+export const TEACHERS_PROFILE_PAGE_ROUTE = "/teachers/:id";

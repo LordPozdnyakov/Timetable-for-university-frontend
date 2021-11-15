@@ -17,9 +17,11 @@ import {
   STUDENTS_PAGE_ROUTE,
   TEACHERS_PAGE_ROUTE,
   ADD_GROUP_PAGE_ROUTE,
+  TEACHERS_PROFILE_PAGE_ROUTE,
 } from "../Constant/routes-constants";
 import GroupsPage from "../Pages/GroupsPage/GroupsPage";
 import AddGroupPage from "../Pages/AddGroupPage/AddGroupPage";
+import TeacherPage from "../Pages/TeacherPage/TeacherPage";
 
 export type RouteType = {
   fullPath: string;
@@ -66,6 +68,10 @@ const routes: RouteType[] = [
     title: "Викладачі",
     icon: <UserOutlined />,
     component: TeachersPage,
+  },
+  {
+    fullPath: TEACHERS_PROFILE_PAGE_ROUTE,
+    component: TeacherPage,
   },
   {
     fullPath: GROUPS_PAGE_ROUTE,

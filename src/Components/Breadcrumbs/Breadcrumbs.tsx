@@ -21,6 +21,9 @@ const Breadcrumbs: React.FC = () => {
   );
 
   const { selectedGroup } = useTypedSelector((state) => state.groupsReducer);
+  const { selectedTeacher } = useTypedSelector(
+    (state) => state.teachersReducer
+  );
 
   return (
     <Breadcrumb className="breadcrumbs">
@@ -51,6 +54,12 @@ const Breadcrumbs: React.FC = () => {
             if (selectedGroup) {
               const { shortName } = selectedGroup;
               breadcrumb = shortName;
+            }
+          }
+          if (pathnames[0] === "teachers") {
+            if (selectedTeacher) {
+              const { lastName, firstName, patronymic } = selectedTeacher;
+              breadcrumb = `${lastName} ${firstName} ${patronymic}`;
             }
           }
           pathProperty = createBreadcrumbsForInfoPage(path, breadcrumb);

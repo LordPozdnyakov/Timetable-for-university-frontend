@@ -27,11 +27,13 @@ import {
   STUDENT_PROFILE_PAGE_ROUTE,
   STUDENTS_PAGE_ROUTE,
   TEACHERS_PAGE_ROUTE,
+  TEACHERS_PROFILE_PAGE_ROUTE,
 } from "../../Constant/routes-constants";
 import GroupsPage from "../GroupsPage/GroupsPage";
 import GroupPage from "../GroupPage/GroupPage";
 import AddGroupPage from "../AddGroupPage/AddGroupPage";
 import EditGroupPage from "../EditGroupPage/EditGroupPage";
+import TeacherPage from "../TeacherPage/TeacherPage";
 
 interface homeProps {
   logOut: () => void;
@@ -63,6 +65,11 @@ const HomePage: React.FC<homeProps> = ({ logOut }) => {
             component={StudentProfilePage}
           />
           <Route exact path={TEACHERS_PAGE_ROUTE} component={TeachersPage} />
+          <Route
+            exact
+            path={TEACHERS_PROFILE_PAGE_ROUTE}
+            component={TeacherPage}
+          />
           <Route exact path={GROUPS_PAGE_ROUTE} component={GroupsPage} />
           <Route exact path={ADD_GROUP_PAGE_ROUTE} component={AddGroupPage} />
           <Route

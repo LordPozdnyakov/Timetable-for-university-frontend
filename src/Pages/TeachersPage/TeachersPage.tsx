@@ -34,7 +34,7 @@ const TeachersPage: React.FC = () => {
   return (
     <div>
       <div className="page__header">
-        <h5 className="page__title page__title--no-mb">Всі вчителі</h5>
+        <h5 className="page__title page__title--no-mb">Всі викладачі</h5>
         <Link to={ADD_STUDENT_PAGE_ROUTE}>
           <Button
             className="add-btn"

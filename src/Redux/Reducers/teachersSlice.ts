@@ -5,12 +5,14 @@ type TeachersState = {
   teachers: IUser[];
   loading: boolean;
   error: string | null;
+  selectedTeacher: IUser | null;
 };
 
 const initialTeachersState: TeachersState = {
   teachers: [],
   loading: false,
   error: null,
+  selectedTeacher: null,
 };
 
 export const teachersSlice = createSlice({
@@ -28,6 +30,11 @@ export const teachersSlice = createSlice({
       state.loading = false;
       state.error = null;
       state.teachers = action.payload;
+    },
+    fetchTeacherByIdSuccess(state, action: PayloadAction<IUser>) {
+      state.loading = false;
+      state.error = null;
+      state.selectedTeacher = action.payload;
     },
   },
 });

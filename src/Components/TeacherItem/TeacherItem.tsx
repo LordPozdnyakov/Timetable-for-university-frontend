@@ -4,6 +4,7 @@ import {
   EDIT_STUDENT_PAGE_ROUTE,
   GROUPS_PAGE_ROUTE,
   STUDENTS_PAGE_ROUTE,
+  TEACHERS_PAGE_ROUTE,
 } from "../../Constant/routes-constants";
 import { DeleteFilled, EditFilled } from "@ant-design/icons";
 import SimpleModal from "../SimpleModal/SimpleModal";
@@ -56,7 +57,7 @@ const TeacherItem: FC<TeacherItemProps> = ({
     <React.Fragment>
       <tr>
         <td>
-          <Link to={`${STUDENTS_PAGE_ROUTE}/${id}`}>{fullName}</Link>
+          <Link to={`${TEACHERS_PAGE_ROUTE}/${id}`}>{fullName}</Link>
         </td>
         <td>{birthDay}</td>
         <td>
@@ -76,8 +77,8 @@ const TeacherItem: FC<TeacherItemProps> = ({
         </td>
       </tr>
       <SimpleModal
-        title="Видалити вчителя?"
-        content={`Вчитель ${fullName} буде повністю видалений із системи.
+        title="Видалити викладача?"
+        content={`Викладач ${fullName} буде повністю видалений із системи.
                    Продовжити?`}
         isModalVisible={isModalVisible}
         hideModal={hideModal}
