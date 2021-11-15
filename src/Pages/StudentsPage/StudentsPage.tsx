@@ -1,11 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Student from "../../Components/Student/Student";
 import { Button } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { useTypedDispatch, useTypedSelector } from "../../hooks/redux-hooks";
 import IUser from "../../Types/IUser";
-import { getStudents } from "../../Redux/Actions/studentsActions";
+import {
+  getSortedStudents,
+  getStudents,
+} from "../../Redux/Actions/studentsActions";
 import { ADD_STUDENT_PAGE_ROUTE } from "../../Constant/routes-constants";
 
 const StudentsPage: React.FC = () => {
@@ -18,6 +21,13 @@ const StudentsPage: React.FC = () => {
   useEffect(() => {
     dispatch(getStudents());
   }, [dispatch]);
+
+  const [sortOrder, setSortOrder] = useState("desc");
+
+  const handleSortByGroup = () => {
+    sortOrder === "asc" ? setSortOrder("desc") : setSortOrder("asc");
+    dispatch(getSortedStudents("groupName", sortOrder));
+  };
 
   if (loading) {
     return <div>Завантаження...</div>;
@@ -49,7 +59,9 @@ const StudentsPage: React.FC = () => {
           <tbody>
             <tr>
               <th>Ім’я</th>
-              <th>Група</th>
+              <th className="table__th-btn" onClick={handleSortByGroup}>
+                Група ↑↓
+              </th>
               <th>Дата народження</th>
               <th>Номер телефону</th>
               <th>E-mail</th>

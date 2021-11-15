@@ -5,6 +5,7 @@ import {
   editStundentAPI,
   deleteStundentAPI,
   getStudentsByGroupAPI,
+  getSortedStudentsAPI,
 } from "../../API/studentsAPI";
 import { AppDispatch } from "../Store";
 import { studentsSlice } from "../Reducers/studentsSlice";
@@ -103,6 +104,20 @@ export const getStudentsByGroup = (groupId: number) => {
       dispatch(getStudentsByGroupSuccess(response));
     } catch (e) {
       dispatch(fetchDataError(`Помилка: ${(e as Error).message}`));
+    }
+  };
+};
+
+export const getSortedStudents = (sortBy: string, order: string) => {
+  return async (dispatch: AppDispatch) => {
+    try {
+      dispatch(fetchData());
+      const response = await getSortedStudentsAPI(sortBy, order);
+      dispatch(fetchStudentsSuccess(response));
+    } catch (e) {
+      dispatch(
+        fetchDataError(`Помилка при завантаженні: ${(e as Error).message}`)
+      );
     }
   };
 };

@@ -34,3 +34,10 @@ export const getStudentsByGroupAPI = async (groupId: number) => {
   const response = await axios.get<IUser[]>(`users?groupId=${groupId}`);
   return response.data;
 };
+
+export const getSortedStudentsAPI = async (sortBy: string, order: string) => {
+  const response = await axios.get<IUser[]>(
+    `users?_sort=${sortBy}&_order=${order}`
+  );
+  return response.data;
+};
