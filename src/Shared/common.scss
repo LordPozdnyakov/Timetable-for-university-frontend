@@ -48,19 +48,21 @@
   color: $error-color;
 }
 
-.students {
-  &__table {
-    width: 100%;
+.table {
+  width: 100%;
 
-    tr {
-      border: 1px solid #e5e5e5;
-    }
+  tr {
+    border: 1px solid #e5e5e5;
+  }
 
-    th,
-    td {
-      text-align: center;
-      padding: 15px 10px;
-    }
+  th,
+  td {
+    text-align: center;
+    padding: 15px 10px;
+  }
+
+  .table-icon {
+    width: 50px;
   }
 }
 

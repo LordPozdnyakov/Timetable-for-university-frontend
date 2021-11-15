@@ -43,7 +43,7 @@ const GroupsPage = () => {
         </Link>
       </div>
       <div className="table-responsive">
-        <table className="students__table">
+        <table className="table">
           <tbody>
             <tr>
               <th>Група</th>
