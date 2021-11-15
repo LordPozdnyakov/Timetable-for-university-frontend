@@ -6,6 +6,8 @@ type TeachersState = {
   loading: boolean;
   error: string | null;
   selectedTeacher: IUser | null;
+  teacherAddedSuccess: boolean;
+  addedTeacher: IUser | null;
 };
 
 const initialTeachersState: TeachersState = {
@@ -13,6 +15,8 @@ const initialTeachersState: TeachersState = {
   loading: false,
   error: null,
   selectedTeacher: null,
+  teacherAddedSuccess: false,
+  addedTeacher: null,
 };
 
 export const teachersSlice = createSlice({
@@ -35,6 +39,23 @@ export const teachersSlice = createSlice({
       state.loading = false;
       state.error = null;
       state.selectedTeacher = action.payload;
+    },
+    addTeacherSuccess(state, action: PayloadAction<IUser>) {
+      state.error = null;
+      state.loading = false;
+      state.teacherAddedSuccess = true;
+      state.addedTeacher = action.payload;
+      state.teachers.push(action.payload);
+    },
+    editTeacherSuccess(state, action: PayloadAction<IUser>) {
+      state.selectedTeacher = action.payload;
+      state.error = null;
+      state.loading = false;
+    },
+    clearAddTeacherData(state) {
+      state.error = null;
+      state.teacherAddedSuccess = false;
+      state.addedTeacher = null;
     },
   },
 });

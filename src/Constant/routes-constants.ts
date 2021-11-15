@@ -16,4 +16,7 @@ export const GROUP_PAGE_ROUTE = "/groups/:id";
 
 //OTHERS
 export const TEACHERS_PAGE_ROUTE = "/teachers";
+export const ADD_TEACHER_PAGE_ROUTE = "/teachers/add-teacher";
+export const EDIT_TEACHER_PAGE_ROUTE = "/teachers/edit-teacher";
+export const EDIT_TEACHER_PAGE_WITH_PARAMS_ROUTE = "/teachers/edit-teacher/:id";
 export const TEACHERS_PROFILE_PAGE_ROUTE = "/teachers/:id";

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ADD_STUDENT_PAGE_ROUTE } from "../../Constant/routes-constants";
+import { ADD_TEACHER_PAGE_ROUTE } from "../../Constant/routes-constants";
 import { Button } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { useTypedDispatch, useTypedSelector } from "../../hooks/redux-hooks";
@@ -35,7 +35,7 @@ const TeachersPage: React.FC = () => {
     <div>
       <div className="page__header">
         <h5 className="page__title page__title--no-mb">Всі викладачі</h5>
-        <Link to={ADD_STUDENT_PAGE_ROUTE}>
+        <Link to={ADD_TEACHER_PAGE_ROUTE}>
           <Button
             className="add-btn"
             type="primary"

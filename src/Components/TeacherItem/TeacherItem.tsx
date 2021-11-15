@@ -1,9 +1,7 @@
 import React, { FC, useState } from "react";
 import { Link } from "react-router-dom";
 import {
-  EDIT_STUDENT_PAGE_ROUTE,
-  GROUPS_PAGE_ROUTE,
-  STUDENTS_PAGE_ROUTE,
+  EDIT_TEACHER_PAGE_ROUTE,
   TEACHERS_PAGE_ROUTE,
 } from "../../Constant/routes-constants";
 import { DeleteFilled, EditFilled } from "@ant-design/icons";
@@ -68,7 +66,7 @@ const TeacherItem: FC<TeacherItemProps> = ({
         </td>
         <td>{address}</td>
         <td className="table-icon edit-icon">
-          <Link to={`${EDIT_STUDENT_PAGE_ROUTE}/${id}`}>
+          <Link to={`${EDIT_TEACHER_PAGE_ROUTE}/${id}`}>
             <EditFilled />
           </Link>
         </td>

@@ -19,8 +19,10 @@ import "../../App.scss";
 import {
   ADD_GROUP_PAGE_ROUTE,
   ADD_STUDENT_PAGE_ROUTE,
+  ADD_TEACHER_PAGE_ROUTE,
   EDIT_GROUP_PAGE_WITH_PARAMS_ROUTE,
   EDIT_STUDENT_PAGE_WITH_PARAMS_ROUTE,
+  EDIT_TEACHER_PAGE_WITH_PARAMS_ROUTE,
   GROUP_PAGE_ROUTE,
   GROUPS_PAGE_ROUTE,
   MAIN_PAGE_ROUTE,
@@ -34,6 +36,8 @@ import GroupPage from "../GroupPage/GroupPage";
 import AddGroupPage from "../AddGroupPage/AddGroupPage";
 import EditGroupPage from "../EditGroupPage/EditGroupPage";
 import TeacherPage from "../TeacherPage/TeacherPage";
+import AddTeacherPage from "../AddTeacherPage/AddTeacherPage";
+import TeacherEditPage from "../TeacherEditPage/TeacherEditPage";
 
 interface homeProps {
   logOut: () => void;
@@ -65,6 +69,16 @@ const HomePage: React.FC<homeProps> = ({ logOut }) => {
             component={StudentProfilePage}
           />
           <Route exact path={TEACHERS_PAGE_ROUTE} component={TeachersPage} />
+          <Route
+            exact
+            path={ADD_TEACHER_PAGE_ROUTE}
+            component={AddTeacherPage}
+          />
+          <Route
+            exact
+            path={EDIT_TEACHER_PAGE_WITH_PARAMS_ROUTE}
+            component={TeacherEditPage}
+          />
           <Route
             exact
             path={TEACHERS_PROFILE_PAGE_ROUTE}

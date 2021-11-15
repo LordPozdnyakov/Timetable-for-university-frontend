@@ -18,10 +18,14 @@ import {
   TEACHERS_PAGE_ROUTE,
   ADD_GROUP_PAGE_ROUTE,
   TEACHERS_PROFILE_PAGE_ROUTE,
+  ADD_TEACHER_PAGE_ROUTE,
+  EDIT_TEACHER_PAGE_WITH_PARAMS_ROUTE,
 } from "../Constant/routes-constants";
 import GroupsPage from "../Pages/GroupsPage/GroupsPage";
 import AddGroupPage from "../Pages/AddGroupPage/AddGroupPage";
 import TeacherPage from "../Pages/TeacherPage/TeacherPage";
+import AddTeacherPage from "../Pages/AddTeacherPage/AddTeacherPage";
+import TeacherEditPage from "../Pages/TeacherEditPage/TeacherEditPage";
 
 export type RouteType = {
   fullPath: string;
@@ -68,6 +72,18 @@ const routes: RouteType[] = [
     title: "Викладачі",
     icon: <UserOutlined />,
     component: TeachersPage,
+  },
+  {
+    fullPath: ADD_TEACHER_PAGE_ROUTE,
+    shortPath: "add-teacher",
+    title: "Додати викладача",
+    component: AddTeacherPage,
+  },
+  {
+    fullPath: EDIT_TEACHER_PAGE_WITH_PARAMS_ROUTE,
+    shortPath: "edit-teacher",
+    title: "Редагувати викладача",
+    component: TeacherEditPage,
   },
   {
     fullPath: TEACHERS_PROFILE_PAGE_ROUTE,
