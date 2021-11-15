@@ -3,10 +3,6 @@ export default interface IUser {
 
   // Login
   email: string;
-  passwordHash: string;
-  passwordSalt: string;
-  rememberMe: boolean;
-  token: string;
 
   // Privilege
   privilege: string;
