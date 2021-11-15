@@ -2,12 +2,10 @@ import React, { FC, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   EDIT_GROUP_PAGE_ROUTE,
-  EDIT_STUDENT_PAGE_ROUTE,
   GROUPS_PAGE_ROUTE,
 } from "../../Constant/routes-constants";
 import { DeleteFilled, EditFilled } from "@ant-design/icons";
 import { useTypedDispatch } from "../../hooks/redux-hooks";
-import { deleteStudent } from "../../Redux/Actions/studentsActions";
 import SimpleModal from "../SimpleModal/SimpleModal";
 import { deleteGroup } from "../../Redux/Actions/groupsActions";
 

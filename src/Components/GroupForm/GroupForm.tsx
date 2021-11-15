@@ -58,7 +58,7 @@ const GroupForm = ({ editMode }: { editMode: boolean }) => {
       message.error(error);
     }
     dispatch(clearAddGroupDataForm());
-  }, [groupAddedSuccess, error, dispatch]);
+  }, [groupAddedSuccess, error, dispatch, formik]);
 
   const { id } = useParams<{ id: string }>();
 
@@ -89,7 +89,7 @@ const GroupForm = ({ editMode }: { editMode: boolean }) => {
     formik.resetForm();
   };
 
-  const { shortName, fullName, year, educationForm, course } = group;
+  const { shortName, fullName, educationForm } = group;
 
   const handleChangeInfo = (event: FormEvent<HTMLFormElement>) => {
     const target = event.target as HTMLInputElement;

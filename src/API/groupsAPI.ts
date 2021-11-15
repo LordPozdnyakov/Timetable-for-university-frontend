@@ -1,7 +1,6 @@
 import axios from "./core";
 import GroupType from "../Types/GroupType";
 import GroupFormInfo from "../Types/GroupFormInfo";
-import IUser from "../Types/IUser";
 
 export const getAllGroupsAPI = async () => {
   const response = await axios.get<GroupType[]>("groups");

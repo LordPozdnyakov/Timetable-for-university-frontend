@@ -55,7 +55,7 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
 
   useEffect(() => {
     dispatch(getGroups());
-  }, []);
+  }, [dispatch]);
 
   const { id } = useParams<{ id: string }>();
 
@@ -90,7 +90,6 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
     patronymic,
     birthDay,
     phoneNumber,
-    email,
     groupName,
     address,
     fatherName,
@@ -164,7 +163,6 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
   const handleSaveStudent = () => {
     if (!editMode) {
       dispatch(addStudent(student));
-      // dispatch(clearAddStudentDataForm());
       setCancelIsActive(false);
       formik.resetForm();
       return;
@@ -315,7 +313,7 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
             >
               {groups.map((group) => {
                 return (
-                  <Select.Option value={`${group.shortName}`}>
+                  <Select.Option key={group.id} value={`${group.shortName}`}>
                     {group.shortName}
                   </Select.Option>
                 );

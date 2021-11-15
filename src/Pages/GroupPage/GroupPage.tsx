@@ -74,7 +74,7 @@ const GroupPage = () => {
         <div>Студенти відсутні</div>
       ) : (
         <div className="table-responsive">
-          <table className="students__table">
+          <table className="table">
             <tbody>
               {students.map((student: IUser) => {
                 return <Student student={student} key={student.id} />;
