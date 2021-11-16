@@ -2,7 +2,6 @@ import React, { FormEvent, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Button, DatePicker, Form, Input, Select, message } from "antd";
 import moment from "moment";
-import "./StudentForm.scss";
 import StudentFormInfo from "../../Types/StudentFormInfo";
 import { Moment } from "moment";
 import { useTypedDispatch, useTypedSelector } from "../../hooks/redux-hooks";
@@ -17,6 +16,7 @@ import IUser from "../../Types/IUser";
 import SimpleModal from "../SimpleModal/SimpleModal";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { getGroups } from "../../Redux/Actions/groupsActions";
 
 const StudentFormSchema = Yup.object().shape({
   firstName: Yup.string().required(`Це поле обов'язкове`),
@@ -51,6 +51,12 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
     (state) => state.studentsReducer
   );
 
+  const { groups } = useTypedSelector((state) => state.groupsReducer);
+
+  useEffect(() => {
+    dispatch(getGroups());
+  }, [dispatch]);
+
   const { id } = useParams<{ id: string }>();
 
   useEffect(() => {
@@ -84,7 +90,6 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
     patronymic,
     birthDay,
     phoneNumber,
-    email,
     groupName,
     address,
     fatherName,
@@ -158,7 +163,6 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
   const handleSaveStudent = () => {
     if (!editMode) {
       dispatch(addStudent(student));
-      // dispatch(clearAddStudentDataForm());
       setCancelIsActive(false);
       formik.resetForm();
       return;
@@ -307,8 +311,13 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
               value={groupName}
               onChange={handleChangeGroup}
             >
-              <Select.Option value="415">415</Select.Option>
-              <Select.Option value="221">221</Select.Option>
+              {groups.map((group) => {
+                return (
+                  <Select.Option key={group.id} value={`${group.shortName}`}>
+                    {group.shortName}
+                  </Select.Option>
+                );
+              })}
             </Select>
           </Form.Item>
           <Form.Item className="form__item form__input--big">

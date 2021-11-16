@@ -1,7 +1,7 @@
 import { getUser } from "../Actions/getUser";
 import { GET_USER } from "../../Constant/Constant";
 import { IUserType } from "../../Types";
-import { getStundentByIdAPI } from "../../API/studentsAPI";
+import { getStudentByIdAPI } from "../../API/studentsAPI";
 
 export type InitialStateType = {
   user: object | null;
@@ -25,5 +25,5 @@ export const ProfileReducer = (
 };
 
 export const getUserProfile = () => async (dispatch: any) => {
-  dispatch(getUser(await getStundentByIdAPI(1)));
+  dispatch(getUser(await getStudentByIdAPI(1)));
 };

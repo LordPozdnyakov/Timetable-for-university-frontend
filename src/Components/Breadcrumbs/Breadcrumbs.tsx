@@ -5,8 +5,8 @@ import { useLocation } from "react-router-dom";
 import { useTypedSelector } from "../../hooks/redux-hooks";
 import {
   createPathnamesArray,
-  checkIfPageIsProfile,
-  createBreadcrumpsForUserName,
+  checkIfPageIsInfoPage,
+  createBreadcrumbsForInfoPage,
 } from "../../Utils/helpers/breadcrumbs-helpers";
 import "./Breadcrumbs.scss";
 import { MAIN_PAGE_ROUTE } from "../../Constant/routes-constants";
@@ -15,9 +15,14 @@ import routes, { RouteType } from "../../Shared/route-config";
 const Breadcrumbs: React.FC = () => {
   const location = useLocation();
   const pathnames: string[] = createPathnamesArray(location.pathname);
-  const isProfile: boolean = checkIfPageIsProfile(location.pathname);
+  const isInfoPage: boolean = checkIfPageIsInfoPage(location.pathname);
   const { selectedStudent } = useTypedSelector(
     (state) => state.studentsReducer
+  );
+
+  const { selectedGroup } = useTypedSelector((state) => state.groupsReducer);
+  const { selectedTeacher } = useTypedSelector(
+    (state) => state.teachersReducer
   );
 
   return (
@@ -37,15 +42,27 @@ const Breadcrumbs: React.FC = () => {
         let pathProperty: RouteType | undefined = routes.find(
           (pathProps: RouteType) => path === pathProps.shortPath
         );
-        if (!pathProperty && index === pathnames.length - 1 && isProfile) {
-          let fullName: string = "";
+        if (!pathProperty && index === pathnames.length - 1 && isInfoPage) {
+          let breadcrumb: string = "";
           if (pathnames[0] === "students") {
             if (selectedStudent) {
               const { lastName, firstName, patronymic } = selectedStudent;
-              fullName = `${lastName} ${firstName} ${patronymic}`;
+              breadcrumb = `${lastName} ${firstName} ${patronymic}`;
             }
           }
-          pathProperty = createBreadcrumpsForUserName(path, fullName);
+          if (pathnames[0] === "groups") {
+            if (selectedGroup) {
+              const { shortName } = selectedGroup;
+              breadcrumb = shortName;
+            }
+          }
+          if (pathnames[0] === "teachers") {
+            if (selectedTeacher) {
+              const { lastName, firstName, patronymic } = selectedTeacher;
+              breadcrumb = `${lastName} ${firstName} ${patronymic}`;
+            }
+          }
+          pathProperty = createBreadcrumbsForInfoPage(path, breadcrumb);
         }
         if (!pathProperty) return null;
         const { title, icon } = pathProperty;

@@ -2,12 +2,7 @@
   "users": [
     {
       "id": 1,
-      "userId": 1,
       "email": "test@gmail.com",
-      "passwordHash": "password",
-      "passwordSalt": "passwordSalt",
-      "rememberMe": true,
-      "token": "token",
       "privilege": "student",
       "firstName": "FirstName",
       "lastName": "LastName",
@@ -19,16 +14,12 @@
       "birthDay": "01.02.1992",
       "phoneNumber": "PhoneNumber",
       "address": "address 1",
-      "groupName": "5PR2"
+      "groupName": "5PR2",
+      "groupId": 4
     },
     {
       "id": 2,
-      "userId": 2,
       "email": "test2@gmail.com",
-      "passwordHash": "password2",
-      "passwordSalt": "passwordSalt2",
-      "rememberMe": true,
-      "token": "token2",
       "privilege": "student",
       "firstName": "FirstName2",
       "lastName": "LastName2",
@@ -40,16 +31,12 @@
       "birthDay": "02.02.1992",
       "phoneNumber": "PhoneNumber2",
       "address": "address 2",
-      "groupName": "5RR2"
+      "groupName": "5PR1",
+      "groupId": 3
     },
     {
       "id": 3,
-      "userId": 3,
       "email": "test3@gmail.com",
-      "passwordHash": "password3",
-      "passwordSalt": "passwordSalt3",
-      "rememberMe": true,
-      "token": "token3",
       "privilege": "student",
       "firstName": "FirstName3",
       "lastName": "LastName3",
@@ -61,7 +48,107 @@
       "birthDay": "03.02.1992",
       "phoneNumber": "PhoneNumber3",
       "address": "address 3",
-      "groupName": "6PR2"
+      "groupName": "6PR2",
+      "groupId": 5
+    },
+    {
+      "id": 4,
+      "email": "test3@gmail.com",
+      "privilege": "student",
+      "firstName": "FirstName4",
+      "lastName": "LastName4",
+      "patronymic": "Patronymic4",
+      "fatherName": "FatherName4",
+      "fatherPhone": "FatherPhone4",
+      "motherName": "MotherName4",
+      "motherPhone": "MotherPhone4",
+      "birthDay": "03.02.1994",
+      "phoneNumber": "PhoneNumber4",
+      "address": "address 4",
+      "groupName": "5PR2",
+      "groupId": 4
+    }
+  ],
+  "groups": [
+    {
+      "id": 1,
+      "shortName": "1PR1",
+      "fullName": "Програмна інженерія",
+      "course": 1,
+      "educationForm": "Денна",
+      "year": 2021,
+      "studentCount": 35
+    },
+    {
+      "id": 2,
+      "shortName": "2PR1",
+      "fullName": "Програмна інженерія",
+      "course": 2,
+      "educationForm": "Денна",
+      "year": 2020,
+      "studentCount": 45
+    },
+    {
+      "id": 3,
+      "shortName": "5PR1",
+      "fullName": "Програмна інженерія",
+      "course": 5,
+      "educationForm": "Денна",
+      "year": 2017,
+      "studentCount": 29
+    },
+    {
+      "id": 4,
+      "shortName": "5PR2",
+      "fullName": "Програмна інженерія",
+      "course": 5,
+      "educationForm": "Денна",
+      "year": 2017,
+      "studentCount": 33
+    },
+    {
+      "id": 5,
+      "shortName": "6PR2",
+      "fullName": "Програмна інженерія",
+      "course": 6,
+      "educationForm": "Денна",
+      "year": 2017,
+      "studentCount": 93
+    }
+  ],
+  "teachers": [
+    {
+      "id": 1,
+      "email": "teachertest@gmail.com",
+      "privilege": "teacher",
+      "firstName": "TeacherFirstName",
+      "lastName": "TeacherLastName",
+      "patronymic": "TeacherPatronymic",
+      "birthDay": "01.02.1982",
+      "phoneNumber": "TeacherPhoneNumber",
+      "address": "Teacher address 1"
+    },
+    {
+      "id": 2,
+      "email": "teachertest2@gmail.com",
+      "privilege": "teacher",
+      "firstName": "TeacherFirstName2",
+      "lastName": "TeacherLastName2",
+      "patronymic": "TeacherPatronymic2",
+      "birthDay": "01.02.1983",
+      "phoneNumber": "TeacherPhoneNumber2",
+      "address": "Teacher address 2"
+    },
+    {
+      "id": 3,
+      "email": "teachertest3@gmail.com",
+      "privilege": "teacher",
+      "firstName": "TeacherFirstName3",
+      "lastName": "TeacherLastName3",
+      "patronymic": "TeacherPatronymic3",
+      "birthDay": "01.02.1983",
+      "phoneNumber": "TeacherPhoneNumber3",
+      "address": "Teacher address 3"
     }
   ]
 }

@@ -1,8 +1,26 @@
 @import "./src/Shared/variables";
 
-.page-title {
-  font-size: $h5;
-  font-weight: 400;
+.page {
+  &__title {
+    font-size: $h5;
+    font-weight: 400;
+
+    &--no-mb {
+      margin-bottom: 0;
+    }
+  }
+
+  &__subtitle {
+    padding: 20px 0 10px;
+    font-size: 18px;
+  }
+
+  &__header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
 }
 
 .add-btn {
@@ -28,4 +46,121 @@
 
 .error-message {
   color: $error-color;
+}
+
+.table {
+  width: 100%;
+
+  tr {
+    border: 1px solid #e5e5e5;
+  }
+
+  th,
+  td {
+    text-align: center;
+    padding: 15px 10px;
+  }
+
+  .table-icon {
+    width: 50px;
+  }
+
+  &__th-btn {
+    cursor: pointer;
+  }
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+.form {
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  padding: 6px !important;
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    &--buttons {
+      display: flex;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+    }
+  }
+
+  &__item {
+    width: 250px;
+    flex-grow: 1;
+    margin-bottom: 0 !important;
+    padding: 10px !important;
+  }
+
+  &__input {
+    margin-top: 8px !important;
+
+    &--medium {
+      min-width: 50%;
+    }
+
+    &--big {
+      min-width: 66.6%;
+    }
+  }
+
+  &__date-picker {
+    display: block !important;
+  }
+
+  &__subtitle {
+    display: block;
+    width: 100%;
+    padding-left: 10px;
+
+    font-size: 20px;
+    font-weight: 500;
+  }
+
+  &__button {
+    margin: 10px;
+    font-size: 15px !important;
+    font-weight: 500 !important;
+    text-transform: uppercase;
+
+    &--save {
+      color: #ffffff !important;
+      background-color: $primary-color !important;
+    }
+
+    &--cancel {
+      color: $primary-color !important;
+    }
+
+    &--delete {
+      color: $error-color !important;
+      border-color: $error-color !important;
+    }
+  }
+
+  &--pt {
+    padding-top: 20px !important;
+  }
+}
+
+.adaptive-row {
+  display: flex;
+  flex-wrap: wrap !important;
+}
+
+.col {
+  padding: 0 8px;
+  min-width: 250px;
+  flex-grow: 1;
+  max-width: 100%;
+}
+
+.mb0 {
+  margin-bottom: 0 !important;
 }

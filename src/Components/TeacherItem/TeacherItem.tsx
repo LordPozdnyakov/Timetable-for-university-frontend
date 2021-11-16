@@ -1,30 +1,35 @@
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 import { Link } from "react-router-dom";
+import {
+  EDIT_TEACHER_PAGE_ROUTE,
+  TEACHERS_PAGE_ROUTE,
+} from "../../Constant/routes-constants";
 import { DeleteFilled, EditFilled } from "@ant-design/icons";
 import SimpleModal from "../SimpleModal/SimpleModal";
-import IUser from "../../Types/IUser";
-import "./Student.scss";
-import {
-  EDIT_STUDENT_PAGE_ROUTE,
-  GROUPS_PAGE_ROUTE,
-  STUDENTS_PAGE_ROUTE,
-} from "../../Constant/routes-constants";
-import { deleteStudent } from "../../Redux/Actions/studentsActions";
 import { useTypedDispatch } from "../../hooks/redux-hooks";
+import { deleteTeacher } from "../../Redux/Actions/teachersActions";
 
-const Student = ({ student }: { student: IUser }) => {
-  const {
-    id,
-    firstName,
-    lastName,
-    patronymic,
-    groupName,
-    birthDay,
-    phoneNumber,
-    email,
-    address,
-    groupId,
-  } = student;
+type TeacherItemProps = {
+  id: number;
+  email: string;
+  firstName: string;
+  lastName: string;
+  patronymic: string;
+  birthDay: string;
+  phoneNumber: string;
+  address: string;
+};
+
+const TeacherItem: FC<TeacherItemProps> = ({
+  id,
+  firstName,
+  lastName,
+  patronymic,
+  birthDay,
+  phoneNumber,
+  email,
+  address,
+}) => {
   const fullName = `${lastName} ${firstName} ${patronymic}`;
 
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -44,17 +49,14 @@ const Student = ({ student }: { student: IUser }) => {
 
   const handleConfirmDeleting = (): void => {
     setIsModalVisible(false);
-    dispatch(deleteStudent(id));
+    dispatch(deleteTeacher(id));
   };
 
   return (
     <React.Fragment>
       <tr>
         <td>
-          <Link to={`${STUDENTS_PAGE_ROUTE}/${id}`}>{fullName}</Link>
-        </td>
-        <td>
-          <Link to={`${GROUPS_PAGE_ROUTE}/${groupId}`}>{groupName}</Link>
+          <Link to={`${TEACHERS_PAGE_ROUTE}/${id}`}>{fullName}</Link>
         </td>
         <td>{birthDay}</td>
         <td>
@@ -65,7 +67,7 @@ const Student = ({ student }: { student: IUser }) => {
         </td>
         <td>{address}</td>
         <td className="table-icon edit-icon">
-          <Link to={`${EDIT_STUDENT_PAGE_ROUTE}/${id}`}>
+          <Link to={`${EDIT_TEACHER_PAGE_ROUTE}/${id}`}>
             <EditFilled />
           </Link>
         </td>
@@ -74,8 +76,8 @@ const Student = ({ student }: { student: IUser }) => {
         </td>
       </tr>
       <SimpleModal
-        title="Видалити студента?"
-        content={`Студент ${fullName} буде повністю видалений із системи.
+        title="Видалити викладача?"
+        content={`Викладач ${fullName} буде повністю видалений із системи.
                    Продовжити?`}
         isModalVisible={isModalVisible}
         hideModal={hideModal}
@@ -86,4 +88,4 @@ const Student = ({ student }: { student: IUser }) => {
   );
 };
 
-export default Student;
+export default TeacherItem;
