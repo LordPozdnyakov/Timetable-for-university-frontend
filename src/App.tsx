@@ -5,7 +5,7 @@ import { MAIN_PAGE_ROUTE } from "./Constant/routes-constants";
 import { AuthVerify } from "./Modules";
 
 const App: React.FC = () => {
-  const isAuth = localStorage.getItem("token");
+  const isAuth = true;
   const history = useHistory();
   const logOut = () => {
     window.localStorage.clear();
