@@ -10,7 +10,6 @@ import { useTypedDispatch, useTypedSelector } from "../../hooks/redux-hooks";
 import { getStudents } from "../../Redux/Actions/studentsActions";
 import { getGroups } from "../../Redux/Actions/groupsActions";
 import { getTeachers } from "../../Redux/Actions/teachersActions";
-import { DownloadStudentsComponent } from "../../Components";
 
 const MainPage = () => {
   const dispatch = useTypedDispatch();
@@ -44,7 +43,6 @@ const MainPage = () => {
         linkTitle="Перейти"
         routeTo={GROUPS_PAGE_ROUTE}
       />
-      <DownloadStudentsComponent />
     </div>
   );
 };

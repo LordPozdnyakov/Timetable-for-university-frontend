@@ -10,6 +10,7 @@ import {
   getStudents,
 } from "../../Redux/Actions/studentsActions";
 import { ADD_STUDENT_PAGE_ROUTE } from "../../Constant/routes-constants";
+import { DownloadStudentsComponent } from "../../Components";
 
 const StudentsPage: React.FC = () => {
   const { students, loading, error } = useTypedSelector(
@@ -53,6 +54,7 @@ const StudentsPage: React.FC = () => {
             icon={<PlusOutlined className="add-btn__inner" />}
           />
         </Link>
+        <DownloadStudentsComponent />
       </div>
       <div className="table-responsive">
         <table className="table">
