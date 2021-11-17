@@ -46,15 +46,17 @@ const StudentsPage: React.FC = () => {
     <div className="students">
       <div className="page__header">
         <h5 className="page__title page__title--no-mb">Всі студенти</h5>
-        <Link to={ADD_STUDENT_PAGE_ROUTE}>
-          <Button
-            className="add-btn"
-            type="primary"
-            shape="circle"
-            icon={<PlusOutlined className="add-btn__inner" />}
-          />
-        </Link>
-        <DownloadStudentsComponent />
+        <div>
+          <Link to={ADD_STUDENT_PAGE_ROUTE}>
+            <Button
+              className="add-btn"
+              type="primary"
+              shape="circle"
+              icon={<PlusOutlined className="add-btn__inner" />}
+            />
+          </Link>
+          <DownloadStudentsComponent />
+        </div>
       </div>
       <div className="table-responsive">
         <table className="table">
