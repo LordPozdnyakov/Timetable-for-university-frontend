@@ -25,6 +25,7 @@ const StudentFormSchema = Yup.object().shape({
   email: Yup.string()
     .required(`Це поле обов'язкове`)
     .email("Введіть коректний email"),
+  groupName: Yup.string().required(`Це поле обов'язкове`),
 });
 
 const dateFormat = "DD/MM/YYYY";
@@ -70,6 +71,7 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
     formik.values.firstName = selectedStudent.firstName;
     formik.values.patronymic = selectedStudent.patronymic;
     formik.values.email = selectedStudent.email;
+    formik.values.groupName = selectedStudent.groupName;
   }, [selectedStudent, dispatch, editMode, id]);
 
   useEffect(() => {
@@ -152,6 +154,8 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
   };
 
   const handleChangeGroup = (groupName: string) => {
+    formik.values.groupName = groupName;
+    formik.errors.groupName = "";
     setStudent((state) => {
       return {
         ...state,
@@ -201,6 +205,7 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
       lastName: student.lastName,
       patronymic: student.patronymic,
       email: student.email,
+      groupName: student.groupName,
     },
     validationSchema: StudentFormSchema,
     onSubmit: (values) => {
@@ -308,8 +313,11 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
             <Select
               id="groupName"
               className="form__input"
-              value={groupName}
-              onChange={handleChangeGroup}
+              value={formik.values.groupName}
+              onChange={(selectedGroup) => {
+                handleChangeGroup(selectedGroup);
+                formik.handleChange(selectedGroup);
+              }}
             >
               {groups.map((group) => {
                 return (
@@ -319,6 +327,9 @@ const StudentForm = ({ editMode }: { editMode: boolean }) => {
                 );
               })}
             </Select>
+            {formik.errors.groupName && (
+              <div className="error-message">{formik.errors.groupName}</div>
+            )}
           </Form.Item>
           <Form.Item className="form__item form__input--big">
             <label htmlFor="address" className="form-label">
