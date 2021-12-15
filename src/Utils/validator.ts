@@ -21,5 +21,9 @@ export const recoveryPasswordSchema = Yup.object().shape({
     .min(7, "Пароль має бути не маньше 7 символів"),
   confirmPassword: Yup.string()
     .required(`Це поле обов'язковое`)
-    .oneOf([Yup.ref("password"), null], "Пароли повинні співпадати"),
+    .oneOf([Yup.ref("password"), null], "Паролі повинні співпадати"),
+});
+
+export const registrationSchema = Yup.object().shape({
+  privilage: Yup.string().required("Це поле обов'язковое"),
 });

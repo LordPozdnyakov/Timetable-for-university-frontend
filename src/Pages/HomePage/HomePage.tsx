@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 
 import {
   AddStudentPage,
@@ -30,6 +30,7 @@ import {
   STUDENTS_PAGE_ROUTE,
   TEACHERS_PAGE_ROUTE,
   TEACHERS_PROFILE_PAGE_ROUTE,
+  USERS_PAGE_ROUTE,
 } from "../../Constant/routes-constants";
 import GroupsPage from "../GroupsPage/GroupsPage";
 import GroupPage from "../GroupPage/GroupPage";
@@ -38,12 +39,15 @@ import EditGroupPage from "../EditGroupPage/EditGroupPage";
 import TeacherPage from "../TeacherPage/TeacherPage";
 import AddTeacherPage from "../AddTeacherPage/AddTeacherPage";
 import TeacherEditPage from "../TeacherEditPage/TeacherEditPage";
+import UsersPage from "../UsersPage/UsersPage";
+import { usePrivilage } from "../../hooks/usePrivilage";
 
 interface homeProps {
   logOut: () => void;
 }
 
 const HomePage: React.FC<homeProps> = ({ logOut }) => {
+  const { isAdminPrivilage } = usePrivilage();
   return (
     <div className="wrapper">
       <HeaderContainerComponent logOut={logOut} />
@@ -92,6 +96,11 @@ const HomePage: React.FC<homeProps> = ({ logOut }) => {
             component={EditGroupPage}
           />
           <Route exact path={GROUP_PAGE_ROUTE} component={GroupPage} />
+          {isAdminPrivilage ? (
+            <Route exact path={USERS_PAGE_ROUTE} component={UsersPage} />
+          ) : (
+            <Redirect to="/" />
+          )}
         </Switch>
       </div>
     </div>

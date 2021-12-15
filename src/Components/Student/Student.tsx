@@ -11,6 +11,7 @@ import {
 } from "../../Constant/routes-constants";
 import { deleteStudent } from "../../Redux/Actions/studentsActions";
 import { useTypedDispatch } from "../../hooks/redux-hooks";
+import { usePrivilage } from "../../hooks/usePrivilage";
 
 const Student = ({ student }: { student: IUser }) => {
   const {
@@ -28,6 +29,8 @@ const Student = ({ student }: { student: IUser }) => {
   const fullName = `${lastName} ${firstName} ${patronymic}`;
 
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const { isStudentPrivilage, isGuestPrivilage } = usePrivilage();
+
   const dispatch = useTypedDispatch();
 
   const showModal = (): void => {
@@ -64,14 +67,18 @@ const Student = ({ student }: { student: IUser }) => {
           <a href={`mailto:${email}`}>{email}</a>
         </td>
         <td>{address}</td>
-        <td className="table-icon edit-icon">
-          <Link to={`${EDIT_STUDENT_PAGE_ROUTE}/${id}`}>
-            <EditFilled />
-          </Link>
-        </td>
-        <td className="table-icon delete-icon" onClick={showModal}>
-          <DeleteFilled />
-        </td>
+        {!isStudentPrivilage && !isGuestPrivilage && (
+          <td className="table-icon edit-icon">
+            <Link to={`${EDIT_STUDENT_PAGE_ROUTE}/${id}`}>
+              <EditFilled />
+            </Link>
+          </td>
+        )}
+        {!isStudentPrivilage && !isGuestPrivilage && (
+          <td className="table-icon delete-icon" onClick={showModal}>
+            <DeleteFilled />
+          </td>
+        )}
       </tr>
       <SimpleModal
         title="Видалити студента?"

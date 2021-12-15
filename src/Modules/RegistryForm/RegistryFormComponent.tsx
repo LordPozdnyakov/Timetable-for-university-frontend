@@ -1,22 +1,25 @@
 import React from "react";
 import { Link, RouteComponentProps, withRouter } from "react-router-dom";
-import { LockOutlined } from "@ant-design/icons";
-import { Form, Input, Checkbox, Space, Spin } from "antd";
+import { Form, Input, Space, Spin, Select } from "antd";
 import { useFormik, FormikProps } from "formik";
 import ButtonComponent from "../../Components/Button/ButtonComponent";
 import FormWrapper from "../../Components/FormWrapper/FormWrapper";
+import RegStudentForm from "../../Components/RegStudentForm/RegStudentFormComponent";
+import RegTeacherForm from "../../Components/RegTeacherForm/RegTeacherFormComponent";
 import { validateField } from "../../Utils/helpers/validateField";
 import { LoginSchema } from "../../Utils/validator";
 import { useTypedDispatch, useTypedSelector } from "../../hooks/redux-hooks";
 import { setLogin } from "../../Redux/Actions/setLogin";
 
 import { FormikValues } from "..";
+import { render } from "react-dom";
 
 interface logginType<Values = FormikValues> extends RouteComponentProps {
   initialValues: Values;
 }
 
-const LoginFormComponent: React.FC<logginType> = () => {
+const RegistryFormComponent: React.FC<logginType> = () => {
+  const { Option } = Select;
   const dispatch = useTypedDispatch();
   const { loading, error } = useTypedSelector((state) => state.loginSlice);
   const layout = {
@@ -44,6 +47,7 @@ const LoginFormComponent: React.FC<logginType> = () => {
       }
     },
   });
+
   const {
     touched,
     errors,
@@ -67,60 +71,21 @@ const LoginFormComponent: React.FC<logginType> = () => {
   return (
     <div className="wrapper__form">
       <FormWrapper>
-        <span className="wrapper__form-icon">
-          <LockOutlined className="wrapper__form-icon-i" />
-        </span>
-        <h3>Увійти</h3>
+        <h3>Реєстрація</h3>
         <Form {...layout} name="LoginForm" onFinish={handleSubmit}>
-          <Form.Item
-            name="email"
-            hasFeedback
-            validateStatus={validateField("email", touched, errors)}
-          >
-            <Input
-              size={"large"}
-              placeholder="Email *"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              id="email"
-              value={values.email}
-            />
-          </Form.Item>
-          {errors.email && touched.email && (
-            <div className="wrapper__form-error">{errors.email}</div>
-          )}
-          <Form.Item
-            name="password"
-            hasFeedback
-            validateStatus={validateField("password", touched, errors)}
-          >
-            <Input.Password
-              size={"large"}
-              placeholder="Пароль *"
-              onChange={handleChange}
-              type="password"
-              onBlur={handleBlur}
-              id="password"
-              value={values.password}
-            />
-          </Form.Item>
-          {errors.password && touched.password && (
-            <div className="wrapper__form-error">{errors.password}</div>
-          )}
-          <Form.Item name="rememberMe" valuePropName="checked">
-            <div className="checkbox">
-              <div>
-                <Checkbox
-                  onChange={handleChange}
-                  id="rememberMe"
-                  checked={values.rememberMe}
-                />
-              </div>
-              <div>
-                <p>Запам’ятати мене</p>
-              </div>
+          <Form.Item name="privilage">
+            <div>
+              <Select
+                className="leftSideText"
+                onSelect={(selectedOption) => {}}
+              >
+                <Option value="student">Student</Option>
+                <Option value="teacher">Teacher</Option>
+              </Select>
             </div>
           </Form.Item>
+          {/* make a conditional operator with 2 components(RegStudentForm or RegTeacherForm) */}
+
           <Form.Item {...tailLayout}>
             <ButtonComponent
               type="submit"
@@ -128,13 +93,14 @@ const LoginFormComponent: React.FC<logginType> = () => {
               onClick={handleSubmit}
               disabled={isSubmitting}
             >
-              Увійти
+              Надіслати запит
             </ButtonComponent>
           </Form.Item>
-          <div className="links">
-            <Link to={"/recovery"}>Забули пароль?</Link>
-            <Link to={"/registration"}>Реєстрація</Link>
-          </div>
+          <Form.Item>
+            <div>
+              <Link to={"/login"}>Вже маєте аккаунт?</Link>
+            </div>
+          </Form.Item>
         </Form>
         {error ? (
           <div className="wrapper__form-global-error">{error}</div>
@@ -146,4 +112,4 @@ const LoginFormComponent: React.FC<logginType> = () => {
   );
 };
 
-export default withRouter(LoginFormComponent);
+export default withRouter(RegistryFormComponent);

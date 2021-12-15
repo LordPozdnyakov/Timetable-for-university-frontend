@@ -8,6 +8,7 @@ import { DeleteFilled, EditFilled } from "@ant-design/icons";
 import SimpleModal from "../SimpleModal/SimpleModal";
 import { useTypedDispatch } from "../../hooks/redux-hooks";
 import { deleteTeacher } from "../../Redux/Actions/teachersActions";
+import { usePrivilage } from "../../hooks/usePrivilage";
 
 type TeacherItemProps = {
   id: number;
@@ -33,6 +34,8 @@ const TeacherItem: FC<TeacherItemProps> = ({
   const fullName = `${lastName} ${firstName} ${patronymic}`;
 
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const { isTeacherPrivilage, isGuestPrivilage, isStudentPrivilage } =
+    usePrivilage();
   const dispatch = useTypedDispatch();
 
   const showModal = (): void => {
@@ -66,14 +69,18 @@ const TeacherItem: FC<TeacherItemProps> = ({
           <a href={`mailto:${email}`}>{email}</a>
         </td>
         <td>{address}</td>
-        <td className="table-icon edit-icon">
-          <Link to={`${EDIT_TEACHER_PAGE_ROUTE}/${id}`}>
-            <EditFilled />
-          </Link>
-        </td>
-        <td className="table-icon delete-icon" onClick={showModal}>
-          <DeleteFilled />
-        </td>
+        {!isTeacherPrivilage && !isStudentPrivilage && !isGuestPrivilage && (
+          <td className="table-icon edit-icon">
+            <Link to={`${EDIT_TEACHER_PAGE_ROUTE}/${id}`}>
+              <EditFilled />
+            </Link>
+          </td>
+        )}
+        {!isTeacherPrivilage && !isStudentPrivilage && !isGuestPrivilage && (
+          <td className="table-icon delete-icon" onClick={showModal}>
+            <DeleteFilled />
+          </td>
+        )}
       </tr>
       <SimpleModal
         title="Видалити викладача?"

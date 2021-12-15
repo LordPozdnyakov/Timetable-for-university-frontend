@@ -8,6 +8,7 @@ import { DeleteFilled, EditFilled } from "@ant-design/icons";
 import { useTypedDispatch } from "../../hooks/redux-hooks";
 import SimpleModal from "../SimpleModal/SimpleModal";
 import { deleteGroup } from "../../Redux/Actions/groupsActions";
+import { usePrivilage } from "../../hooks/usePrivilage";
 
 type GroupItemProps = {
   id: number;
@@ -23,6 +24,8 @@ const GroupItem: FC<GroupItemProps> = ({
   studentCount,
 }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const { isTeacherPrivilage, isStudentPrivilage, isGuestPrivilage } =
+    usePrivilage();
   const dispatch = useTypedDispatch();
 
   const showModal = (): void => {
@@ -50,14 +53,18 @@ const GroupItem: FC<GroupItemProps> = ({
         </td>
         <td>{fullName}</td>
         <td>{studentCount}</td>
-        <td className="table-icon edit-icon">
-          <Link to={`${EDIT_GROUP_PAGE_ROUTE}/${id}`}>
-            <EditFilled />
-          </Link>
-        </td>
-        <td className="table-icon delete-icon" onClick={showModal}>
-          <DeleteFilled />
-        </td>
+        {!isTeacherPrivilage && !isStudentPrivilage && !isGuestPrivilage && (
+          <td className="table-icon edit-icon">
+            <Link to={`${EDIT_GROUP_PAGE_ROUTE}/${id}`}>
+              <EditFilled />
+            </Link>
+          </td>
+        )}
+        {!isTeacherPrivilage && !isStudentPrivilage && !isGuestPrivilage && (
+          <td className="table-icon delete-icon" onClick={showModal}>
+            <DeleteFilled />
+          </td>
+        )}
       </tr>
       <SimpleModal
         title="Видалити группу?"

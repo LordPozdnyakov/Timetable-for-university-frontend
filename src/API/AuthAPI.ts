@@ -5,7 +5,7 @@ export interface responseType {
   status: number;
   data: {
     token?: string;
-    privilege?: "string";
+    privilege?: string;
     firstName?: "string";
     lastName?: "string";
     patronymic?: "string";

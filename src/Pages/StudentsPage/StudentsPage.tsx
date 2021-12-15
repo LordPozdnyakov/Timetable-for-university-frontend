@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Student from "../../Components/Student/Student";
-import { Button } from "antd";
+import { Button, Pagination } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { useTypedDispatch, useTypedSelector } from "../../hooks/redux-hooks";
 import IUser from "../../Types/IUser";
@@ -11,6 +11,9 @@ import {
 } from "../../Redux/Actions/studentsActions";
 import { ADD_STUDENT_PAGE_ROUTE } from "../../Constant/routes-constants";
 import { DownloadStudentsComponent } from "../../Components";
+import "../../Shared/common.scss";
+import { paginationPageSize, usePagination } from "../../hooks/usePagination";
+import { usePrivilage } from "../../hooks/usePrivilage";
 
 const StudentsPage: React.FC = () => {
   const { students, loading, error } = useTypedSelector(
@@ -18,6 +21,8 @@ const StudentsPage: React.FC = () => {
   );
 
   const dispatch = useTypedDispatch();
+  const { changePage, firstPageIndex, lastPageIndex } = usePagination();
+  const { isStudentPrivilage, isGuestPrivilage } = usePrivilage();
 
   useEffect(() => {
     dispatch(getStudents());
@@ -46,17 +51,19 @@ const StudentsPage: React.FC = () => {
     <div className="students">
       <div className="page__header">
         <h5 className="page__title page__title--no-mb">Всі студенти</h5>
-        <div>
-          <Link to={ADD_STUDENT_PAGE_ROUTE}>
-            <Button
-              className="add-btn"
-              type="primary"
-              shape="circle"
-              icon={<PlusOutlined className="add-btn__inner" />}
-            />
-          </Link>
-          <DownloadStudentsComponent />
-        </div>
+        {!isStudentPrivilage && !isGuestPrivilage && (
+          <div>
+            <Link to={ADD_STUDENT_PAGE_ROUTE}>
+              <Button
+                className="add-btn"
+                type="primary"
+                shape="circle"
+                icon={<PlusOutlined className="add-btn__inner" />}
+              />
+            </Link>
+            <DownloadStudentsComponent />
+          </div>
+        )}
       </div>
       <div className="table-responsive">
         <table className="table">
@@ -73,9 +80,19 @@ const StudentsPage: React.FC = () => {
               <th></th>
               <th></th>
             </tr>
-            {students.map((student: IUser) => {
-              return <Student student={student} key={student.id} />;
-            })}
+            {students?.length > 0 &&
+              students
+                .slice(firstPageIndex, lastPageIndex)
+                .map((student: IUser) => {
+                  return <Student student={student} key={student.id} />;
+                })}
+            <Pagination
+              className="pagination"
+              defaultCurrent={1}
+              total={students.length}
+              defaultPageSize={paginationPageSize}
+              onChange={changePage}
+            />
           </tbody>
         </table>
       </div>

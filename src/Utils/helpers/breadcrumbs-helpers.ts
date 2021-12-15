@@ -11,7 +11,8 @@ export function checkIfPageIsInfoPage(fullPathname: string): boolean {
   return (
     (pathnames[0] === "students" ||
       pathnames[0] === "teachers" ||
-      pathnames[0] === "groups") &&
+      pathnames[0] === "groups" ||
+      pathnames[0] === "users") &&
     pathnames.length === 2 &&
     containsId
   );

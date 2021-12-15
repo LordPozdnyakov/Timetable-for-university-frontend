@@ -5,19 +5,21 @@ import { MAIN_PAGE_ROUTE } from "./Constant/routes-constants";
 import { AuthVerify } from "./Modules";
 
 const App: React.FC = () => {
-  const isAuth = localStorage.getItem("token");
+  let isAuth = localStorage.getItem("token");
   const history = useHistory();
+  console.log(history);
   const logOut = () => {
-    window.localStorage.clear();
     history.push("/login");
+    window.localStorage.clear();
+    isAuth = localStorage.getItem("token");
   };
   return (
     <>
       <Switch>
         <Route
           exact
-          path={["/login", "/recovery", "/recovery/password"]}
-          component={AuthPage}
+          path={["/login", "/recovery", "/recovery/password", "/registration"]}
+          render={() => (!isAuth ? <AuthPage /> : <Redirect to="/" />)}
         />
         <Route
           path={MAIN_PAGE_ROUTE}

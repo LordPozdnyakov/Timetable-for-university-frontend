@@ -32,4 +32,14 @@
       margin-right: 12px;
     }
   }
+  .links {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.leftSideText {
+  display: flex;
+  justify-content: left;
+  text-align: left;
 }

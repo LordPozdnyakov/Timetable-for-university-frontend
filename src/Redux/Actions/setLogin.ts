@@ -10,6 +10,7 @@ export const setLogin =
       dispatch(loginSlice.actions.loginFetching());
       const { status, data } = await setVerificationDataAPI(values, path);
       window.localStorage["token"] = data.token;
+      window.localStorage["privilage"] = data.privilege;
       dispatch(loginSlice.actions.loginFetchingSuccess(data));
       openNotification({
         title: "Авторизация прошла успешно",

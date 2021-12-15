@@ -4,6 +4,7 @@ import { ProfileReducer } from "./Reducers/ProfileReducer";
 import studentsReducer from "./Reducers/studentsSlice";
 import groupsReducer from "./Reducers/groupsSlice";
 import teachersReducer from "./Reducers/teachersSlice";
+import usersReducer from "./Reducers/usersSlice";
 import loginSlice from "./Reducers/loginSlice";
 import RecoveryPasswordSlice from "./Reducers/RecoveryPasswordSlice";
 import recoverySlice from "./Reducers/RecoverySlice";
@@ -21,6 +22,7 @@ let reducers = combineReducers({
   studentsReducer,
   groupsReducer,
   teachersReducer,
+  usersReducer,
   RecoveryPasswordSlice,
 });
 
