@@ -16,6 +16,7 @@ const Breadcrumbs: React.FC = () => {
   const location = useLocation();
   const pathnames: string[] = createPathnamesArray(location.pathname);
   const isInfoPage: boolean = checkIfPageIsInfoPage(location.pathname);
+  console.log(pathnames);
   const { selectedStudent } = useTypedSelector(
     (state) => state.studentsReducer
   );
@@ -42,7 +43,7 @@ const Breadcrumbs: React.FC = () => {
         let pathProperty: RouteType | undefined = routes.find(
           (pathProps: RouteType) => path === pathProps.shortPath
         );
-        if (!pathProperty && index === pathnames.length - 1 && isInfoPage) {
+        if (!pathProperty && index === pathnames.length - 1 && !isInfoPage) {
           let breadcrumb: string = "";
           if (pathnames[0] === "students") {
             if (selectedStudent) {
@@ -62,13 +63,15 @@ const Breadcrumbs: React.FC = () => {
               breadcrumb = `${lastName} ${firstName} ${patronymic}`;
             }
           }
+          if (pathnames[0] === "users") {
+            breadcrumb = "Користувачі";
+          }
           pathProperty = createBreadcrumbsForInfoPage(path, breadcrumb);
         }
         if (!pathProperty) return null;
         const { title, icon } = pathProperty;
         const isLastElem: boolean = index === pathnames.length - 1;
         const routeTo: string = `/${pathnames.slice(0, index + 1).join("/")}`;
-
         return isLastElem ? (
           <Breadcrumb.Item key={path}>
             {icon}
