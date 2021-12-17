@@ -1,7 +1,6 @@
 import axios from "./core";
 import IUser from "../Types/IUser";
 import TeacherFormInfo from "../Types/TeacherFormInfo";
-import StudentFormInfo from "../Types/StudentFormInfo";
 
 export const getAllTeachersAPI = async () => {
   const response = await axios.get<IUser[]>("teachers");

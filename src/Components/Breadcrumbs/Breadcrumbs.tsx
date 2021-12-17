@@ -16,7 +16,6 @@ const Breadcrumbs: React.FC = () => {
   const location = useLocation();
   const pathnames: string[] = createPathnamesArray(location.pathname);
   const isInfoPage: boolean = checkIfPageIsInfoPage(location.pathname);
-  console.log(pathnames);
   const { selectedStudent } = useTypedSelector(
     (state) => state.studentsReducer
   );
