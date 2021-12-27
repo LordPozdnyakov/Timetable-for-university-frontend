@@ -1,4 +1,5 @@
-export default interface RegStudentFormInfo {
+export default interface RegUserFormInfo {
+  privilage: string;
   firstName: string;
   lastName: string;
   patronymic: string;
@@ -6,6 +7,6 @@ export default interface RegStudentFormInfo {
   email: string;
   password: string;
   passwordConfirmation: string;
-  groupName: string;
   address: string;
+  fullName: object;
 }

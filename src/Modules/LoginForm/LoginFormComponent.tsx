@@ -36,7 +36,7 @@ const LoginFormComponent: React.FC<logginType> = () => {
     },
     validationSchema: LoginSchema,
     onSubmit: async (values, { setSubmitting }) => {
-      const status = await dispatch(setLogin(values, "login"));
+      const status = await dispatch(setLogin(values, "api/v1/auth/login"));
       if (status === 200) {
         window.location.replace("/");
       } else {

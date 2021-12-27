@@ -17,12 +17,8 @@ import {
 const { SubMenu } = Menu;
 
 const SidebarComponent = () => {
-  const {
-    isAdminPrivilage,
-    isGuestPrivilage,
-    isStudentPrivilage,
-    isTeacherPrivilage,
-  } = usePrivilage();
+  const { isAdminPrivilage, isStudentPrivilage, isTeacherPrivilage } =
+    usePrivilage();
 
   return (
     <section className="sidebar">
@@ -33,51 +29,57 @@ const SidebarComponent = () => {
         theme="dark"
         mode="inline"
       >
-        <SubMenu
-          className="sidebar__item"
-          key="sub1"
-          icon={<UserOutlined className="sidebar__icon" />}
-          title="Студенти"
-        >
-          <Menu.Item className="sidebar__item" key="1">
-            <NavLink to="/students">Всі студенти</NavLink>
-          </Menu.Item>
-          {!isStudentPrivilage && !isGuestPrivilage && (
-            <Menu.Item className="sidebar__item" key="2">
-              <NavLink to="/students/add-student">Додати студента</NavLink>
+        {!isStudentPrivilage && (
+          <SubMenu
+            className="sidebar__item"
+            key="sub1"
+            icon={<UserOutlined className="sidebar__icon" />}
+            title="Студенти"
+          >
+            <Menu.Item className="sidebar__item" key="1">
+              <NavLink to="/students">Всі студенти</NavLink>
             </Menu.Item>
-          )}
-        </SubMenu>
-        <SubMenu
-          className="sidebar__item"
-          key="sub2"
-          icon={<TeamOutlined className="sidebar__icon" />}
-          title="Групи"
-        >
-          <Menu.Item className="sidebar__item" key="3">
-            <NavLink to="/groups">Всі групи</NavLink>
-          </Menu.Item>
-          {!isStudentPrivilage && !isTeacherPrivilage && !isGuestPrivilage && (
-            <Menu.Item className="sidebar__item" key="4">
-              <NavLink to="/groups/add-group">Додати групу</NavLink>
+            {!isStudentPrivilage && (
+              <Menu.Item className="sidebar__item" key="2">
+                <NavLink to="/students/add-student">Додати студента</NavLink>
+              </Menu.Item>
+            )}
+          </SubMenu>
+        )}
+        {!isStudentPrivilage && (
+          <SubMenu
+            className="sidebar__item"
+            key="sub2"
+            icon={<TeamOutlined className="sidebar__icon" />}
+            title="Групи"
+          >
+            <Menu.Item className="sidebar__item" key="3">
+              <NavLink to="/groups">Всі групи</NavLink>
             </Menu.Item>
-          )}
-        </SubMenu>
-        <SubMenu
-          className="sidebar__item"
-          key="sub3"
-          icon={<SolutionOutlined className="sidebar__icon" />}
-          title="Викладачі"
-        >
-          <Menu.Item className="sidebar__item" key="5">
-            <NavLink to="/teachers">Всі викладачі</NavLink>
-          </Menu.Item>
-          {!isStudentPrivilage && !isTeacherPrivilage && !isGuestPrivilage && (
-            <Menu.Item className="sidebar__item" key="6">
-              <NavLink to="/teachers/add-teacher">Додати викладача</NavLink>
+            {!isStudentPrivilage && !isTeacherPrivilage && (
+              <Menu.Item className="sidebar__item" key="4">
+                <NavLink to="/groups/add-group">Додати групу</NavLink>
+              </Menu.Item>
+            )}
+          </SubMenu>
+        )}
+        {!isStudentPrivilage && !isTeacherPrivilage && (
+          <SubMenu
+            className="sidebar__item"
+            key="sub3"
+            icon={<SolutionOutlined className="sidebar__icon" />}
+            title="Викладачі"
+          >
+            <Menu.Item className="sidebar__item" key="5">
+              <NavLink to="/teachers">Всі викладачі</NavLink>
             </Menu.Item>
-          )}
-        </SubMenu>
+            {!isStudentPrivilage && !isTeacherPrivilage && (
+              <Menu.Item className="sidebar__item" key="6">
+                <NavLink to="/teachers/add-teacher">Додати викладача</NavLink>
+              </Menu.Item>
+            )}
+          </SubMenu>
+        )}
         <SubMenu
           className="sidebar__item"
           key="sub4"

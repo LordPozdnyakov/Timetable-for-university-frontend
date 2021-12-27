@@ -9,6 +9,7 @@ import loginSlice from "./Reducers/loginSlice";
 import RecoveryPasswordSlice from "./Reducers/RecoveryPasswordSlice";
 import recoverySlice from "./Reducers/RecoverySlice";
 import { configureStore } from "@reduxjs/toolkit";
+import registrationSlice from "./Reducers/registrationSlice";
 
 type redusersType = typeof reducers;
 export type AppStateType = ReturnType<redusersType>;
@@ -18,6 +19,7 @@ export type AppDispatch = AppStore["dispatch"];
 let reducers = combineReducers({
   profile: ProfileReducer,
   loginSlice,
+  registrationSlice,
   recoverySlice,
   studentsReducer,
   groupsReducer,

@@ -31,11 +31,12 @@ export const registrationSchema = Yup.object().shape({
   password: Yup.string()
     .required(`Це поле обов'язковое`)
     .min(8, "Пароль має бути 8 символів"),
-  passwordConfirmation: Yup.string().oneOf(
-    [Yup.ref("password"), null],
-    "Пароль повинен співпадати"
-  ),
+  passwordConfirmation: Yup.string()
+    .min(8, "Пароль має бути 8 символів")
+    .required(`Це поле обов'язковое`)
+    .oneOf([Yup.ref("password"), null], "Пароль повинен співпадати"),
   firstName: Yup.string().required(`Це поле обов'язковое`),
   lastName: Yup.string().required(`Це поле обов'язковое`),
   patronymic: Yup.string().required(`Це поле обов'язковое`),
+  privilage: Yup.string().required(`Це поле обов'язковое`),
 });

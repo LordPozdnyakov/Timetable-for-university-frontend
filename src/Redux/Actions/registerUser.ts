@@ -1,4 +1,4 @@
-import { setVerificationDataAPI } from "../../API/AuthAPI";
+import { setVerificationDataAPI } from "../../API/RegAPI";
 import FormikValues from "../../Modules/RegistryForm/FormikValues";
 import { openNotification } from "../../Utils/helpers/openNotification";
 import { registrationSlice } from "../Reducers/registrationSlice";
