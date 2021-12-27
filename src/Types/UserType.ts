@@ -1,4 +1,6 @@
 export default interface UserType {
+  id: number;
+  email: string;
   // Name
   firstName: string;
   lastName: string;

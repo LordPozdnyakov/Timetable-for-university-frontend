@@ -41,7 +41,9 @@ const TeachersPage: React.FC = () => {
         <table className="table">
           <tbody>
             <tr>
-              <th>Користувачі</th>
+              <th>id</th>
+              <th>email</th>
+              <th>Користувач</th>
               <th>Привілегія</th>
             </tr>
             {users &&
@@ -49,8 +51,11 @@ const TeachersPage: React.FC = () => {
               users.slice(firstPageIndex, lastPageIndex).map((user) => {
                 return (
                   <UserItem
+                    id={user.id}
+                    email={user.email}
                     firstName={user.firstName}
                     lastName={user.lastName}
+                    patronimic={user.patronymic}
                     privilage={user.privilege}
                   />
                 );
