@@ -9,9 +9,9 @@ const App: React.FC = () => {
   const history = useHistory();
   console.log(history);
   const logOut = () => {
+    isAuth = localStorage.getItem("token");
     history.push("/login");
     window.localStorage.clear();
-    isAuth = localStorage.getItem("token");
   };
   return (
     <>
